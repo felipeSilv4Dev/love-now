@@ -8,12 +8,14 @@ export const GlobalStyles = createGlobalStyle`
 }
 
 body {
-  background-color:  #242424;
+  background-color:  ${({ theme }) => theme.colors.default};
   font-family: "Roboto", sans-serif;
 	display: flex;
 	color: ${({ theme }) => theme.colors.default};
 	flex-direction: column;
-	/* min-height: 110vh; */
+	width: 95%;
+	margin: 5rem auto auto;
+
 }
 
 
