@@ -1,7 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { GlobalStyles } from './styles/Global.styled';
 
-import Main from './Main/Main';
+import Main from './components/Main/Main';
+import Register from './components/Register/Register';
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <GlobalStyles />
       <Routes>
         <Route path="/" element={<Main />} />
+        <Route path="cadastro" element={<Register />} />
       </Routes>
     </BrowserRouter>
   );
