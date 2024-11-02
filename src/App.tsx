@@ -10,7 +10,7 @@ function App() {
       <GlobalStyles />
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="cadastro" element={<Register />} />
+        <Route path="register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   );

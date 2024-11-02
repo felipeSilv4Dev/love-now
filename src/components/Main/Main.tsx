@@ -1,19 +1,22 @@
 import * as S from './Main.styled';
-import * as U from '../../styles/utils/utils.styled';
 
 const Main = () => {
   return (
-    <U.Container $bg={'../../utils/casal.jpg'}>
-      <U.TextBox>
-        <U.Title $animation>Love Now</U.Title>
-        <S.Paragraph>
-          Surpreenda quem você ama com uma página feita especialmente para eles!
-          ❤️✨
-        </S.Paragraph>
+    <S.Container>
+      <S.TextBox>
+        <S.Image src="../../utils/couple.svg" alt="image undrawn couple" />
+        <S.Title>LOVE NOW</S.Title>
+        <S.Description>
+          "Surpreenda quem você ama com uma página personalizada: mensagens,
+          fotos e memórias únicas para celebrar sua história juntos!"
+        </S.Description>
 
-        <U.Button to="/cadastro">Entrar</U.Button>
-      </U.TextBox>
-    </U.Container>
+        <S.Button to={'/register'}>Criar</S.Button>
+        <S.WapperHeath>
+          <S.Hearth src="../../utils/hearth.svg" alt="image hearth" />
+        </S.WapperHeath>
+      </S.TextBox>
+    </S.Container>
   );
 };
 
