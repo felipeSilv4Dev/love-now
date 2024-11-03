@@ -1,4 +1,5 @@
 import * as S from './Main.styled';
+import HearthAnimation from './HearthAnimation';
 
 const Main = () => {
   return (
@@ -12,9 +13,7 @@ const Main = () => {
         </S.Description>
 
         <S.Button to={'/register'}>Criar</S.Button>
-        <S.WapperHeath>
-          <S.Hearth src="../../utils/hearth.svg" alt="image hearth" />
-        </S.WapperHeath>
+        <HearthAnimation />
       </S.TextBox>
     </S.Container>
   );
