@@ -51,8 +51,8 @@ export const Description = styled.p`
 export const Button = styled(Link)`
   font-family: 'Poppins', system-ui;
   background: linear-gradient(#ffa7ff, #f600dd);
-  font-size: 2.2rem;
-  padding: 1rem 6rem;
+  font-size: 2rem;
+  padding: 1rem 4rem;
   text-transform: uppercase;
   border-radius: 10rem;
   position: relative;
@@ -136,7 +136,7 @@ export const WapperHeath = styled.span<{
 export const Hearth = styled.img<{ $height?: number; $opacity?: number }>`
   transform-origin: center center;
   transform: skew(200deg);
-  animation: ${hearth} 2s infinite alternate ease;
+  animation: ${hearth} 2s infinite linear;
   height: ${(props) => (props.$height ? `${props.$height}px` : 'auto')};
   opacity: ${(props) => (props.$opacity ? props.$opacity : 1)};
 `;
