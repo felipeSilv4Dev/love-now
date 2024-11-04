@@ -77,7 +77,8 @@ const Form = () => {
         />
         {<span>{errors.name ? errors.name.message : 'Nome '}</span>}
       </S.InputBox>
-      <div>
+
+      {/* <div>
         <input
           type="file"
           accept="image/*"
@@ -86,8 +87,9 @@ const Form = () => {
           placeholder="Selecione uma foto"
         />
         {errors.photo && <span>{errors.photo.message}</span>}
-      </div>
-      <button type="submit">enviar</button>
+      </div> */}
+
+      {/* <button type="submit">enviar</button> */}
     </S.Form>
   );
 };

@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 
 export const Container = styled.section`
@@ -8,6 +7,7 @@ export const Container = styled.section`
   position: relative;
   overflow: hidden;
 `;
+
 export const TextBox = styled.div`
   height: 100%;
   display: flex;
@@ -15,25 +15,6 @@ export const TextBox = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 2rem;
-`;
-
-export const Image = styled.img`
-  height: 99.5vh;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`;
-
-export const Title = styled.h1`
-  font-family: 'Knewave', system-ui;
-  font-weight: 400;
-  font-style: normal;
-  text-transform: uppercase;
-  letter-spacing: 0.3rem;
-  font-size: 15rem;
-  position: relative;
-  z-index: 1;
 `;
 
 export const Description = styled.p`
@@ -45,50 +26,7 @@ export const Description = styled.p`
   text-align: center;
   max-width: 45ch;
   line-height: 1.3;
-  color: #efefff;
-`;
-
-export const Button = styled(Link)`
-  font-family: 'Poppins', system-ui;
-  background: linear-gradient(#ffa7ff, #f600dd);
-  font-size: 2rem;
-  padding: 1rem 4rem;
-  text-transform: uppercase;
-  border-radius: 10rem;
-  position: relative;
-  z-index: 1;
-  color: #efefff;
-  text-decoration: none;
-  transition: all 0.2s;
-  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
-
-  &::after {
-    content: '';
-    display: inline-block;
-    height: 100%;
-    width: 100%;
-    border-radius: 10rem;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transition: all 0.4s;
-    z-index: -1;
-    background: linear-gradient(#ffa7ff, #f600dd);
-  }
-
-  &:hover {
-    transform: translateY(-3px);
-
-    &::after {
-      transform: scaleX(1.4) scaleY(1.6);
-      opacity: 0;
-    }
-
-    &:active {
-      transform: translateY(3px);
-      box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.2);
-    }
-  }
+  color: ${({ theme }) => theme.colors.light};
 `;
 
 const top = keyframes`

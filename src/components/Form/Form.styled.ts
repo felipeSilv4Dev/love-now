@@ -3,15 +3,15 @@ import styled from 'styled-components';
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
+  width: 75%;
+  margin: 8rem auto;
+  position: relative;
   gap: 2rem;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-  padding: 4rem;
-  color: gray;
+  z-index: 1;
 `;
 
 export const Input = styled.input<{ $error: boolean }>`
-  font-size: 1.5rem;
+  /* font-size: 1.5rem;
   font-family: inherit;
   padding: 1.5rem 2rem;
   color: inherit;
@@ -22,7 +22,7 @@ export const Input = styled.input<{ $error: boolean }>`
     ${(props) => (props.$error ? 'red' : 'transparent')};
   width: 90%;
   display: block;
-  transition: all 0.3s;
+  transition: all 0.3s; */
 
   &:focus {
     outline: none;

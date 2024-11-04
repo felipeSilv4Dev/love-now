@@ -8,7 +8,7 @@ export const GlobalStyles = createGlobalStyle`
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Poppins", sans-serif;
   background-color:  ${({ theme }) => theme.colors.dark};
 	color: ${({ theme }) => theme.colors.light};
 }
