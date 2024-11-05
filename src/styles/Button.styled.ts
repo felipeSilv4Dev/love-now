@@ -1,7 +1,6 @@
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import { css } from 'styled-components';
 
-export const Button = styled(Link)`
+export const buttonStyle = css`
   font-family: 'Poppins', system-ui;
   background: ${({ theme }) => theme.colors.linearPrimary};
   font-size: 2rem;

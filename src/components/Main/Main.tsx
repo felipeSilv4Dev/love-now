@@ -15,7 +15,7 @@ const Main = () => {
           fotos e memórias únicas para celebrar sua história juntos!"
         </S.Description>
 
-        <Button to={'/register'}>Criar</Button>
+        <S.Button to={'/register'}>Criar</S.Button>
         <HearthAnimation />
       </S.TextBox>
     </S.Container>

@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
+import { buttonStyle } from '../../styles/Button.styled';
 
 export const Container = styled.section`
   background: url('../../utils/texture.png') no-repeat center center;
@@ -27,6 +29,10 @@ export const Description = styled.p`
   max-width: 45ch;
   line-height: 1.3;
   color: ${({ theme }) => theme.colors.light};
+`;
+
+export const Button = styled(Link)`
+  ${buttonStyle}
 `;
 
 const top = keyframes`

@@ -13,7 +13,8 @@ export const Header = styled.div`
 export const Container = styled.section`
   background: url('../../utils/texture.png') no-repeat center center;
   background-size: cover;
-  height: 100vh;
+  /* height: 100vh; */
+
   position: relative;
   overflow: hidden;
 `;
