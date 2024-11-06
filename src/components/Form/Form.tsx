@@ -39,11 +39,16 @@ const schema = yup.object({
     }),
 
   quality: yup
-    .mixed<string[]>()
-    .required('Por favor, escreva no minímo uma qualidade!')
-    .test('stringCount', 'Por favor, escreva uma qualidade', (doc) => {
-      return !!doc.length;
-    }),
+    .array(yup.string())
+    .of(yup.string().required())
+    .required()
+    .test(
+      'typeError',
+      'Por favor, escreva uma qualidade antes de enviar!',
+      (doc) => {
+        return !!doc.length;
+      }
+    ),
 });
 
 const Form = () => {
@@ -69,6 +74,7 @@ const Form = () => {
   });
 
   const photoWatch = watch('photo');
+
   useEffect(() => {
     if (photoWatch) {
       clearErrors('photo');
@@ -97,28 +103,45 @@ const Form = () => {
     }
   };
 
-  console.log(errors);
   const handleSelectedQuality = (value: string) => {
+    clearErrors('quality');
     if (value.length > 15) {
       setError('quality', {
-        message: 'por favor,a palavra deve ter no minímo 15 caracteres!',
+        message: 'Por favor,a palavra deve ter no máximo 15 caracteres!',
       });
+      return;
     }
-    if (value) {
-      setQuality((q) => {
-        if (q.length <= 2) {
-          const qualityAmount = [...quality, value];
-          setValue('quality', qualityAmount);
-          return qualityAmount;
-        }
-        return q;
-      });
 
-      setQualityValue('');
+    if (!value) {
+      setError('quality', {
+        message: 'Por favor, escreva uma qualidade antes de adicionar!',
+      });
+      return;
     }
+    if (value.length < 4) {
+      setError('quality', {
+        message: 'Por favor,a palavra deve ter no minímo 4 caracteres!',
+      });
+      return;
+    }
+
+    setQuality((q) => {
+      if (q.length <= 2) {
+        const qualityAmount = [...quality, value];
+        setValue('quality', qualityAmount);
+        return qualityAmount;
+      }
+      return q;
+    });
+
+    setQualityValue('');
   };
 
-  console.log({ quality });
+  const handleRemoveQuality = (index: number) => {
+    const newQuality = quality.filter((_, i) => i !== index);
+    setQuality(newQuality);
+  };
+
   return (
     <S.Form onSubmit={handleSubmit(handlerDatas)}>
       <S.InputBox>
@@ -181,7 +204,12 @@ const Form = () => {
             onChange={({ target }) => setQualityValue(target.value)}
           />
 
-          <S.ButtonQuality onClick={() => handleSelectedQuality(qualityValue)}>
+          <S.ButtonQuality
+            disabled={quality.length === 3}
+            onClick={(e) => (
+              e.preventDefault(), handleSelectedQuality(qualityValue)
+            )}
+          >
             adicionar
           </S.ButtonQuality>
         </S.BoxQuality>
@@ -189,9 +217,24 @@ const Form = () => {
         <S.TextError $error={!!errors.quality}>
           {errors.quality ? errors.quality.message : 'Qualidade'}
         </S.TextError>
+
+        <S.TextContainerQuality>
+          {quality.length > 0 ? (
+            quality.map((q, i) => (
+              <S.TextQuality key={i + 1}>
+                {q}
+                <S.Close onClick={() => handleRemoveQuality(i)}>❌</S.Close>
+              </S.TextQuality>
+            ))
+          ) : (
+            <S.TextQuality>Adicione no máximo 3 qualidades...</S.TextQuality>
+          )}
+        </S.TextContainerQuality>
       </S.InputBox>
 
-      <button type="submit">enviar</button>
+      <S.ButtonSubmit disabled={quality.length <= 0} type="submit">
+        enviar
+      </S.ButtonSubmit>
     </S.Form>
   );
 };

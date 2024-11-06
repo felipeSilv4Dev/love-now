@@ -52,8 +52,8 @@ export const InputBox = styled.div`
 
   input:focus + span ,textarea:focus + span {
     opacity: 1;
-    transform: translateY(0);
     visibility: visible;
+    transform: translateY(0);
   }
 `;
 
@@ -99,6 +99,7 @@ export const PhotoFill = styled.span<{ $fill?: number }>`
   width: ${({ $fill }) => ($fill ? `${$fill}%` : 0)};
   height: ${({ $fill }) => ($fill ? `${$fill}%` : 0)};
   font-size: 1.5rem;
+  font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -131,7 +132,8 @@ export const BoxQuality = styled.div`
   }
 `;
 
-export const ButtonQuality = styled.span`
+export const ButtonQuality = styled.button`
+  all: unset;
   ${buttonStyle}
   ${flex}
 	width: 16rem;
@@ -140,4 +142,61 @@ export const ButtonQuality = styled.span`
   cursor: pointer;
   padding: 1.5rem 2rem;
   font-size: 1.5rem;
+
+  &:hover {
+    transform: initial;
+  }
+  &:disabled {
+    opacity: 0.4;
+    cursor: initial;
+
+    &:hover {
+      &::after {
+        display: none;
+      }
+    }
+  }
+`;
+
+export const TextQuality = styled.p`
+  font-size: 1.5rem;
+  margin-left: 2rem;
+  display: flex;
+  color: ${({ theme: { colors } }) => colors.light};
+  text-transform: lowercase;
+`;
+
+export const TextContainerQuality = styled.div`
+  ${flex}
+  flex-direction: row;
+  gap: 0.1rem;
+`;
+
+export const Close = styled.span`
+  cursor: pointer;
+`;
+
+export const ButtonSubmit = styled.button`
+  all: unset;
+  ${buttonStyle}
+  ${flex}
+	width: 16rem;
+  text-align: center;
+  justify-content: center;
+  align-self: center;
+  cursor: pointer;
+  padding: 1.5rem 2rem;
+  font-size: 1.5rem;
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: initial;
+
+    &:hover {
+      transform: initial;
+      &::after {
+        display: none;
+      }
+    }
+  }
 `;
