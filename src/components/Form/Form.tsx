@@ -39,9 +39,8 @@ const schema = yup.object({
     }),
 
   quality: yup
-    .array(yup.string())
-    .of(yup.string().required())
-    .required()
+    .mixed<string[]>()
+    .required('dsasdasd')
     .test(
       'typeError',
       'Por favor, escreva uma qualidade antes de enviar!',
@@ -53,9 +52,9 @@ const schema = yup.object({
 
 const Form = () => {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-  const [quality, setQuality] = useState<string[]>([]);
+  const [qualitys, setQualitys] = useState<string[]>([]);
   const [qualityValue, setQualityValue] = useState<string>('');
-  const som = 100 / 3;
+  const porcentage = 100 / 3;
 
   const {
     register,
@@ -64,25 +63,67 @@ const Form = () => {
     setError,
     watch,
     clearErrors,
-
     formState: { errors },
   } = useForm<Inputs>({
     resolver: yupResolver(schema),
     defaultValues: {
-      quality: [],
+      quality: qualitys,
     },
   });
-
   const photoWatch = watch('photo');
 
   useEffect(() => {
-    if (photoWatch) {
-      clearErrors('photo');
-    }
+    if (photoWatch) clearErrors('photo');
   }, [clearErrors, photoWatch]);
 
   const handlerDatas: SubmitHandler<Inputs> = (data) => {
     console.log(data);
+  };
+
+  // const handleAddItems = <T extends string | File>(
+  // 	prevItems: T[],
+  // 	value: T | T[],
+  // 	key: 'quality' | 'photo'
+  // ): T[] => {
+  // 	// Normaliza `value` para sempre ser um array
+  // 	const newItems = Array.isArray(value) ? value : [value];
+  // 	const itemsAmount = [...prevItems, ...newItems];
+
+  // 	if (
+  // 		key === 'photo' &&
+  // 		itemsAmount.every((item) => item instanceof File)
+  // 	) {
+  // 		setValue(key, itemsAmount as File[]);
+  // 	} else if (
+  // 		key === 'quality' &&
+  // 		itemsAmount.every((item) => typeof item === 'string')
+  // 	) {
+  // 		setValue(key, itemsAmount as string[]);
+  // 	}
+
+  // 	return itemsAmount;
+  // };
+
+  const verificateType = <T extends string | File>(key: string, array: T[]) => {
+    if (key === 'photo' && array.every((item) => item instanceof File)) {
+      setValue(key, array as File[]);
+    } else if (
+      key === 'quality' &&
+      array.every((item) => typeof item === 'string')
+    ) {
+      setValue(key, array as string[]);
+    }
+  };
+
+  const handleAddItems = <T extends string | File>(
+    prevItems: T[],
+    value: T | T[],
+    key: 'quality' | 'photo'
+  ): T[] => {
+    const newItems = Array.isArray(value) ? value : [value];
+    const itemsAmount = [...prevItems, ...newItems];
+    verificateType(key, itemsAmount);
+    return itemsAmount;
   };
 
   const handleSelectedPhotos = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,11 +131,10 @@ const Form = () => {
 
     if (files) {
       const filesArray = Array.from(files);
+
       setSelectedFiles((file) => {
         if (file.length <= 2) {
-          const uploadFiles = [...file, ...filesArray];
-          setValue('photo', uploadFiles);
-          return uploadFiles;
+          return handleAddItems(file, filesArray, 'photo');
         }
         return file;
       });
@@ -103,44 +143,86 @@ const Form = () => {
     }
   };
 
-  const handleSelectedQuality = (value: string) => {
-    clearErrors('quality');
-    if (value.length > 15) {
-      setError('quality', {
-        message: 'Por favor,a palavra deve ter no máximo 15 caracteres!',
-      });
-      return;
-    }
+  const setErrorQuality = (message: string) => {
+    return setError('quality', { message });
+  };
 
+  const handleValidateValue = (value: string) => {
+    if (value.length > 15) {
+      return setErrorQuality(
+        'Por favor,a palavra deve ter no máximo 15 caracteres!'
+      );
+    }
     if (!value) {
-      setError('quality', {
-        message: 'Por favor, escreva uma qualidade antes de adicionar!',
-      });
-      return;
+      return setErrorQuality(
+        'Por favor, escreva uma qualidade antes de adicionar!'
+      );
     }
     if (value.length < 4) {
-      setError('quality', {
-        message: 'Por favor,a palavra deve ter no minímo 4 caracteres!',
-      });
-      return;
+      return setErrorQuality(
+        'Por favor,a palavra deve ter no minímo 4 caracteres!'
+      );
     }
-
-    setQuality((q) => {
-      if (q.length <= 2) {
-        const qualityAmount = [...quality, value];
-        setValue('quality', qualityAmount);
-        return qualityAmount;
-      }
-      return q;
-    });
-
-    setQualityValue('');
+    return true;
   };
 
-  const handleRemoveQuality = (index: number) => {
-    const newQuality = quality.filter((_, i) => i !== index);
-    setQuality(newQuality);
+  const handleSelectedQuality = (value: string) => {
+    clearErrors('quality');
+    if (handleValidateValue(value)) {
+      setQualitys((prevQualitys) => {
+        if (prevQualitys.length <= 2) {
+          return handleAddItems(prevQualitys, value, 'quality');
+        }
+        return prevQualitys;
+      });
+
+      setQualityValue('');
+    }
   };
+
+  const handleRemoveItem = <T extends string | File>(
+    index: number,
+    key: 'photo' | 'quality',
+    items: T[],
+    setItems: React.Dispatch<React.SetStateAction<T[]>>
+  ) => {
+    const newItems = items.filter((_, i) => i !== index);
+    setItems(newItems);
+
+    verificateType(key, newItems);
+  };
+
+  const shortNamePhoto = (quality: string) =>
+    `${quality.split('.')[0].slice(0, 4)}.${quality.split('.')[1]}`;
+
+  const handleRemovePhoto = (index: number) =>
+    handleRemoveItem(index, 'photo', selectedFiles, setSelectedFiles);
+
+  const showErroPhotos = errors.photo
+    ? errors.photo.message
+    : `selecione ${selectedFiles.length}/3`;
+
+  const showPhotos = selectedFiles.map((quality, index) => (
+    <S.TextQuality key={index}>
+      {shortNamePhoto(quality.name)}
+      <S.Close onClick={() => handleRemovePhoto(index)}>❌</S.Close>
+    </S.TextQuality>
+  ));
+
+  const handleButtonQualitys = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    handleSelectedQuality(qualityValue);
+  };
+
+  const handleRemoveQualitys = (index: number) =>
+    handleRemoveItem(index, 'quality', qualitys, setQualitys);
+
+  const showQualitys = qualitys.map((quality, index) => (
+    <S.TextQuality key={index + 1}>
+      {quality}
+      <S.Close onClick={() => handleRemoveQualitys(index)}>❌</S.Close>
+    </S.TextQuality>
+  ));
 
   return (
     <S.Form onSubmit={handleSubmit(handlerDatas)}>
@@ -148,10 +230,9 @@ const Form = () => {
         <S.InputPhoto
           htmlFor="photo"
           $error={!!errors.photo}
-          $fill={selectedFiles.length * som}
+          $fill={selectedFiles.length * porcentage}
         >
           <input
-            style={{ display: 'none' }}
             id="photo"
             type="file"
             accept="image/*"
@@ -160,12 +241,15 @@ const Form = () => {
             placeholder="Selecione uma foto"
             disabled={selectedFiles.length === 3}
           />
-          <S.PhotoFill $fill={selectedFiles.length * som}>Foto</S.PhotoFill>
+          <S.PhotoFill $fill={selectedFiles.length * porcentage}>
+            Foto
+          </S.PhotoFill>
         </S.InputPhoto>
+
         <S.TextErrorPhoto $error={!!errors.photo}>
-          {errors.photo
-            ? errors.photo.message
-            : `selecione ${selectedFiles.length}/3`}
+          <S.TextContainerQuality>
+            {selectedFiles.length ? showPhotos : showErroPhotos}
+          </S.TextContainerQuality>
         </S.TextErrorPhoto>
       </S.InputBox>
 
@@ -202,15 +286,14 @@ const Form = () => {
             $error={!!errors.quality}
             value={qualityValue}
             onChange={({ target }) => setQualityValue(target.value)}
+            onBlur={({ target }) => target.blur()}
           />
 
           <S.ButtonQuality
-            disabled={quality.length === 3}
-            onClick={(e) => (
-              e.preventDefault(), handleSelectedQuality(qualityValue)
-            )}
+            disabled={qualitys.length === 3}
+            onClick={handleButtonQualitys}
           >
-            adicionar
+            Adicionar
           </S.ButtonQuality>
         </S.BoxQuality>
 
@@ -219,21 +302,16 @@ const Form = () => {
         </S.TextError>
 
         <S.TextContainerQuality>
-          {quality.length > 0 ? (
-            quality.map((q, i) => (
-              <S.TextQuality key={i + 1}>
-                {q}
-                <S.Close onClick={() => handleRemoveQuality(i)}>❌</S.Close>
-              </S.TextQuality>
-            ))
+          {qualitys.length ? (
+            showQualitys
           ) : (
             <S.TextQuality>Adicione no máximo 3 qualidades...</S.TextQuality>
           )}
         </S.TextContainerQuality>
       </S.InputBox>
 
-      <S.ButtonSubmit disabled={quality.length <= 0} type="submit">
-        enviar
+      <S.ButtonSubmit disabled={qualitys.length <= 0} type="submit">
+        Criar
       </S.ButtonSubmit>
     </S.Form>
   );

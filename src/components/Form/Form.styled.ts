@@ -84,6 +84,9 @@ export const InputPhoto = styled.label<{ $fill: number; $error: boolean }>`
   cursor: ${({ $fill }) => ($fill === 100 ? 'initial' : 'pointer')};
   position: relative;
   overflow: hidden;
+  input {
+    display: none;
+  }
 `;
 
 export const TextErrorPhoto = styled.span<{ $error: boolean }>`
