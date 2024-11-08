@@ -11,6 +11,25 @@ type Inputs = {
   quality: string[];
 };
 
+type Key = {
+  key: 'quality' | 'photo';
+};
+interface PropsRemoveItem<T> extends Key {
+  index: number;
+  items: T[];
+  setItems: React.Dispatch<React.SetStateAction<T[]>>;
+}
+
+interface PropsAddItems<T> extends Key {
+  prevItems: T[];
+  value: T | T[];
+}
+interface PropsRemoveItem<T> extends Key {
+  index: number;
+  items: T[];
+  setItems: React.Dispatch<React.SetStateAction<T[]>>;
+}
+
 const schema = yup.object({
   name: yup
     .string()
@@ -80,30 +99,6 @@ const Form = () => {
     console.log(data);
   };
 
-  // const handleAddItems = <T extends string | File>(
-  // 	prevItems: T[],
-  // 	value: T | T[],
-  // 	key: 'quality' | 'photo'
-  // ): T[] => {
-  // 	// Normaliza `value` para sempre ser um array
-  // 	const newItems = Array.isArray(value) ? value : [value];
-  // 	const itemsAmount = [...prevItems, ...newItems];
-
-  // 	if (
-  // 		key === 'photo' &&
-  // 		itemsAmount.every((item) => item instanceof File)
-  // 	) {
-  // 		setValue(key, itemsAmount as File[]);
-  // 	} else if (
-  // 		key === 'quality' &&
-  // 		itemsAmount.every((item) => typeof item === 'string')
-  // 	) {
-  // 		setValue(key, itemsAmount as string[]);
-  // 	}
-
-  // 	return itemsAmount;
-  // };
-
   const verificateType = <T extends string | File>(key: string, array: T[]) => {
     if (key === 'photo' && array.every((item) => item instanceof File)) {
       setValue(key, array as File[]);
@@ -115,11 +110,11 @@ const Form = () => {
     }
   };
 
-  const handleAddItems = <T extends string | File>(
-    prevItems: T[],
-    value: T | T[],
-    key: 'quality' | 'photo'
-  ): T[] => {
+  const handleAddItems = <T extends string | File>({
+    prevItems,
+    value,
+    key,
+  }: PropsAddItems<T>): T[] => {
     const newItems = Array.isArray(value) ? value : [value];
     const itemsAmount = [...prevItems, ...newItems];
     verificateType(key, itemsAmount);
@@ -134,7 +129,11 @@ const Form = () => {
 
       setSelectedFiles((file) => {
         if (file.length <= 2) {
-          return handleAddItems(file, filesArray, 'photo');
+          return handleAddItems({
+            prevItems: file,
+            value: filesArray,
+            key: 'photo',
+          });
         }
         return file;
       });
@@ -171,7 +170,11 @@ const Form = () => {
     if (handleValidateValue(value)) {
       setQualitys((prevQualitys) => {
         if (prevQualitys.length <= 2) {
-          return handleAddItems(prevQualitys, value, 'quality');
+          return handleAddItems({
+            prevItems: prevQualitys,
+            value,
+            key: 'quality',
+          });
         }
         return prevQualitys;
       });
@@ -180,23 +183,30 @@ const Form = () => {
     }
   };
 
-  const handleRemoveItem = <T extends string | File>(
-    index: number,
-    key: 'photo' | 'quality',
-    items: T[],
-    setItems: React.Dispatch<React.SetStateAction<T[]>>
-  ) => {
+  const handleRemoveItem = <T extends string | File>({
+    index,
+    key,
+    items,
+    setItems,
+  }: PropsRemoveItem<T>) => {
     const newItems = items.filter((_, i) => i !== index);
     setItems(newItems);
 
     verificateType(key, newItems);
   };
 
-  const shortNamePhoto = (quality: string) =>
-    `${quality.split('.')[0].slice(0, 4)}.${quality.split('.')[1]}`;
+  const shortNamePhoto = (quality: string, index: number) =>
+    `${index + 1}º ${quality.split('.')[0].slice(0, 4)}.${
+      quality.split('.')[1]
+    }`;
 
   const handleRemovePhoto = (index: number) =>
-    handleRemoveItem(index, 'photo', selectedFiles, setSelectedFiles);
+    handleRemoveItem({
+      index,
+      key: 'photo',
+      items: selectedFiles,
+      setItems: setSelectedFiles,
+    });
 
   const showErroPhotos = errors.photo
     ? errors.photo.message
@@ -204,7 +214,7 @@ const Form = () => {
 
   const showPhotos = selectedFiles.map((quality, index) => (
     <S.TextQuality key={index}>
-      {shortNamePhoto(quality.name)}
+      {shortNamePhoto(quality.name, index)}
       <S.Close onClick={() => handleRemovePhoto(index)}>❌</S.Close>
     </S.TextQuality>
   ));
@@ -215,7 +225,12 @@ const Form = () => {
   };
 
   const handleRemoveQualitys = (index: number) =>
-    handleRemoveItem(index, 'quality', qualitys, setQualitys);
+    handleRemoveItem({
+      index,
+      key: 'quality',
+      items: qualitys,
+      setItems: setQualitys,
+    });
 
   const showQualitys = qualitys.map((quality, index) => (
     <S.TextQuality key={index + 1}>
