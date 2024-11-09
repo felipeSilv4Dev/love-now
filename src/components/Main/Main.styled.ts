@@ -1,13 +1,11 @@
 import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 import { buttonStyle } from '../../styles/Button.styled';
+import { container } from '../../styles/Container.styled';
+import { title } from '../../styles/Title.styled';
 
 export const Container = styled.section`
-  background: url('../../utils/texture.png') no-repeat center center;
-  background-size: cover;
-  height: 100vh;
-  position: relative;
-  overflow: hidden;
+  ${container}
 `;
 
 export const TextBox = styled.div`
@@ -17,6 +15,9 @@ export const TextBox = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 2rem;
+`;
+export const Title = styled.h1`
+  ${title}
 `;
 
 export const Description = styled.p`

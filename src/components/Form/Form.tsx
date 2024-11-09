@@ -3,13 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useEffect, useState } from 'react';
 import * as S from './Form.styled';
-
-type Inputs = {
-  name: string;
-  photo: File[];
-  message: string;
-  quality: string[];
-};
+import { useNavigate } from 'react-router';
 
 type Key = {
   key: 'quality' | 'photo';
@@ -45,7 +39,7 @@ const schema = yup.object({
     .trim()
     .required('Por favor, preencha o campo de mensagem antes de enviar.')
     .min(3, 'A mensagem deve ter pelo menos 3 letras')
-    .max(200, 'O texto deve ter no máximo 200 palavras'),
+    .max(1000, 'O texto deve ter no máximo 1000 palavras'),
   photo: yup
     .mixed<File[]>()
     .required('Por favor, selecione de 1 a 3 fotos!')
@@ -69,10 +63,15 @@ const schema = yup.object({
     ),
 });
 
-const Form = () => {
+const Form = ({
+  setData,
+}: {
+  setData: React.Dispatch<React.SetStateAction<Inputs[]>>;
+}) => {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [qualitys, setQualitys] = useState<string[]>([]);
   const [qualityValue, setQualityValue] = useState<string>('');
+  const navigate = useNavigate();
   const porcentage = 100 / 3;
 
   const {
@@ -96,7 +95,8 @@ const Form = () => {
   }, [clearErrors, photoWatch]);
 
   const handlerDatas: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
+    setData((prevData) => [...prevData, data]);
+    navigate(`/${data.name}`);
   };
 
   const verificateType = <T extends string | File>(key: string, array: T[]) => {

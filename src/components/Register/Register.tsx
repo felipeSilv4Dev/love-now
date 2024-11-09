@@ -1,18 +1,16 @@
-import { Image } from '../../styles/Image.styled';
-import { Title } from '../../styles/Title.styled';
-import Form from '../Form/Form';
+import { ReactNode } from 'react';
+
 import * as S from './Register.styled';
 
-const Register = () => {
+const Register = ({ children }: { children: ReactNode }) => {
   return (
     <S.Container>
-      <Image src="../../utils/couple.svg" alt="image undrawn couple" />
       <S.Header>
         <S.Home to="/">Home</S.Home>
-        <Title $size={'5rem'}>Preencha o cadastro</Title>
+        <S.Title>Preencha o cadastro</S.Title>
       </S.Header>
 
-      <Form />
+      {children}
     </S.Container>
   );
 };

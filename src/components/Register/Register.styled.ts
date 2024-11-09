@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { container } from '../../styles/Container.styled';
+import { title } from '../../styles/Title.styled';
 
 export const Header = styled.div`
   display: flex;
@@ -11,14 +13,13 @@ export const Header = styled.div`
 `;
 
 export const Container = styled.section`
-  background: url('../../utils/texture.png') no-repeat center center;
-  background-size: cover;
-  /* height: 100vh; */
-
-  position: relative;
-  overflow: hidden;
+  ${container}
+  height: auto;
 `;
-
+export const Title = styled.h1`
+  ${title}
+  font-size: 5rem;
+`;
 export const Home = styled(Link)`
   padding: 2rem;
   height: 5rem;
