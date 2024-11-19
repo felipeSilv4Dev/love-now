@@ -1,4 +1,4 @@
-import * as S from './Main.styled';
+import * as S from './Heath.styled';
 
 const HearthAnimation = () => {
   return (

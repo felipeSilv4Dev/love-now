@@ -1,16 +1,20 @@
 import { ReactNode } from 'react';
 
 import * as S from './Register.styled';
+import HearthAnimation from '../Main/HearthAnimation';
 
 const Register = ({ children }: { children: ReactNode }) => {
   return (
     <S.Container>
       <S.Header>
-        <S.Home to="/">Home</S.Home>
-        <S.Title>Preencha o cadastro</S.Title>
+        <S.Home to="/">
+          <S.Title src="../../utils/icon.svg" alt="title regiter" />
+        </S.Home>
+        <S.Title src="../../utils/register.svg" alt="title regiter" />
       </S.Header>
 
       {children}
+      <HearthAnimation />
     </S.Container>
   );
 };

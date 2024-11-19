@@ -6,11 +6,12 @@ import Register from './components/Register/Register';
 import { useState } from 'react';
 import Form from './components/Form/Form';
 import Page from './components/Page/Page';
+import Error from './components/Error/Error';
 
 declare global {
   interface Inputs {
     name: string;
-    photo: File[];
+    photos: File[];
     message: string;
     quality: string[];
   }
@@ -22,17 +23,18 @@ function App() {
     <BrowserRouter>
       <GlobalStyles />
       <Routes>
-        <Route path="/" element={<Main />} />
+        <Route index element={<Main />} />
         <Route
           path="register"
           element={
             <Register>
-              <Form setData={setData} />
+              <Form />
             </Register>
           }
         />
 
-        <Route path="/:id" element={<Page data={data} />} />
+        <Route path="/:slug/:id" element={<Page />} />
+        <Route path="*" element={<Error message="página não encontrada!" />} />
       </Routes>
     </BrowserRouter>
   );

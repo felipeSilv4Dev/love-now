@@ -1,10 +1,11 @@
 import styled, { css } from 'styled-components';
 import { buttonStyle } from '../../styles/Button.styled';
 
-const flex = `
+const flex = css`
   display: flex;
   flex-direction: column;
-  gap: 1rem;`;
+  gap: 1rem;
+`;
 
 export const Form = styled.form`
   position: relative;
@@ -45,6 +46,14 @@ const baseInput = css<{ $error: boolean }>`
 
 export const Input = styled.input<{ $error: boolean }>`
   ${baseInput}
+
+  &:-webkit-autofill {
+    font-size: 1.5rem !important;
+    -webkit-box-shadow: 0 0 0 100rem ${({ theme: { colors } }) => colors.dark_1}
+      inset !important;
+    -webkit-text-fill-color: ${({ theme: { colors } }) =>
+      colors.light} !important;
+  }
 `;
 
 export const InputBox = styled.div`
@@ -75,15 +84,31 @@ export const InputPhoto = styled.label<{ $fill: number; $error: boolean }>`
   height: 12rem;
   border-radius: 50%;
   align-self: center;
-  background: ${({ theme: { colors } }) => colors.dark_1};
-  border: 3px solid ${({ theme }) => theme.colors.dark_2};
-  border-bottom: 0.3rem solid
-    ${({ $error, theme: { colors } }) =>
-      $error ? colors.error : colors.dark_2};
-
+  background: conic-gradient(
+    ${({ theme: { colors } }) => colors.fill}
+      calc(${({ $fill }) => ($fill ? $fill : 0)} * 3.6deg),
+    ${({ theme: { colors }, $error }) =>
+        $error ? colors.error : colors.dark_2}
+      0
+  );
   cursor: ${({ $fill }) => ($fill === 100 ? 'initial' : 'pointer')};
   position: relative;
   overflow: hidden;
+  transition: all 0.2s linear;
+
+  &::before {
+    content: '';
+    display: block;
+    height: 11.4rem;
+    width: 11.4rem;
+    position: absolute;
+    background-color: ${({ theme: { colors } }) => colors.dark_1};
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
   input {
     display: none;
   }
@@ -94,29 +119,23 @@ export const TextErrorPhoto = styled.span<{ $error: boolean }>`
   display: Block;
   color: ${({ $error, theme: { colors } }) =>
     $error ? colors.error : colors.light};
-  transition: all 0.3s;
+  transition: all 0.3s linear;
   align-self: center;
 `;
 
-export const PhotoFill = styled.span<{ $fill?: number }>`
-  width: ${({ $fill }) => ($fill ? `${$fill}%` : 0)};
-  height: ${({ $fill }) => ($fill ? `${$fill}%` : 0)};
+export const PhotoFill = styled.span<{ $fill: number }>`
   font-size: 1.5rem;
   font-weight: bold;
-  display: flex;
+  ${flex}
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  background-image: ${({ theme: { colors } }) => colors.linearPrimary};
   color: ${({ theme: { colors }, $fill }) =>
-    $fill ? colors.light : colors.dark_2};
+    $fill < 100 ? colors.light : colors.dark_2};
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   transition: all 0.2s linear;
-
-  opacity: ${({ $fill }) => ($fill === 100 ? 0.5 : 1)};
 `;
 
 export const Message = styled.textarea<{ $error: boolean }>`
@@ -161,7 +180,18 @@ export const ButtonQuality = styled.button`
   }
 `;
 
+export const TextContainerQuality = styled.div`
+  ${flex}
+  flex-direction: row;
+  gap: 0.1rem;
+  align-items: center;
+`;
+
 export const TextQuality = styled.p`
+  ${flex}
+  flex-direction: row;
+  gap: 0.5rem;
+
   font-size: 1.5rem;
   margin-left: 2rem;
   display: flex;
@@ -169,14 +199,14 @@ export const TextQuality = styled.p`
   text-transform: lowercase;
 `;
 
-export const TextContainerQuality = styled.div`
-  ${flex}
-  flex-direction: row;
-  gap: 0.1rem;
-`;
+export const Close = styled.img`
+  height: 2.1rem;
 
-export const Close = styled.span`
   cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
 export const ButtonSubmit = styled.button`

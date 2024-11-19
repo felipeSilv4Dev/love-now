@@ -3,10 +3,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useEffect, useState } from 'react';
 import * as S from './Form.styled';
-import { useNavigate } from 'react-router';
+import { loadStripe } from '@stripe/stripe-js';
+
+import axios from 'axios';
 
 type Key = {
-  key: 'quality' | 'photo';
+  key: 'quality' | 'photos';
 };
 interface PropsRemoveItem<T> extends Key {
   index: number;
@@ -40,7 +42,7 @@ const schema = yup.object({
     .required('Por favor, preencha o campo de mensagem antes de enviar.')
     .min(3, 'A mensagem deve ter pelo menos 3 letras')
     .max(1000, 'O texto deve ter no máximo 1000 palavras'),
-  photo: yup
+  photos: yup
     .mixed<File[]>()
     .required('Por favor, selecione de 1 a 3 fotos!')
     .test('fileCount', 'Por favor, só aceitamos apenas imagens', (files) => {
@@ -63,16 +65,15 @@ const schema = yup.object({
     ),
 });
 
-const Form = ({
-  setData,
-}: {
-  setData: React.Dispatch<React.SetStateAction<Inputs[]>>;
-}) => {
+const Form = () => {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [qualitys, setQualitys] = useState<string[]>([]);
   const [qualityValue, setQualityValue] = useState<string>('');
-  const navigate = useNavigate();
   const porcentage = 100 / 3;
+
+  const stripePromise = loadStripe(
+    'pk_test_51QChFIK7uAjTqLfBVYyBBb57pNu2BHxgtRBWkH0QlaqRXH1oZeuvUsfttrz72D0TlX4rxH6EHY0mSEfz9tnBO6KB00KJb9LNWQ'
+  );
 
   const {
     register,
@@ -88,19 +89,53 @@ const Form = ({
       quality: qualitys,
     },
   });
-  const photoWatch = watch('photo');
+  const photosWatch = watch('photos');
 
   useEffect(() => {
-    if (photoWatch) clearErrors('photo');
-  }, [clearErrors, photoWatch]);
+    if (photosWatch) clearErrors('photos');
+  }, [clearErrors, photosWatch]);
 
-  const handlerDatas: SubmitHandler<Inputs> = (data) => {
-    setData((prevData) => [...prevData, data]);
-    navigate(`/${data.name}`);
+  const URL_API = 'https://love-now.vercel.app/';
+
+  const createUser = async (data: Inputs) => {
+    const formData = new FormData();
+    formData.append('name', data.name);
+    formData.append('message', data.message);
+
+    data.quality.forEach((qualityData) => {
+      formData.append('quality', qualityData);
+    });
+
+    // Adiciona as fotos ao FormData
+    data.photos.forEach((photo) => {
+      formData.append('photos', photo);
+    });
+
+    const res = await fetch(`${URL_API}register`, {
+      method: 'POST',
+      body: formData,
+    });
+    return await res.json();
+  };
+
+  const handlerDatas: SubmitHandler<Inputs> = async (data) => {
+    try {
+      const user = await createUser(data);
+
+      console.log(user);
+      // const session = await axios(
+      //   `${URL_API}register/checkout-session/${user.id}`
+      // );
+      // const stripe = await stripePromise;
+
+      // stripe?.redirectToCheckout({ sessionId: session.data.session.id });
+    } catch (err) {
+      if (err instanceof Error) alert(err.message);
+    }
   };
 
   const verificateType = <T extends string | File>(key: string, array: T[]) => {
-    if (key === 'photo' && array.every((item) => item instanceof File)) {
+    if (key === 'photos' && array.every((item) => item instanceof File)) {
       setValue(key, array as File[]);
     } else if (
       key === 'quality' &&
@@ -132,7 +167,7 @@ const Form = ({
           return handleAddItems({
             prevItems: file,
             value: filesArray,
-            key: 'photo',
+            key: 'photos',
           });
         }
         return file;
@@ -203,19 +238,24 @@ const Form = ({
   const handleRemovePhoto = (index: number) =>
     handleRemoveItem({
       index,
-      key: 'photo',
+      key: 'photos',
       items: selectedFiles,
       setItems: setSelectedFiles,
     });
 
-  const showErroPhotos = errors.photo
-    ? errors.photo.message
+  const showErroPhotos = errors.photos
+    ? errors.photos.message
     : `selecione ${selectedFiles.length}/3`;
 
   const showPhotos = selectedFiles.map((quality, index) => (
     <S.TextQuality key={index}>
-      {shortNamePhoto(quality.name, index)}
-      <S.Close onClick={() => handleRemovePhoto(index)}>❌</S.Close>
+      <span>{shortNamePhoto(quality.name, index)}</span>
+
+      <S.Close
+        onClick={() => handleRemovePhoto(index)}
+        src="../../utils/trash.svg"
+        alt="image trash"
+      />
     </S.TextQuality>
   ));
 
@@ -234,8 +274,12 @@ const Form = ({
 
   const showQualitys = qualitys.map((quality, index) => (
     <S.TextQuality key={index + 1}>
-      {quality}
-      <S.Close onClick={() => handleRemoveQualitys(index)}>❌</S.Close>
+      <span>{quality}</span>
+      <S.Close
+        onClick={() => handleRemoveQualitys(index)}
+        src="../../utils/trash.svg"
+        alt="image trash"
+      />
     </S.TextQuality>
   ));
 
@@ -243,12 +287,12 @@ const Form = ({
     <S.Form onSubmit={handleSubmit(handlerDatas)}>
       <S.InputBox>
         <S.InputPhoto
-          htmlFor="photo"
-          $error={!!errors.photo}
+          htmlFor="photos"
+          $error={!!errors.photos}
           $fill={selectedFiles.length * porcentage}
         >
           <input
-            id="photo"
+            id="photos"
             type="file"
             accept="image/*"
             multiple
@@ -261,7 +305,7 @@ const Form = ({
           </S.PhotoFill>
         </S.InputPhoto>
 
-        <S.TextErrorPhoto $error={!!errors.photo}>
+        <S.TextErrorPhoto $error={!!errors.photos}>
           <S.TextContainerQuality>
             {selectedFiles.length ? showPhotos : showErroPhotos}
           </S.TextContainerQuality>
@@ -299,6 +343,7 @@ const Form = ({
             placeholder="Escreva as qualidades da pessoa"
             {...register('quality')}
             $error={!!errors.quality}
+            autoComplete="on"
             value={qualityValue}
             onChange={({ target }) => setQualityValue(target.value)}
             onBlur={({ target }) => target.blur()}
