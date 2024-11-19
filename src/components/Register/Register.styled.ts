@@ -16,8 +16,9 @@ export const Container = styled.section`
   height: auto;
 `;
 export const Title = styled.img`
-  height: 8rem;
+  height: 4rem;
 `;
+
 export const Home = styled(Link)`
   display: flex;
   align-items: center;
@@ -26,8 +27,18 @@ export const Home = styled(Link)`
   position: fixed;
   z-index: 10;
   left: 10rem;
+  width: 8rem;
+  border-radius: 50%;
+  height: 8rem;
+  background-color: ${({ theme: { colors } }) => colors.dark_1};
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.5);
 
   &:hover {
-    transform: scale(1.1);
+    transform: translateY(-0.3rem);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.5);
+
+    &:active {
+      transform: initial;
+    }
   }
 `;

@@ -8,12 +8,13 @@ const Register = ({ children }: { children: ReactNode }) => {
     <S.Container>
       <S.Header>
         <S.Home to="/">
-          <S.Title src="../../utils/icon.svg" alt="title regiter" />
+          <S.Title src="../../utils/home.svg" alt="title regiter" />
         </S.Home>
         <S.Title src="../../utils/register.svg" alt="title regiter" />
       </S.Header>
 
       {children}
+
       <HearthAnimation />
     </S.Container>
   );

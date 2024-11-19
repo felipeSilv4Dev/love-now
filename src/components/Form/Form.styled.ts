@@ -188,6 +188,9 @@ export const TextContainerQuality = styled.div`
 `;
 
 export const TextQuality = styled.p`
+  background-color: ${({ theme: { colors } }) => colors.dark_1};
+  border-radius: 8rem;
+  padding: 1rem 1.5rem;
   ${flex}
   flex-direction: row;
   gap: 0.5rem;

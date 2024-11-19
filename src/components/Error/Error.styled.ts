@@ -6,7 +6,9 @@ import { buttonStyle } from '../../styles/Button.styled';
 
 export const Container = styled.section`
   ${container}
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
   img {
     opacity: 0.3;
   }
@@ -15,17 +17,17 @@ export const Container = styled.section`
 export const Message = styled.h2`
   ${title}
   color:${({ theme: { colors } }) => colors.light};
-
-  font-size: 6rem;
+  font-family: 'Poppins', sans-serif;
+  text-transform: capitalize;
+  font-weight: bold;
+  font-size: 5rem;
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
 `;
 
 export const Status = styled.h2`
   ${title}
   color:${({ theme: { colors } }) => colors.error};
+  font-family: 'Poppins', sans-serif;
   display: inline;
   font-size: 6rem;
   text-align: center;
@@ -36,7 +38,7 @@ export const Image = styled.img``;
 export const Home = styled(Link)`
   ${buttonStyle}
   display: flex;
-  margin: 5rem 25%;
+  margin: 4rem 32%;
   justify-content: center;
   align-items: center;
   text-align: center;
