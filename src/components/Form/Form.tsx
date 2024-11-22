@@ -306,9 +306,9 @@ const Form = () => {
         </S.InputPhoto>
 
         <S.TextErrorPhoto $error={!!errors.photos}>
-          <S.TextContainerQuality>
-            {selectedFiles.length ? showPhotos : showErroPhotos}
-          </S.TextContainerQuality>
+          <S.TextContainer>
+            {selectedFiles.length ? showPhotos : <p>{showErroPhotos}</p>}
+          </S.TextContainer>
         </S.TextErrorPhoto>
       </S.InputBox>
 
@@ -361,13 +361,13 @@ const Form = () => {
           {errors.quality ? errors.quality.message : 'Qualidade'}
         </S.TextError>
 
-        <S.TextContainerQuality>
+        <S.TextContainer>
           {qualitys.length ? (
             showQualitys
           ) : (
             <S.TextQuality>Adicione no máximo 3 qualidades...</S.TextQuality>
           )}
-        </S.TextContainerQuality>
+        </S.TextContainer>
       </S.InputBox>
 
       <S.ButtonSubmit disabled={qualitys.length <= 0} type="submit">

@@ -12,11 +12,14 @@ const Error = ({
   return (
     <S.Container>
       <Image src="../../utils/error.svg" alt="Page Error" />
-      <S.Message>
-        Error: <S.Status>{statusCode}</S.Status> {message}
-        💥
-        <S.Home to="/">voltar para o início</S.Home>
-      </S.Message>
+
+      <S.ContentBox>
+        <S.Title src="../../utils/title-error.svg" alt="Page Error" />
+        <S.Message>
+          {message} <S.Status>{statusCode}</S.Status>
+        </S.Message>
+        <S.Home to="/">voltar</S.Home>
+      </S.ContentBox>
       <HearthAnimation />
     </S.Container>
   );

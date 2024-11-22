@@ -6,12 +6,21 @@ import { buttonStyle } from '../../styles/Button.styled';
 
 export const Container = styled.section`
   ${container}
+
+  img {
+    top: 40%;
+  }
+`;
+
+export const ContentBox = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  img {
-    opacity: 0.3;
-  }
+  gap: 1.5rem;
 `;
 
 export const Message = styled.h2`
@@ -20,8 +29,13 @@ export const Message = styled.h2`
   font-family: 'Poppins', sans-serif;
   text-transform: capitalize;
   font-weight: bold;
-  font-size: 5rem;
-  position: absolute;
+  font-size: 4rem;
+  display: block;
+`;
+
+export const Title = styled.img`
+  z-index: 1;
+  height: 16rem;
 `;
 
 export const Status = styled.h2`
@@ -29,17 +43,16 @@ export const Status = styled.h2`
   color:${({ theme: { colors } }) => colors.error};
   font-family: 'Poppins', sans-serif;
   display: inline;
-  font-size: 6rem;
+  font-size: 4rem;
   text-align: center;
 `;
 
 export const Image = styled.img``;
 
 export const Home = styled(Link)`
-  ${buttonStyle}
-  display: flex;
+  ${buttonStyle}/* display: flex;
   margin: 4rem 32%;
   justify-content: center;
   align-items: center;
-  text-align: center;
+  text-align: center; */
 `;

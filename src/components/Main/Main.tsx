@@ -6,7 +6,6 @@ const Main = () => {
   return (
     <S.Container>
       <S.TextBox>
-        <Image src="../../utils/couple.svg" alt="image undrawn couple" />
         <S.Title src="../../utils/title.svg" alt="title" />
 
         <S.Description>
@@ -14,7 +13,7 @@ const Main = () => {
           fotos e memórias únicas para celebrar sua história juntos!"
         </S.Description>
 
-        <S.Button to={'/register'}>Criar</S.Button>
+        <S.Button to={'/register'}>Criar Minha página</S.Button>
         <HearthAnimation />
       </S.TextBox>
     </S.Container>

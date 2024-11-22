@@ -5,6 +5,9 @@ import { container } from '../../styles/Container.styled';
 
 export const Container = styled.section`
   ${container}
+  background: url("../../utils/man.jpg") no-repeat center center;
+  background-size: cover;
+  background-position-y: -5rem;
 `;
 
 export const TextBox = styled.div`

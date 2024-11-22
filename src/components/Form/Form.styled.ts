@@ -180,11 +180,15 @@ export const ButtonQuality = styled.button`
   }
 `;
 
-export const TextContainerQuality = styled.div`
+export const TextContainer = styled.div`
   ${flex}
   flex-direction: row;
   gap: 0.1rem;
   align-items: center;
+
+  p {
+    padding: 1rem 1.5rem;
+  }
 `;
 
 export const TextQuality = styled.p`

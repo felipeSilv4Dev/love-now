@@ -4,28 +4,25 @@ import { title } from '../../styles/Title.styled';
 
 export const Container = styled.section`
   ${container}
+  height: auto;
+  padding: 12rem 0;
+`;
+export const PhotosBox = styled.div`
   display: flex;
+  width: max-content;
+  margin: 0 auto;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  position: relative;
   gap: 2rem;
-  height: auto;
-`;
-
-export const Title = styled.h1`
-  ${title}
-  font-size: 8rem;
-  text-align: center;
-  color: ${({ theme: { colors } }) => colors.light};
-  margin-top: 8rem;
 `;
 
 export const ContainerImage = styled.div`
   display: grid;
-
   overflow: hidden;
   height: 80rem;
-  border: 11px solid ${({ theme: { colors } }) => colors.dark_2};
+  border: 10px solid ${({ theme: { colors } }) => colors.dark_2};
   border-radius: 2.3rem;
 
   /* &::before {
@@ -73,9 +70,37 @@ transform:initial
 }
 
 `;
+
 export const Image = styled.img<{ $active: boolean }>`
   grid-area: 1/1;
   opacity: 0;
   animation: ${({ $active }) => ($active ? start : end)} 0.5s
     ${({ $active }) => ($active ? 'forwards' : 'backwards')};
+`;
+
+export const Name = styled.h3`
+  position: absolute;
+  z-index: 10;
+  background-color: ${({ theme: { colors } }) => colors.dark_1};
+  font-size: 1.8rem;
+  padding: 1rem 1.5rem;
+  border-radius: 6rem;
+  border: 2px solid ${({ theme: { colors } }) => colors.cor_1};
+  bottom: 10rem;
+  left: -4rem;
+`;
+
+export const Control = styled.div`
+  display: flex;
+  gap: 1.5rem;
+`;
+
+export const Index = styled.span<{ $active: boolean }>`
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  transition: all 0.2s;
+  background-color: ${({ theme: { colors }, $active }) =>
+    $active ? colors.cor_1 : colors.dark_1};
+  cursor: pointer;
 `;

@@ -1,40 +1,55 @@
 import { useEffect, useState } from 'react';
 import * as S from './Page.styled';
 
+const data = [
+  {
+    name: 'son goku',
+    photos: ['../../utils/teste-goku.jpg', '../../utils/teste-gabi.jpg'],
+    quality: ['super-sayajin', 'guerreiro Z, kakaroto'],
+    message:
+      '	Lorem ipsum dolor sit, amet consectetur adipisicing elit. A, nemo consequatur, quisquam soluta, iusto voluptate cumque qui debitis tempora error ipsa delectus porro voluptas? Labore eveniet saepe praesentium deserunt architecto.	Lorem ipsum dolor sit, amet consectetur adipisicing elit. A, nemo consequatur, quisquam soluta, iusto voluptate cumque qui debitis tempora error ipsa delectus porro voluptas? Labore eveniet saepe praesentium deserunt architecto.	Lorem ipsum dolor sit, amet consectetur adipisicing elit. A, nemo consequatur, quisquam soluta, iusto voluptate cumque qui debitis tempora error ipsa delectus porro voluptas? Labore eveniet saepe praesentium deserunt architecto.	Lorem ipsum dolor sit, amet consectetur adipisicing elit. A, nemo consequatur, quisquam soluta, iusto voluptate cumque qui debitis tempora error ipsa delectus porro voluptas? Labore eveniet saepe praesentium deserunt architecto.',
+  },
+];
 const Page = () => {
-  // const dataImage = data.flatMap((image) => image.photo);
+  const images = data.flatMap((image) => image.photos);
   // const images = dataImage.map((image) => URL.createObjectURL(image));
   const [count, setCount] = useState<number>(0);
 
-  // useEffect(() => {
-  //   const imagesTime = setInterval(() => {
-  //     if (count < images.length - 1) {
-  //       setCount(count + 1);
-  //     } else {
-  //       setCount(0);
-  //     }
-  //   }, 3000);
+  useEffect(() => {
+    const imagesTime = setInterval(() => {
+      if (count < images.length - 1) {
+        setCount(count + 1);
+      } else {
+        setCount(0);
+      }
+    }, 3000);
 
-  //   return () => clearInterval(imagesTime);
-  // }, [count, setCount, images]);
+    return () => clearInterval(imagesTime);
+  }, [count, setCount, images]);
 
   return (
     <S.Container>
-      <S.Title>Exemple name</S.Title>
-      {/* {data.map((el, index) => (
-        <S.Title key={index}>{el.name}</S.Title>
-      ))} */}
+      <S.PhotosBox>
+        <S.ContainerImage>
+          {images.map((img, index) => (
+            <S.Image
+              key={index}
+              src={img}
+              $active={count === index}
+              alt="image couple"
+            />
+          ))}
+        </S.ContainerImage>
+        {data.map((el) => (
+          <S.Name>{el.name}</S.Name>
+        ))}
 
-      <S.ContainerImage>
-        {/* {images.map((image, index) => (
-          <S.Image
-            key={index}
-            src={image}
-            $active={count === index}
-            alt="image couple"
-          />
-        ))} */}
-      </S.ContainerImage>
+        <S.Control>
+          {images.map((_, index) => (
+            <S.Index key={index} $active={count === index} />
+          ))}
+        </S.Control>
+      </S.PhotosBox>
     </S.Container>
   );
 };

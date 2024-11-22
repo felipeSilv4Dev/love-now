@@ -16,7 +16,7 @@ export const Container = styled.section`
   height: auto;
 `;
 export const Title = styled.img`
-  height: 4rem;
+  height: 10rem;
 `;
 
 export const Home = styled(Link)`
@@ -27,11 +27,15 @@ export const Home = styled(Link)`
   position: fixed;
   z-index: 10;
   left: 10rem;
-  width: 8rem;
+  width: 6rem;
+  height: 6rem;
   border-radius: 50%;
-  height: 8rem;
   background-color: ${({ theme: { colors } }) => colors.dark_1};
   box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.5);
+
+  img {
+    height: 3rem;
+  }
 
   &:hover {
     transform: translateY(-0.3rem);
