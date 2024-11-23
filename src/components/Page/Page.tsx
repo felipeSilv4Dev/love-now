@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import * as S from './Page.styled';
+import { Image } from '../../styles/Image.styled';
+import Map from './Map';
 
 const data = [
   {
@@ -32,16 +34,11 @@ const Page = () => {
       <S.PhotosBox>
         <S.ContainerImage>
           {images.map((img, index) => (
-            <S.Image
-              key={index}
-              src={img}
-              $active={count === index}
-              alt="image couple"
-            />
+            <S.Image key={index} $src={img} $active={count === index} />
           ))}
         </S.ContainerImage>
-        {data.map((el) => (
-          <S.Name>{el.name}</S.Name>
+        {data.map((el, _) => (
+          <S.Name key={_}>{el.name}</S.Name>
         ))}
 
         <S.Control>
@@ -50,6 +47,9 @@ const Page = () => {
           ))}
         </S.Control>
       </S.PhotosBox>
+
+      <S.TitleMap src="../../utils/title-map.svg" alt="title map" />
+      <Map />
     </S.Container>
   );
 };

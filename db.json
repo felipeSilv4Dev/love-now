@@ -1,0 +1,40 @@
+{
+  "countries": [
+    {
+      "id": "USA",
+      "name": "United States",
+      "coordinates": [-100.0, 40.0],
+      "value": 331002651
+    },
+    {
+      "id": "BRA",
+      "name": "Brazil",
+      "coordinates": [-51.9253, -14.235],
+      "value": 212559417
+    },
+    {
+      "id": "CHN",
+      "name": "China",
+      "coordinates": [104.1954, 35.8617],
+      "value": 1439323776
+    },
+    {
+      "id": "IND",
+      "name": "India",
+      "coordinates": [78.9629, 20.5937],
+      "value": 1380004385
+    },
+    {
+      "id": "RUS",
+      "name": "Russia",
+      "coordinates": [105.3188, 61.524],
+      "value": 145912025
+    },
+    {
+      "id": "ZAF",
+      "name": "South Africa",
+      "coordinates": [22.9375, -30.5595],
+      "value": 59308690
+    }
+  ]
+}
