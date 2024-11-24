@@ -7,9 +7,9 @@ const data = [
   {
     name: 'son goku',
     photos: ['../../utils/teste-goku.jpg', '../../utils/teste-gabi.jpg'],
-    quality: ['super-sayajin', 'guerreiro Z, kakaroto'],
+    quality: ['super-sayajin', 'guerreiro Z', 'kakaroto'],
     message:
-      '	Lorem ipsum dolor sit, amet consectetur adipisicing elit. A, nemo consequatur, quisquam soluta, iusto voluptate cumque qui debitis tempora error ipsa delectus porro voluptas? Labore eveniet saepe praesentium deserunt architecto.	Lorem ipsum dolor sit, amet consectetur adipisicing elit. A, nemo consequatur, quisquam soluta, iusto voluptate cumque qui debitis tempora error ipsa delectus porro voluptas? Labore eveniet saepe praesentium deserunt architecto.	Lorem ipsum dolor sit, amet consectetur adipisicing elit. A, nemo consequatur, quisquam soluta, iusto voluptate cumque qui debitis tempora error ipsa delectus porro voluptas? Labore eveniet saepe praesentium deserunt architecto.	Lorem ipsum dolor sit, amet consectetur adipisicing elit. A, nemo consequatur, quisquam soluta, iusto voluptate cumque qui debitis tempora error ipsa delectus porro voluptas? Labore eveniet saepe praesentium deserunt architecto.',
+      "Camila, dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.,Camila, dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Camila, dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Camila, dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
   },
 ];
 const Page = () => {
@@ -50,6 +50,16 @@ const Page = () => {
 
       <S.TitleMap src="../../utils/title-map.svg" alt="title map" />
       <Map />
+      <S.TitleQuality src="../../utils/quality.svg" alt="title map" />
+      <S.QualityBox>
+        {data.map((el) =>
+          el.quality.map((el, i) => <S.Quality key={i}>{el}</S.Quality>)
+        )}
+      </S.QualityBox>
+
+      {data.map((el, i) => (
+        <S.Message key={i}>{el.message}</S.Message>
+      ))}
     </S.Container>
   );
 };

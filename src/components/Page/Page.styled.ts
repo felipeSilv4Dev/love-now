@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { container } from '../../styles/Container.styled';
 
 const start = keyframes`
@@ -27,16 +27,20 @@ transform:initial
 
 `;
 
+const flex = css`
+  display: flex;
+  align-items: center;
+`;
+
 export const Container = styled.section`
   ${container}
   height: auto;
   padding: 12rem 3rem;
 `;
 export const PhotosBox = styled.div`
-  display: flex;
+  ${flex}
   width: max-content;
   margin: 0 auto;
-  align-items: center;
   justify-content: center;
   flex-direction: column;
   position: relative;
@@ -75,7 +79,7 @@ export const Name = styled.h3`
 `;
 
 export const Control = styled.div`
-  display: flex;
+  ${flex};
   gap: 1.5rem;
 `;
 
@@ -95,4 +99,40 @@ export const TitleMap = styled.img`
   margin: 10rem auto;
   padding-top: 5rem;
   border-top: 2px solid ${({ theme: { colors } }) => colors.dark_1};
+`;
+
+export const QualityBox = styled.div`
+  ${flex};
+  justify-content: center;
+  gap: 3rem;
+  width: 55%;
+  margin: 10rem auto;
+  padding-bottom: 5rem;
+  border-bottom: 2px solid ${({ theme: { colors } }) => colors.dark_1};
+`;
+
+export const Quality = styled.p`
+  ${flex}
+  justify-content: center;
+  flex: 0 0 auto;
+  background: url('../../utils/coracao.svg') no-repeat center center;
+  background-color: ${({ theme: { colors } }) => colors.dark_3};
+  background-size: cover;
+  border: 2px solid ${({ theme: { colors } }) => colors.dark_2};
+  font-size: 2rem;
+  padding: 4rem;
+  border-radius: 50%;
+  aspect-ratio: 1;
+`;
+export const TitleQuality = styled.img`
+  display: block;
+  margin: 4rem auto;
+  height: 9rem;
+`;
+
+export const Message = styled.p`
+  font-size: 2.5rem;
+  font-weight: bold;
+  padding: 0 6rem;
+  text-align: center;
 `;
