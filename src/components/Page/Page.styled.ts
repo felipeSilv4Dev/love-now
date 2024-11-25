@@ -126,7 +126,7 @@ export const Quality = styled.p`
 `;
 export const TitleQuality = styled.img`
   display: block;
-  margin: 4rem auto;
+  margin: 15rem auto 4rem;
   height: 9rem;
 `;
 

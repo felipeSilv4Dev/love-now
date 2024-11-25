@@ -1,5 +1,5 @@
+import React from 'react';
 import * as S from './Heath.styled';
-
 const HearthAnimation = () => {
   return (
     <div>

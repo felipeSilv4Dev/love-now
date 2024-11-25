@@ -1,41 +1,41 @@
-// import { useEffect, useState } from 'react';
-import {
-  Circle,
-  LayerGroup,
-  MapContainer,
-  Marker,
-  Popup,
-  TileLayer,
-  Tooltip,
-  useMap,
-} from 'react-leaflet';
-import L, { map } from 'leaflet';
+import React from 'react';
+import { MapContainer, Marker, Popup, TileLayer, Tooltip } from 'react-leaflet';
+
 import * as S from './Map.styled';
-import { Image } from '../../styles/Image.styled';
 
 const Map = () => {
-  // const pointerMap = L.icon({
-  //   iconUrl: '../../utils/pointer-map.png',
-  // });
-
-  // L.marker([-14.235, -51.9253], { icon: pointerMap }).addTo();
+  const customTilerLayer = () => {
+    return import.meta.env.VITE_MAPBOX_TOKEN ? (
+      <TileLayer
+        attribution='&copy; © <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        url={`https://api.mapbox.com/styles/v1/${
+          import.meta.env.VITE_MAPBOX_USERID
+        }/${
+          import.meta.env.VITE_MAPBOX_STYLE
+        }/tiles/256/{z}/{x}/{y}@2x?access_token=${
+          import.meta.env.VITE_MAPBOX_TOKEN
+        }`}
+      />
+    ) : (
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+    );
+  };
 
   return (
     <S.Container>
       <MapContainer
         center={[-14.235, -51.9253]}
-        zoom={3.45}
+        zoom={4}
         style={{ height: '100%', width: '100%' }}
         scrollWheelZoom={false}
         zoomControl={false}
       >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
+        {customTilerLayer()}
 
         <Marker position={[-14.235, -51.9253]}>
-          <Popup>Camilla</Popup>
           <Tooltip direction="top" offset={[-18, -10]} opacity={1} permanent>
             son goku
           </Tooltip>
