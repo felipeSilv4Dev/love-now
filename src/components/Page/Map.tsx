@@ -1,26 +1,48 @@
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
+import {
+  Circle,
+  LayerGroup,
+  MapContainer,
+  Marker,
+  Popup,
+  TileLayer,
+  Tooltip,
+  useMap,
+} from 'react-leaflet';
+import L, { map } from 'leaflet';
+import * as S from './Map.styled';
+import { Image } from '../../styles/Image.styled';
 
 const Map = () => {
-  const [countries, setCountries] = useState([]);
+  // const pointerMap = L.icon({
+  //   iconUrl: '../../utils/pointer-map.png',
+  // });
 
-  useEffect(() => {
-    const getCountries = async () => {
-      try {
-        const res = await fetch('http://localhost:3004/countries', {
-          method: 'GET',
-          headers: { 'Content-Type': 'application-json' },
-        });
-        if (!res.ok) throw new Error('countries not found!');
-        const js = await res.json();
-        setCountries(js);
-      } catch (err) {
-        if (err instanceof Error) console.log(err.message);
-      }
-    };
-    getCountries();
-  }, [setCountries]);
+  // L.marker([-14.235, -51.9253], { icon: pointerMap }).addTo();
 
-  return <div></div>;
+  return (
+    <S.Container>
+      <MapContainer
+        center={[-14.235, -51.9253]}
+        zoom={3.45}
+        style={{ height: '100%', width: '100%' }}
+        scrollWheelZoom={false}
+        zoomControl={false}
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+
+        <Marker position={[-14.235, -51.9253]}>
+          <Popup>Camilla</Popup>
+          <Tooltip direction="top" offset={[-18, -10]} opacity={1} permanent>
+            son goku
+          </Tooltip>
+        </Marker>
+      </MapContainer>
+    </S.Container>
+  );
 };
 
 export default Map;

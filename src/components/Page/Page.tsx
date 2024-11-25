@@ -30,37 +30,41 @@ const Page = () => {
   }, [count, setCount, images]);
 
   return (
-    <S.Container>
-      <S.PhotosBox>
-        <S.ContainerImage>
-          {images.map((img, index) => (
-            <S.Image key={index} $src={img} $active={count === index} />
+    <>
+      <S.Container>
+        <S.PhotosBox>
+          <S.ContainerImage>
+            {images.map((img, index) => (
+              <S.Image key={index} $src={img} $active={count === index} />
+            ))}
+          </S.ContainerImage>
+          {data.map((el, _) => (
+            <S.Name key={_}>{el.name}</S.Name>
           ))}
-        </S.ContainerImage>
-        {data.map((el, _) => (
-          <S.Name key={_}>{el.name}</S.Name>
+
+          <S.Control>
+            {images.map((_, index) => (
+              <S.Index key={index} $active={count === index} />
+            ))}
+          </S.Control>
+        </S.PhotosBox>
+
+        <S.TitleMap src="../../utils/title-map.svg" alt="title map" />
+
+        <Map />
+
+        <S.TitleQuality src="../../utils/quality.svg" alt="title map" />
+        <S.QualityBox>
+          {data.map((el) =>
+            el.quality.map((el, i) => <S.Quality key={i}>{el}</S.Quality>)
+          )}
+        </S.QualityBox>
+
+        {data.map((el, i) => (
+          <S.Message key={i}>{el.message}</S.Message>
         ))}
-
-        <S.Control>
-          {images.map((_, index) => (
-            <S.Index key={index} $active={count === index} />
-          ))}
-        </S.Control>
-      </S.PhotosBox>
-
-      <S.TitleMap src="../../utils/title-map.svg" alt="title map" />
-      <Map />
-      <S.TitleQuality src="../../utils/quality.svg" alt="title map" />
-      <S.QualityBox>
-        {data.map((el) =>
-          el.quality.map((el, i) => <S.Quality key={i}>{el}</S.Quality>)
-        )}
-      </S.QualityBox>
-
-      {data.map((el, i) => (
-        <S.Message key={i}>{el.message}</S.Message>
-      ))}
-    </S.Container>
+      </S.Container>
+    </>
   );
 };
 
