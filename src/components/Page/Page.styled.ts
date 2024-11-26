@@ -27,6 +27,15 @@ transform:initial
 
 `;
 
+const width = keyframes`
+from{
+width:0;}
+to{
+width:100%;
+}
+
+`;
+
 const flex = css`
   display: flex;
   align-items: center;
@@ -76,6 +85,17 @@ export const Name = styled.h3`
   border: 2px solid ${({ theme: { colors } }) => colors.cor_1};
   bottom: 10rem;
   left: -4rem;
+  overflow: hidden;
+`;
+export const LoadingWidth = styled.span<{ $width: boolean }>`
+  height: 100%;
+  background-color: ${({ theme: { colors } }) => colors.dark_2};
+  position: absolute;
+  width: 0;
+  left: 0;
+  bottom: 0;
+  z-index: -1;
+  animation: ${({ $width }) => ($width ? '' : width)} 6s linear;
 `;
 
 export const Control = styled.div`

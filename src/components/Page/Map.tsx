@@ -1,9 +1,9 @@
 import React from 'react';
-import { MapContainer, Marker, Popup, TileLayer, Tooltip } from 'react-leaflet';
+import { MapContainer, Marker, TileLayer, Tooltip } from 'react-leaflet';
 
 import * as S from './Map.styled';
 
-const Map = () => {
+const Map = ({ name }: { name: string }) => {
   const customTilerLayer = () => {
     return import.meta.env.VITE_MAPBOX_TOKEN ? (
       <TileLayer
@@ -32,12 +32,14 @@ const Map = () => {
         style={{ height: '100%', width: '100%' }}
         scrollWheelZoom={false}
         zoomControl={false}
+        doubleClickZoom={false}
+        touchZoom={false}
       >
         {customTilerLayer()}
 
         <Marker position={[-14.235, -51.9253]}>
           <Tooltip direction="top" offset={[-18, -10]} opacity={1} permanent>
-            son goku
+            {name}
           </Tooltip>
         </Marker>
       </MapContainer>

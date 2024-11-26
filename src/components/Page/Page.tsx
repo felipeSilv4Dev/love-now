@@ -16,19 +16,30 @@ const Page = () => {
   const images = data.flatMap((image) => image.photos);
   // const images = dataImage.map((image) => URL.createObjectURL(image));
   const [count, setCount] = useState<number>(0);
+  const [width, setWidth] = useState(false);
 
   useEffect(() => {
     const imagesTime = setInterval(() => {
       if (count < images.length - 1) {
+        setWidth(true);
         setCount(count + 1);
       } else {
+        setWidth(true);
         setCount(0);
       }
-    }, 3000);
+    }, 6000);
 
-    return () => clearInterval(imagesTime);
+    return () => {
+      setWidth(false);
+      clearInterval(imagesTime);
+    };
   }, [count, setCount, images]);
 
+  const handlerChangeIndex = (index: number) => {
+    if (count === index) return;
+    setCount(index);
+    setWidth(true);
+  };
   return (
     <S.Container>
       <S.PhotosBox>
@@ -38,19 +49,27 @@ const Page = () => {
           ))}
         </S.ContainerImage>
         {data.map((el, _) => (
-          <S.Name key={_}>{el.name}</S.Name>
+          <S.Name key={_}>
+            <S.LoadingWidth $width={width} />
+            {el.name}
+          </S.Name>
         ))}
 
         <S.Control>
           {images.map((_, index) => (
-            <S.Index key={index} $active={count === index} />
+            <S.Index
+              onClick={() => handlerChangeIndex(index)}
+              key={index}
+              $active={count === index}
+            />
           ))}
         </S.Control>
       </S.PhotosBox>
 
       <S.TitleMap src="../../utils/title-map.svg" alt="title map" />
-
-      <Map />
+      {data.map((el) => (
+        <Map key={el.name} name={el.name} />
+      ))}
 
       <S.TitleQuality src="../../utils/quality.svg" alt="title map" />
       <S.QualityBox>

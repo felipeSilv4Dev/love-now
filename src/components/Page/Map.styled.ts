@@ -6,7 +6,7 @@ export const Container = styled.section`
   margin: 0 auto;
   border-radius: 2rem;
   overflow: hidden;
-  border: 8px solid ${({ theme: { colors } }) => colors.dark_2};
+  border: 2px solid ${({ theme: { colors } }) => colors.dark_2};
 
   .leaflet-tooltip {
     background-color: ${({ theme: { colors } }) => colors.dark_1};
