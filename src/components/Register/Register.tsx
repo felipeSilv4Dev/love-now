@@ -2,7 +2,6 @@ import React from 'react';
 import { ReactNode } from 'react';
 
 import * as S from './Register.styled';
-import HearthAnimation from '../Main/HearthAnimation';
 
 const Register = ({ children }: { children: ReactNode }) => {
   return (
@@ -15,8 +14,6 @@ const Register = ({ children }: { children: ReactNode }) => {
       </S.Header>
 
       {children}
-
-      <HearthAnimation />
     </S.Container>
   );
 };

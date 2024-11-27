@@ -1,5 +1,13 @@
 import { createGlobalStyle } from 'styled-components';
 
+export const size = {
+  desktopL: '160em',
+  desktopS: '112.5em',
+  largeS: '80em',
+  mobileL: '64em',
+  mobileS: '48em',
+};
+
 export const GlobalStyles = createGlobalStyle`
 * {
   margin: 0;
@@ -24,19 +32,19 @@ img {
 }
 
 
-@media (min-width: 112.5em) {
+@media (min-width:${size.desktopS} ) {
   html {
     font-size: 75%;
   }
 }
 
-@media (min-width: 160em) {
+@media (min-width: ${size.desktopL}) {
   html {
     font-size: 100%;
   }
 }
 
-@media (max-width: 48em) {
+@media (max-width: ${size.mobileS}) {
   html {
     font-size: 50%;
   }

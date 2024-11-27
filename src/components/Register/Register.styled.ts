@@ -1,22 +1,44 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { container } from '../../styles/Container.styled';
+import { size } from '../../styles/Global.styled';
 
 export const Header = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 8rem;
-  gap: 2rem;
   justify-content: center;
+  padding-top: 6rem;
+  gap: 2rem;
   position: relative;
+
+  @media (max-width: ${size.mobileS}) {
+    padding: 0 0 3rem;
+    flex-direction: column;
+  }
 `;
 
 export const Container = styled.section`
   ${container}
-  height: auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: initial;
+
+  @media (max-width: ${size.mobileL}) {
+    height: 100vh;
+  }
+
+  @media (max-width: ${size.mobileS}) {
+    height: 100%;
+    padding: 5rem 3rem;
+  }
 `;
 export const Title = styled.img`
   height: 10rem;
+
+  @media (max-width: ${size.largeS}) {
+    height: 8rem;
+  }
 `;
 
 export const Home = styled(Link)`
@@ -43,6 +65,18 @@ export const Home = styled(Link)`
 
     &:active {
       transform: initial;
+    }
+  }
+  @media (max-width: ${size.largeS}) {
+    width: 8rem;
+    height: 8rem;
+    top: initial;
+    left: initial;
+    position: initial;
+    box-shadow: initial;
+
+    img {
+      height: 4rem;
     }
   }
 `;

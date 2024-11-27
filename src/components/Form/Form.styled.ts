@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { buttonStyle } from '../../styles/Button.styled';
+import { size } from '../../styles/Global.styled';
 
 const flex = css`
   display: flex;
@@ -12,9 +13,21 @@ export const Form = styled.form`
   ${flex}
   gap: 2rem;
   width: 55%;
-  margin: 8rem auto;
-
+  margin: auto;
+  padding: 8rem 0;
   z-index: 1;
+
+  @media (max-width: ${size.largeS}) {
+    width: 70%;
+  }
+
+  @media (max-width: ${size.mobileS}) {
+    margin: 0;
+    gap: 1rem;
+    width: 100%;
+    padding: 0;
+    padding-bottom: 8rem;
+  }
 `;
 
 const baseInput = css<{ $error: boolean }>`
@@ -42,6 +55,29 @@ const baseInput = css<{ $error: boolean }>`
   &:focus::placeholder {
     color: transparent;
   }
+
+  @media (max-width: ${size.largeS}) {
+    font-size: 1.8rem;
+  }
+
+  @media (max-width: ${size.mobileS}) {
+    font-size: 1.8rem;
+    border-radius: 2.5rem;
+  }
+`;
+
+export const InputBox = styled.div`
+  ${flex}
+
+  input:focus + span ,textarea:focus + span {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  @media (max-width: ${size.mobileS}) {
+    gap: 1.5rem;
+  }
 `;
 
 export const Input = styled.input<{ $error: boolean }>`
@@ -56,16 +92,6 @@ export const Input = styled.input<{ $error: boolean }>`
   }
 `;
 
-export const InputBox = styled.div`
-  ${flex}
-
-  input:focus + span ,textarea:focus + span {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-`;
-
 export const TextError = styled.span<{ $error: boolean }>`
   font-size: 1.5rem;
   margin-left: 2rem;
@@ -77,6 +103,14 @@ export const TextError = styled.span<{ $error: boolean }>`
   visibility: ${({ $error }) => ($error ? 'visible' : 'hidden')};
   transition: all 0.3s;
   transform: translateY(${({ $error }) => ($error ? 0 : '-5rem')});
+
+  @media (max-width: ${size.largeS}) {
+    font-size: 1.8rem;
+  }
+
+  @media (max-width: ${size.mobileS}) {
+    font-size: 1.5rem;
+  }
 `;
 
 export const InputPhoto = styled.label<{ $fill: number; $error: boolean }>`
@@ -107,10 +141,20 @@ export const InputPhoto = styled.label<{ $fill: number; $error: boolean }>`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
+    @media (max-width: ${size.mobileS}) {
+      height: 14.4rem;
+      width: 14.4rem;
+    }
   }
 
   input {
     display: none;
+  }
+
+  @media (max-width: ${size.mobileS}) {
+    width: 15rem;
+    height: 15rem;
   }
 `;
 
@@ -121,12 +165,20 @@ export const TextErrorPhoto = styled.span<{ $error: boolean }>`
     $error ? colors.error : colors.light};
   transition: all 0.3s linear;
   align-self: center;
+
+  @media (max-width: ${size.largeS}) {
+    font-size: 1.8rem;
+  }
+
+  @media (max-width: ${size.mobileS}) {
+    font-size: 1.8rem;
+  }
 `;
 
 export const PhotoFill = styled.span<{ $fill: number }>`
+  ${flex}
   font-size: 1.5rem;
   font-weight: bold;
-  ${flex}
   align-items: center;
   justify-content: center;
   color: ${({ theme: { colors }, $fill }) =>
@@ -136,6 +188,13 @@ export const PhotoFill = styled.span<{ $fill: number }>`
   left: 50%;
   transform: translate(-50%, -50%);
   transition: all 0.2s linear;
+
+  @media (max-width: ${size.largeS}) {
+    font-size: 1.8rem;
+  }
+  @media (max-width: ${size.mobileS}) {
+    font-size: 2rem;
+  }
 `;
 
 export const Message = styled.textarea<{ $error: boolean }>`
@@ -167,7 +226,12 @@ export const ButtonQuality = styled.button`
 
   &:hover {
     transform: initial;
+
+    &:active {
+      transform: initial;
+    }
   }
+
   &:disabled {
     opacity: 0.4;
     cursor: initial;
@@ -189,6 +253,15 @@ export const TextContainer = styled.div`
   p {
     padding: 1rem 1.5rem;
   }
+
+  @media (max-width: ${size.mobileS}) {
+    text-align: center;
+
+    p {
+      padding: 1.5rem 2rem;
+      font-size: 1.5rem;
+    }
+  }
 `;
 
 export const TextQuality = styled.p`
@@ -197,13 +270,19 @@ export const TextQuality = styled.p`
   padding: 1rem 1.5rem;
   ${flex}
   flex-direction: row;
-  gap: 0.5rem;
+  gap: 1rem;
+  align-items: end;
 
   font-size: 1.5rem;
   margin-left: 2rem;
   display: flex;
   color: ${({ theme: { colors } }) => colors.light};
   text-transform: lowercase;
+
+  @media (max-width: ${size.largeS}) {
+    font-size: 1.8rem;
+    margin-left: 1rem;
+  }
 `;
 
 export const Close = styled.img`
@@ -238,5 +317,14 @@ export const ButtonSubmit = styled.button`
         display: none;
       }
     }
+  }
+
+  @media (max-width: ${size.largeS}) {
+    font-size: 1.8rem;
+  }
+
+  @media (max-width: ${size.mobileS}) {
+    font-size: 2rem;
+    margin-top: 3rem;
   }
 `;

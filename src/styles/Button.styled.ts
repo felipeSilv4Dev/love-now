@@ -1,4 +1,5 @@
 import { css } from 'styled-components';
+import { size } from './Global.styled';
 
 export const buttonStyle = css`
   font-family: 'Poppins', system-ui;
@@ -40,5 +41,8 @@ export const buttonStyle = css`
       transform: translateY(3px);
       box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.2);
     }
+  }
+  @media (max-width: ${size.mobileS}) {
+    border-radius: 2.5rem;
   }
 `;

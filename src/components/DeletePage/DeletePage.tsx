@@ -10,7 +10,7 @@ const DeletePage = () => {
       <S.ContentBox>
         <S.Title src="../../utils/title-delete.svg" alt="Page delete" />
         <S.Message>Seus dados foram apagados!</S.Message>
-        <S.Home to="/register">Criar minha página novamente</S.Home>
+        <S.Home to="/register">voltar</S.Home>
       </S.ContentBox>
       <HearthAnimation />
     </S.Container>

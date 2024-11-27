@@ -3,6 +3,7 @@ import { container } from '../../styles/Container.styled';
 import { title } from '../../styles/Title.styled';
 import { Link } from 'react-router-dom';
 import { buttonStyle } from '../../styles/Button.styled';
+import { size } from '../../styles/Global.styled';
 
 export const Container = styled.section`
   ${container}
@@ -21,6 +22,10 @@ export const ContentBox = styled.div`
   justify-content: center;
   align-items: center;
   gap: 1.5rem;
+
+  @media (max-width: ${size.mobileS}) {
+    padding: 3rem;
+  }
 `;
 
 export const Message = styled.h2`
@@ -31,11 +36,19 @@ export const Message = styled.h2`
   font-weight: bold;
   font-size: 4rem;
   display: block;
+
+  @media (max-width: ${size.mobileS}) {
+    font-size: 2rem;
+    text-align: center;
+  }
 `;
 
 export const Title = styled.img`
   z-index: 1;
   height: 16rem;
+  @media (max-width: ${size.mobileS}) {
+    height: 12rem;
+  }
 `;
 
 export const Status = styled.h2`
@@ -45,9 +58,10 @@ export const Status = styled.h2`
   display: inline;
   font-size: 4rem;
   text-align: center;
+  @media (max-width: ${size.mobileS}) {
+    font-size: 2rem;
+  }
 `;
-
-export const Image = styled.img``;
 
 export const Home = styled(Link)`
   ${buttonStyle}
