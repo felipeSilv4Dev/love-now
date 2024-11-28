@@ -1,5 +1,6 @@
 import styled, { css, keyframes } from 'styled-components';
 import { container } from '../../styles/Container.styled';
+import { size } from '../../styles/Global.styled';
 
 const start = keyframes`
 0%{
@@ -59,10 +60,15 @@ export const PhotosBox = styled.div`
 export const ContainerImage = styled.div`
   display: grid;
   overflow: hidden;
-  border: 10px solid ${({ theme: { colors } }) => colors.dark_2};
+  border: 5px solid ${({ theme: { colors } }) => colors.dark_2};
   border-radius: 2.3rem;
   height: 80rem;
   width: 60rem;
+
+  @media (max-width: ${size.mobileS}) {
+    height: 60rem;
+    width: 45rem;
+  }
 `;
 
 export const Image = styled.div<{ $active: boolean; $src: string }>`
@@ -86,7 +92,13 @@ export const Name = styled.h3`
   bottom: 10rem;
   left: -4rem;
   overflow: hidden;
+
+  @media (max-width: ${size.mobileS}) {
+    left: -1.5rem;
+    border-radius: 2rem;
+  }
 `;
+
 export const LoadingWidth = styled.span<{ $width: boolean }>`
   height: 100%;
   background-color: ${({ theme: { colors } }) => colors.dark_2};
@@ -119,6 +131,11 @@ export const TitleMap = styled.img`
   margin: 10rem auto;
   padding-top: 5rem;
   border-top: 2px solid ${({ theme: { colors } }) => colors.dark_1};
+
+  @media (max-width: ${size.mobileS}) {
+    margin: 5rem auto;
+    height: 14rem;
+  }
 `;
 
 export const QualityBox = styled.div`
@@ -129,25 +146,46 @@ export const QualityBox = styled.div`
   margin: 10rem auto;
   padding-bottom: 5rem;
   border-bottom: 2px solid ${({ theme: { colors } }) => colors.dark_1};
+
+  @media (max-width: ${size.mobileS}) {
+    margin: 5rem auto;
+    gap: 1rem;
+    width: 100%;
+    justify-content: start;
+    overflow-x: scroll;
+  }
 `;
 
-export const Quality = styled.p`
-  ${flex}
-  justify-content: center;
-  flex: 0 0 auto;
-  background: url('../../utils/coracao.svg') no-repeat center center;
-  background-color: ${({ theme: { colors } }) => colors.dark_3};
-  background-size: cover;
-  border: 2px solid ${({ theme: { colors } }) => colors.dark_2};
-  font-size: 2rem;
-  padding: 4rem;
-  border-radius: 50%;
-  aspect-ratio: 1;
-`;
 export const TitleQuality = styled.img`
   display: block;
   margin: 15rem auto 4rem;
   height: 9rem;
+
+  @media (max-width: ${size.mobileS}) {
+    margin: 10rem auto 5rem;
+    height: 6rem;
+  }
+`;
+
+export const Quality = styled.p`
+  ${flex}
+  background: url('../../utils/coracao.svg') no-repeat center center;
+  background-size: cover;
+  height: 22rem;
+  width: 22rem;
+  background-color: ${({ theme: { colors } }) => colors.dark_3};
+  border: 2px solid ${({ theme: { colors } }) => colors.dark_2};
+  font-size: 2rem;
+  padding: 4rem;
+  border-radius: 50%;
+  text-align: center;
+  justify-content: center;
+  aspect-ratio: 1;
+
+  @media (max-width: ${size.mobileS}) {
+    height: 18rem;
+    width: 18rem;
+  }
 `;
 
 export const Message = styled.p`
@@ -155,4 +193,10 @@ export const Message = styled.p`
   font-weight: bold;
   padding: 0 6rem;
   text-align: center;
+
+  @media (max-width: ${size.mobileS}) {
+    padding: 0;
+    font-size: 2rem;
+    font-weight: initial;
+  }
 `;

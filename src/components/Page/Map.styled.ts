@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { size } from '../../styles/Global.styled';
 
 export const Container = styled.section`
   height: 70rem;
@@ -16,5 +17,11 @@ export const Container = styled.section`
     font-weight: bold;
     border: 3px solid ${({ theme: { colors } }) => colors.cor_1};
     color: ${({ theme: { colors } }) => colors.light};
+  }
+
+  @media (max-width: ${size.mobileS}) {
+    width: 100%;
+    height: 50rem;
+    border-radius: 1.5rem;
   }
 `;
