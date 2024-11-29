@@ -157,6 +157,25 @@ export const InputPhoto = styled.label<{ $fill: number; $error: boolean }>`
     height: 15rem;
   }
 `;
+export const TextContainerPhotos = styled.div`
+  ${flex}
+  flex-direction: row;
+  gap: 0.1rem;
+  align-items: center;
+
+  p {
+    padding: 1rem 1.5rem;
+  }
+
+  @media (max-width: ${size.mobileS}) {
+    text-align: center;
+
+    p {
+      padding: 1.5rem 2rem;
+      font-size: 1.5rem;
+    }
+  }
+`;
 
 export const TextErrorPhoto = styled.span<{ $error: boolean }>`
   font-size: 1.5rem;
@@ -177,8 +196,7 @@ export const TextErrorPhoto = styled.span<{ $error: boolean }>`
 
 export const PhotoFill = styled.span<{ $fill: number }>`
   ${flex}
-  font-size: 1.5rem;
-  font-weight: bold;
+
   align-items: center;
   justify-content: center;
   color: ${({ theme: { colors }, $fill }) =>
@@ -194,6 +212,18 @@ export const PhotoFill = styled.span<{ $fill: number }>`
   }
   @media (max-width: ${size.mobileS}) {
     font-size: 2rem;
+  }
+
+  img {
+    opacity: ${({ $fill }) => ($fill < 100 ? 1 : 0.5)};
+  }
+`;
+
+export const ImagePhoto = styled.img`
+  height: 2.5rem;
+
+  @media (max-width: ${size.mobileS}) {
+    height: 3rem;
   }
 `;
 
@@ -244,11 +274,13 @@ export const ButtonQuality = styled.button`
   }
 `;
 
-export const TextContainer = styled.div`
+export const TextContainerQualitys = styled.div`
   ${flex}
   flex-direction: row;
   gap: 0.1rem;
   align-items: center;
+  width: 100%;
+  overflow-x: scroll;
 
   p {
     padding: 1rem 1.5rem;
@@ -264,20 +296,20 @@ export const TextContainer = styled.div`
   }
 `;
 
-export const TextQuality = styled.p`
+export const TextContent = styled.p`
+  ${flex};
+  flex: 0 0 auto;
+  flex-direction: row;
+  align-items: end;
+  gap: 1rem;
   background-color: ${({ theme: { colors } }) => colors.dark_1};
   border-radius: 8rem;
   padding: 1rem 1.5rem;
-  ${flex}
-  flex-direction: row;
-  gap: 1rem;
-  align-items: end;
-
-  font-size: 1.5rem;
-  margin-left: 2rem;
-  display: flex;
   color: ${({ theme: { colors } }) => colors.light};
   text-transform: lowercase;
+  font-size: 1.5rem;
+  margin-left: 2rem;
+  width: max-content;
 
   @media (max-width: ${size.largeS}) {
     font-size: 1.8rem;

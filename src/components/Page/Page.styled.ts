@@ -69,6 +69,11 @@ export const ContainerImage = styled.div`
     height: 60rem;
     width: 45rem;
   }
+
+  @media (max-width: 21.5rem) {
+    height: 50rem;
+    width: 35rem;
+  }
 `;
 
 export const Image = styled.div<{ $active: boolean; $src: string }>`
@@ -136,23 +141,31 @@ export const TitleMap = styled.img`
     margin: 5rem auto;
     height: 14rem;
   }
+
+  @media (max-width: 21.5rem) {
+    padding-top: 0rem;
+    height: 10rem;
+  }
 `;
 
 export const QualityBox = styled.div`
   ${flex};
-  justify-content: center;
+  justify-content: start;
   gap: 3rem;
   width: 55%;
   margin: 10rem auto;
   padding-bottom: 5rem;
   border-bottom: 2px solid ${({ theme: { colors } }) => colors.dark_1};
+  overflow-x: scroll;
+  width: 100%;
 
   @media (max-width: ${size.mobileS}) {
     margin: 5rem auto;
     gap: 1rem;
-    width: 100%;
-    justify-content: start;
-    overflow-x: scroll;
+  }
+
+  @media (max-width: 21.5rem) {
+    padding-bottom: 3rem;
   }
 `;
 
@@ -164,6 +177,11 @@ export const TitleQuality = styled.img`
   @media (max-width: ${size.mobileS}) {
     margin: 10rem auto 5rem;
     height: 6rem;
+  }
+
+  @media (max-width: 21.5rem) {
+    height: 4.5rem;
+    margin: 5rem auto;
   }
 `;
 
@@ -177,14 +195,21 @@ export const Quality = styled.p`
   border: 2px solid ${({ theme: { colors } }) => colors.dark_2};
   font-size: 2rem;
   padding: 4rem;
-  border-radius: 50%;
-  text-align: center;
   justify-content: center;
+  text-align: center;
+  border-radius: 50%;
+
   aspect-ratio: 1;
 
   @media (max-width: ${size.mobileS}) {
     height: 18rem;
     width: 18rem;
+  }
+
+  @media (max-width: 21.5rem) {
+    height: 14rem;
+    font-size: 1.5rem;
+    width: 14rem;
   }
 `;
 
@@ -198,5 +223,9 @@ export const Message = styled.p`
     padding: 0;
     font-size: 2rem;
     font-weight: initial;
+  }
+
+  @media (max-width: 21.5rem) {
+    font-size: 1.8rem;
   }
 `;

@@ -6,6 +6,7 @@ import * as S from './Form.styled';
 import { loadStripe } from '@stripe/stripe-js';
 
 import axios from 'axios';
+import { Image } from '../../styles/Image.styled';
 
 type Key = {
   key: 'quality' | 'photos';
@@ -95,8 +96,6 @@ const Form = () => {
     if (photosWatch) clearErrors('photos');
   }, [clearErrors, photosWatch]);
 
-  const URL_API = 'https://love-now.vercel.app/';
-
   const createUser = async (data: Inputs) => {
     const formData = new FormData();
     formData.append('name', data.name);
@@ -111,7 +110,7 @@ const Form = () => {
       formData.append('photos', photo);
     });
 
-    const res = await fetch(`${URL_API}register`, {
+    const res = await fetch(`${import.meta.env.VITE_URL_API}register`, {
       method: 'POST',
       body: formData,
     });
@@ -204,7 +203,7 @@ const Form = () => {
     clearErrors('quality');
     if (handleValidateValue(value)) {
       setQualitys((prevQualitys) => {
-        if (prevQualitys.length <= 2) {
+        if (prevQualitys.length <= 5) {
           return handleAddItems({
             prevItems: prevQualitys,
             value,
@@ -248,7 +247,7 @@ const Form = () => {
     : `selecione ${selectedFiles.length}/3`;
 
   const showPhotos = selectedFiles.map((quality, index) => (
-    <S.TextQuality key={index}>
+    <S.TextContent key={index}>
       <span>{shortNamePhoto(quality.name, index)}</span>
 
       <S.Close
@@ -256,7 +255,7 @@ const Form = () => {
         src="../../utils/trash.svg"
         alt="image trash"
       />
-    </S.TextQuality>
+    </S.TextContent>
   ));
 
   const handleButtonQualitys = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -273,14 +272,14 @@ const Form = () => {
     });
 
   const showQualitys = qualitys.map((quality, index) => (
-    <S.TextQuality key={index + 1}>
+    <S.TextContent key={index + 1}>
       <span>{quality}</span>
       <S.Close
         onClick={() => handleRemoveQualitys(index)}
         src="../../utils/trash.svg"
         alt="image trash"
       />
-    </S.TextQuality>
+    </S.TextContent>
   ));
 
   return (
@@ -301,14 +300,14 @@ const Form = () => {
             disabled={selectedFiles.length === 3}
           />
           <S.PhotoFill $fill={selectedFiles.length * porcentage}>
-            Foto
+            <S.ImagePhoto src="../../utils/photo.svg" alt="icon photo" />
           </S.PhotoFill>
         </S.InputPhoto>
 
         <S.TextErrorPhoto $error={!!errors.photos}>
-          <S.TextContainer>
+          <S.TextContainerPhotos>
             {selectedFiles.length ? showPhotos : <p>{showErroPhotos}</p>}
-          </S.TextContainer>
+          </S.TextContainerPhotos>
         </S.TextErrorPhoto>
       </S.InputBox>
 
@@ -350,7 +349,7 @@ const Form = () => {
           />
 
           <S.ButtonQuality
-            disabled={qualitys.length === 3}
+            disabled={qualitys.length === 6}
             onClick={handleButtonQualitys}
           >
             Adicionar
@@ -361,13 +360,13 @@ const Form = () => {
           {errors.quality ? errors.quality.message : 'Qualidade'}
         </S.TextError>
 
-        <S.TextContainer>
+        <S.TextContainerQualitys>
           {qualitys.length ? (
             showQualitys
           ) : (
-            <S.TextQuality>Adicione no máximo 3 qualidades...</S.TextQuality>
+            <S.TextContent>Adicione no máximo 3 qualidades...</S.TextContent>
           )}
-        </S.TextContainer>
+        </S.TextContainerQualitys>
       </S.InputBox>
 
       <S.ButtonSubmit disabled={qualitys.length <= 0} type="submit">

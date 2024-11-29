@@ -16,11 +16,12 @@ const Error = ({
       <S.ContentBox>
         <S.Title src="../../utils/title-error.svg" alt="Page Error" />
         <S.Message>
-          {message} <S.Status>{statusCode}</S.Status>
+          {message} <S.Status>{statusCode} 💥</S.Status>
         </S.Message>
         <S.Home to="/">voltar</S.Home>
       </S.ContentBox>
       <HearthAnimation />
+      {/* <Image src="../../utils/spinner.svg" alt="spinner" /> */}
     </S.Container>
   );
 };

@@ -51,7 +51,7 @@ export const Title = styled.img`
   }
 `;
 
-export const Status = styled.h2`
+export const Status = styled.span`
   ${title}
   color:${({ theme: { colors } }) => colors.error};
   font-family: 'Poppins', sans-serif;
