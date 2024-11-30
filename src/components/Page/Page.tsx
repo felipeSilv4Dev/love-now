@@ -4,6 +4,10 @@ import * as S from './Page.styled';
 import Map from './Map';
 import useFetch from '../../Hooks/useFetch';
 import Error from '../Error/Error';
+import Spinner from '../Spinner/Spinner';
+import axios, { AxiosError } from 'axios';
+
+import { useParams } from 'react-router';
 
 const data = [
   {
@@ -28,35 +32,24 @@ const data = [
 ];
 
 const Page = () => {
+  const { slug, id } = useParams();
+  const { request, error, isLoading } = useFetch();
+
   const images = data.flatMap((image) => image.photos);
   // const images = dataImage.map((image) => URL.createObjectURL(image));
   const [count, setCount] = useState<number>(0);
   const [width, setWidth] = useState(false);
-  const { request, data: user, error, loading } = useFetch();
 
   useEffect(() => {
-    const getUser = async () => {
-      const controller = new AbortController();
-      await request({
-        url: `${import.meta.env.VITE_URL_API}register/id`,
-        signal: controller.signal,
-      });
-
-      return () => {
-        controller.abort();
-      };
-    };
-
-    getUser();
-  }, [request]);
+    request({ url: `${import.meta.env.VITE_URL_API}register/${id}` });
+  }, [request, id]);
 
   useEffect(() => {
     const imagesTime = setInterval(() => {
+      setWidth(true);
       if (count < images.length - 1) {
-        setWidth(true);
         setCount(count + 1);
       } else {
-        setWidth(true);
         setCount(0);
       }
     }, 6000);
@@ -72,6 +65,10 @@ const Page = () => {
     setCount(index);
     setWidth(true);
   };
+
+  if (isLoading) return <Spinner />;
+
+  // if (error) return <Error message={error} />;
 
   return (
     <S.Container>

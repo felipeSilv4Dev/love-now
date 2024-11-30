@@ -1,42 +1,33 @@
+import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { useCallback, useState } from 'react';
 
 const useFetch = () => {
-  const [data, setData] = useState<[] | null>(null);
-  const [error, setError] = useState<{
-    message: string;
-    statusCode: number;
-  } | null>({ message: '', statusCode: 404 });
-  const [loading, setLoading] = useState<boolean>(false);
+  const [data, setData] = useState(null);
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  interface RequesteTypes {
-    url: string;
-    signal: AbortSignal;
-  }
-
-  const request = useCallback(async ({ url, signal }: RequesteTypes) => {
+  const request = useCallback(async (config: AxiosRequestConfig) => {
     try {
-      setLoading(true);
-      setData(null);
-      setError({ message: '', statusCode: 404 });
+      setIsLoading(true);
+      const response = await axios(config);
 
-      const response = await fetch(url, { signal });
-
-      if (!response.ok) throw new Error(`Usuário não encontrado :`);
-
-      const json = await response.json();
-      setData(json.data);
-      setLoading(false);
-    } catch (err) {
-      if (err instanceof Error) {
-        setError({ message: err.message, statusCode: 500 });
+      if (!response.data.status) {
+        setError(response.data.message);
       }
+      if (response.data.status) setData(response.data);
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        setError(err.response?.data.message);
+      }
+    } finally {
+      setIsLoading(false);
     }
   }, []);
 
   return {
     error,
     data,
-    loading,
+    isLoading,
     request,
   };
 };
