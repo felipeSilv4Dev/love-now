@@ -32,7 +32,7 @@ export const Message = styled.h2`
   ${title}
   color:${({ theme: { colors } }) => colors.light};
   font-family: 'Poppins', sans-serif;
-  text-transform: capitalize;
+  text-transform: lowercase;
   font-weight: bold;
   font-size: 4rem;
   display: block;

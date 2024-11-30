@@ -4,28 +4,23 @@ import * as S from './DeletePage.styled';
 import HearthAnimation from '../Main/HearthAnimation';
 import Error from '../Error/Error';
 import useFetch from '../../Hooks/useFetch';
+import { useParams } from 'react-router';
+import Spinner from '../Spinner/Spinner';
 
 const DeletePage = () => {
-  const { request, data: user, error, loading } = useFetch();
+  const { request, error, data, isLoading } = useFetch();
+  const { id } = useParams();
 
   useEffect(() => {
-    const getUser = async () => {
-      const controller = new AbortController();
-      await request({
-        url: `${import.meta.env.VITE_URL_API}/id`,
-        signal: controller.signal,
-      });
+    request({
+      method: 'DELETE',
+      url: `${import.meta.env.VITE_URL_API}register/${id}`,
+    });
+  }, [request, id]);
 
-      return () => {
-        controller.abort();
-      };
-    };
+  if (isLoading) return <Spinner />;
 
-    getUser();
-  }, [request]);
-
-  if (error?.message)
-    return <Error message={error.message} statusCode={error.statusCode} />;
+  if (error || !data) return <Error message={error} />;
 
   return (
     <S.Container>
