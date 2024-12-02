@@ -6,7 +6,6 @@ import * as S from './Form.styled';
 import { loadStripe } from '@stripe/stripe-js';
 
 import axios from 'axios';
-import { Image } from '../../styles/Image.styled';
 
 type Key = {
   key: 'quality' | 'photos';
@@ -67,6 +66,7 @@ const schema = yup.object({
 });
 
 const Form = () => {
+  const [isloading, setIsLoading] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [qualitys, setQualitys] = useState<string[]>([]);
   const [qualityValue, setQualityValue] = useState<string>('');
@@ -119,17 +119,19 @@ const Form = () => {
 
   const handlerDatas: SubmitHandler<Inputs> = async (data) => {
     try {
+      setIsLoading(true);
       const user = await createUser(data);
 
-      console.log(user);
-      // const session = await axios(
-      //   `${URL_API}register/checkout-session/${user.id}`
-      // );
-      // const stripe = await stripePromise;
+      const session = await axios(
+        `${import.meta.env.VITE_URL_API}register/checkout-session/${user.id}`
+      );
+      const stripe = await stripePromise;
 
-      // stripe?.redirectToCheckout({ sessionId: session.data.session.id });
+      stripe?.redirectToCheckout({ sessionId: session.data.session.id });
     } catch (err) {
       if (err instanceof Error) alert(err.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -369,8 +371,11 @@ const Form = () => {
         </S.TextContainerQualitys>
       </S.InputBox>
 
-      <S.ButtonSubmit disabled={qualitys.length <= 0} type="submit">
-        Criar
+      <S.ButtonSubmit
+        disabled={qualitys.length <= 0 || isloading}
+        type="submit"
+      >
+        {isloading ? 'Finalizando...' : 'Finalizar'}
       </S.ButtonSubmit>
     </S.Form>
   );

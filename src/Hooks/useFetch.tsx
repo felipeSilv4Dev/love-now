@@ -2,19 +2,25 @@ import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { useCallback, useState } from 'react';
 
 const useFetch = () => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<User | unknown>({});
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const request = useCallback(async (config: AxiosRequestConfig) => {
     try {
+      setData({});
+      setError('');
       setIsLoading(true);
       const response = await axios(config);
 
-      if (!response.data.status) {
+      if (response.status !== 200) {
         setError(response.data.message);
       }
-      if (response.data.status) setData(response.data);
+
+      if (response.status === 200) {
+        const id = response.data.id;
+        setData({ ...response.data, id });
+      }
     } catch (err) {
       if (err instanceof AxiosError) {
         setError(err.response?.data.message);

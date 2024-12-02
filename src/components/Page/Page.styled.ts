@@ -62,12 +62,13 @@ export const ContainerImage = styled.div`
   overflow: hidden;
   border: 5px solid ${({ theme: { colors } }) => colors.dark_2};
   border-radius: 2.3rem;
-  height: 80rem;
-  width: 60rem;
+  height: 118rem;
+  width: 82.6rem;
 
   @media (max-width: ${size.mobileS}) {
     height: 60rem;
-    width: 45rem;
+    width: 44rem;
+    border-radius: 1.2rem;
   }
 
   @media (max-width: 21.5rem) {

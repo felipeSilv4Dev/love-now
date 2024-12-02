@@ -5,60 +5,62 @@ import Map from './Map';
 import useFetch from '../../Hooks/useFetch';
 import Error from '../Error/Error';
 import Spinner from '../Spinner/Spinner';
-import axios, { AxiosError } from 'axios';
+import { AxiosRequestConfig } from 'axios';
 
 import { useParams } from 'react-router';
 
-const data = [
-  {
-    name: 'son goku',
-    photos: ['../../utils/teste-goku.jpg', '../../utils/teste-gabi.jpg'],
-    quality: [
-      'super sayajin',
-      'guerreiro Z',
-      'kakaroto',
-      'minha princesa',
-      'minha amorzinho',
-      'minha amorzinho',
-      'minha amorzinho',
-      'minha amorzinho',
-      'minha amorzinho',
-      'minha amorzinho',
-      'minha amorzinho',
-    ],
-    message:
-      "Camila, dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.,Camila, dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Camila, dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Camila, dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-  },
-];
+declare global {
+  interface User {
+    id: string;
+    name: string;
+    photos: Array<string>;
+    quality: Array<string>;
+    message: string;
+  }
+}
+interface FetchRequest {
+  data: User | unknown;
+  isLoading: boolean;
+  request: (config: AxiosRequestConfig) => Promise<void>;
+  error: string;
+}
 
 const Page = () => {
-  const { slug, id } = useParams();
-  const { request, error, isLoading } = useFetch();
+  const { id } = useParams();
+  const { request, data, error, isLoading }: FetchRequest = useFetch();
 
-  const images = data.flatMap((image) => image.photos);
-  // const images = dataImage.map((image) => URL.createObjectURL(image));
   const [count, setCount] = useState<number>(0);
   const [width, setWidth] = useState(false);
 
+  const ValidateData = (obj: unknown): obj is User => {
+    if (obj !== null && typeof obj === 'object' && 'photos' in obj) return true;
+    return false;
+  };
+
   useEffect(() => {
-    request({ url: `${import.meta.env.VITE_URL_API}register/${id}` });
+    request({
+      method: 'GET',
+      url: `${import.meta.env.VITE_URL_API}register/${id}`,
+    });
   }, [request, id]);
 
   useEffect(() => {
-    const imagesTime = setInterval(() => {
-      setWidth(true);
-      if (count < images.length - 1) {
-        setCount(count + 1);
-      } else {
-        setCount(0);
-      }
-    }, 6000);
+    if (ValidateData(data)) {
+      const imagesTime = setInterval(() => {
+        setWidth(true);
+        if (count < data.photos.length - 1) {
+          setCount(count + 1);
+        } else {
+          setCount(0);
+        }
+      }, 6000);
 
-    return () => {
-      setWidth(false);
-      clearInterval(imagesTime);
-    };
-  }, [count, setCount, images]);
+      return () => {
+        setWidth(false);
+        clearInterval(imagesTime);
+      };
+    }
+  }, [count, setCount, data]);
 
   const handlerChangeIndex = (index: number) => {
     if (count === index) return;
@@ -68,51 +70,49 @@ const Page = () => {
 
   if (isLoading) return <Spinner />;
 
-  // if (error) return <Error message={error} />;
+  if (error) return <Error message={error} />;
 
-  return (
-    <S.Container>
-      <S.PhotosBox>
-        <S.ContainerImage>
-          {images.map((img, index) => (
-            <S.Image key={index} $src={img} $active={count === index} />
-          ))}
-        </S.ContainerImage>
-        {data.map((el, _) => (
-          <S.Name key={_}>
+  if (ValidateData(data)) {
+    return (
+      <S.Container>
+        <S.PhotosBox>
+          <S.ContainerImage>
+            {data.photos.map((img, index) => (
+              <S.Image key={index} $src={img} $active={count === index} />
+            ))}
+          </S.ContainerImage>
+
+          <S.Name>
             <S.LoadingWidth $width={width} />
-            {el.name}
+            {data.name}
           </S.Name>
-        ))}
 
-        <S.Control>
-          {images.map((_, index) => (
-            <S.Index
-              onClick={() => handlerChangeIndex(index)}
-              key={index}
-              $active={count === index}
-            />
+          <S.Control>
+            {data.photos.map((_, index) => (
+              <S.Index
+                onClick={() => handlerChangeIndex(index)}
+                key={index}
+                $active={count === index}
+              />
+            ))}
+          </S.Control>
+        </S.PhotosBox>
+
+        <S.TitleMap src="../../utils/title-map.svg" alt="title map" />
+
+        <Map name={data.name} />
+
+        <S.TitleQuality src="../../utils/quality.svg" alt="title map" />
+        <S.QualityBox>
+          {data.quality.map((el, i) => (
+            <S.Quality key={i}>{el}</S.Quality>
           ))}
-        </S.Control>
-      </S.PhotosBox>
+        </S.QualityBox>
 
-      <S.TitleMap src="../../utils/title-map.svg" alt="title map" />
-      {data.map((el) => (
-        <Map key={el.name} name={el.name} />
-      ))}
-
-      <S.TitleQuality src="../../utils/quality.svg" alt="title map" />
-      <S.QualityBox>
-        {data.map((el) =>
-          el.quality.map((el, i) => <S.Quality key={i}>{el}</S.Quality>)
-        )}
-      </S.QualityBox>
-
-      {data.map((el, i) => (
-        <S.Message key={i}>{el.message}</S.Message>
-      ))}
-    </S.Container>
-  );
+        <S.Message>{data.message}</S.Message>
+      </S.Container>
+    );
+  }
 };
 
 export default Page;
