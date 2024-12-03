@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import { size } from '../../styles/Global.styled';
 
 const top = keyframes`
 0%{
@@ -51,4 +52,8 @@ export const Hearth = styled.img<{ $height?: number; $opacity?: number }>`
   height: ${(props) => (props.$height ? `${props.$height}px` : 'auto')};
   opacity: ${(props) => (props.$opacity ? props.$opacity : 1)};
   box-sizing: border-box;
+
+  @media (max-width: ${size.mobileS}) {
+    height: 2rem;
+  }
 `;

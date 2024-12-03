@@ -1,6 +1,5 @@
 import React from 'react';
 import * as S from './Spinner.styled';
-import { Image } from '../../styles/Image.styled';
 
 const Spinner = () => {
   return (

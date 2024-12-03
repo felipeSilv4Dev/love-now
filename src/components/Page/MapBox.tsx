@@ -2,9 +2,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import * as S from './MapBox.styled';
+import useMatch from '../../Hooks/useMatch';
 
 const MapBox = ({ name }: { name: string }) => {
   const [zoom, setZoom] = useState(false);
+  const mobileS = useMatch(48);
+
   const mapRef = useRef<mapboxgl.Map | null>(null);
   // Ref para o mapa
   const marker = useRef<HTMLDivElement | null>(null);
@@ -47,7 +50,7 @@ const MapBox = ({ name }: { name: string }) => {
     bounds.extend([-52.0, -11.0]);
 
     map.fitBounds(bounds, {
-      maxZoom: zoom ? 3 : 0,
+      maxZoom: zoom ? (mobileS ? 2 : 3.5) : 0,
     });
 
     mapRef.current = map;

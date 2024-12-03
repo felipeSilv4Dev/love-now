@@ -32,7 +32,7 @@ export const Spinner = styled.span`
   animation: ${rotate} 2s infinite linear;
 
   @media (max-width: ${size.mobileS}) {
-    height: 2.5rem;
-    width: 2.5rem;
+    height: 3rem;
+    width: 3rem;
   }
 `;

@@ -8,7 +8,6 @@ import { AxiosRequestConfig } from 'axios';
 import MapBox from './MapBox';
 
 import { useParams } from 'react-router';
-import HearthAnimation from '../Main/HearthAnimation';
 
 declare global {
   interface User {
@@ -108,10 +107,7 @@ const Page = () => {
         <S.TitleQuality src="../../utils/quality.svg" alt="title map" />
         <S.QualityBox $quantity={data.quality.length > 2}>
           {data.quality.map((el, i) => (
-            <S.Quality key={i}>
-              {el}
-              <HearthAnimation />
-            </S.Quality>
+            <S.Quality key={i}>{el}</S.Quality>
           ))}
         </S.QualityBox>
 
