@@ -6,7 +6,7 @@ const Spinner = () => {
   return (
     <S.Container>
       <S.WrapperSpinner>
-        <S.Spinner src="../../utils/spinner.png" alt="spinner" />
+        <S.Spinner />
       </S.WrapperSpinner>
     </S.Container>
   );

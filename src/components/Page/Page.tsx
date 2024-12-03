@@ -1,13 +1,14 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import * as S from './Page.styled';
-import Map from './Map';
 import useFetch from '../../Hooks/useFetch';
 import Error from '../Error/Error';
 import Spinner from '../Spinner/Spinner';
 import { AxiosRequestConfig } from 'axios';
+import MapBox from './MapBox';
 
 import { useParams } from 'react-router';
+import HearthAnimation from '../Main/HearthAnimation';
 
 declare global {
   interface User {
@@ -26,8 +27,8 @@ interface FetchRequest {
 }
 
 const Page = () => {
-  const { id } = useParams();
   const { request, data, error, isLoading }: FetchRequest = useFetch();
+  const params = useParams();
 
   const [count, setCount] = useState<number>(0);
   const [width, setWidth] = useState(false);
@@ -40,12 +41,12 @@ const Page = () => {
   useEffect(() => {
     request({
       method: 'GET',
-      url: `${import.meta.env.VITE_URL_API}register/${id}`,
+      url: `${import.meta.env.VITE_URL_API}register/${params.id}`,
     });
-  }, [request, id]);
+  }, [request, params]);
 
   useEffect(() => {
-    if (ValidateData(data)) {
+    if (ValidateData(data) && data.photos.length > 1) {
       const imagesTime = setInterval(() => {
         setWidth(true);
         if (count < data.photos.length - 1) {
@@ -59,6 +60,8 @@ const Page = () => {
         setWidth(false);
         clearInterval(imagesTime);
       };
+    } else {
+      setWidth(true);
     }
   }, [count, setCount, data]);
 
@@ -100,12 +103,15 @@ const Page = () => {
 
         <S.TitleMap src="../../utils/title-map.svg" alt="title map" />
 
-        <Map name={data.name} />
+        <MapBox name={data.name} />
 
         <S.TitleQuality src="../../utils/quality.svg" alt="title map" />
-        <S.QualityBox>
+        <S.QualityBox $quantity={data.quality.length > 2}>
           {data.quality.map((el, i) => (
-            <S.Quality key={i}>{el}</S.Quality>
+            <S.Quality key={i}>
+              {el}
+              <HearthAnimation />
+            </S.Quality>
           ))}
         </S.QualityBox>
 

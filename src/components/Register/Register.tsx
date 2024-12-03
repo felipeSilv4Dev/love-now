@@ -1,6 +1,5 @@
 import React from 'react';
 import { ReactNode } from 'react';
-
 import * as S from './Register.styled';
 
 const Register = ({ children }: { children: ReactNode }) => {

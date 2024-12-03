@@ -149,27 +149,6 @@ export const TitleMap = styled.img`
   }
 `;
 
-export const QualityBox = styled.div`
-  ${flex};
-  justify-content: start;
-  gap: 3rem;
-  width: 55%;
-  margin: 10rem auto;
-  padding-bottom: 5rem;
-  border-bottom: 2px solid ${({ theme: { colors } }) => colors.dark_1};
-  overflow-x: scroll;
-  width: 100%;
-
-  @media (max-width: ${size.mobileS}) {
-    margin: 5rem auto;
-    gap: 1rem;
-  }
-
-  @media (max-width: 21.5rem) {
-    padding-bottom: 3rem;
-  }
-`;
-
 export const TitleQuality = styled.img`
   display: block;
   margin: 15rem auto 4rem;
@@ -186,8 +165,40 @@ export const TitleQuality = styled.img`
   }
 `;
 
+export const QualityBox = styled.div<{ $quantity: boolean }>`
+  ${flex};
+  justify-content: ${({ $quantity }) => ($quantity ? 'start' : 'center')};
+
+  gap: 3rem;
+  width: 55%;
+  margin: 10rem auto;
+  padding-bottom: 5rem;
+  border-bottom: 2px solid ${({ theme: { colors } }) => colors.dark_1};
+  overflow-x: scroll;
+  width: 100%;
+
+  &::-webkit-scrollbar {
+    background-color: transparent;
+    height: 0.5rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(47, 46, 65, 0.3);
+    border-radius: 6px;
+  }
+  @media (max-width: ${size.mobileS}) {
+    margin: 5rem auto;
+    gap: 1rem;
+  }
+
+  @media (max-width: 21.5rem) {
+    padding-bottom: 3rem;
+  }
+`;
+
 export const Quality = styled.p`
   ${flex}
+  flex-shrink: 0;
   background: url('../../utils/coracao.svg') no-repeat center center;
   background-size: cover;
   height: 22rem;
@@ -199,7 +210,9 @@ export const Quality = styled.p`
   justify-content: center;
   text-align: center;
   border-radius: 50%;
+  overflow: hidden;
 
+  position: relative;
   aspect-ratio: 1;
 
   @media (max-width: ${size.mobileS}) {

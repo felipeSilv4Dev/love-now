@@ -41,7 +41,7 @@ export const WapperHeath = styled.span<{
   animation: ${(props) => (props.$type === 'top' ? top : bottom)}
     ${(props) => (props.$time ? `${props.$time}s` : '8s')} infinite linear;
   position: absolute;
-  left: ${(props) => (props.$position ? `${props.$position}rem` : '50%')};
+  left: ${(props) => (props.$position ? `${props.$position}%` : '50%')};
 `;
 
 export const Hearth = styled.img<{ $height?: number; $opacity?: number }>`

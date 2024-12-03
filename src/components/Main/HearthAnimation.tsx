@@ -2,8 +2,8 @@ import React from 'react';
 import * as S from './Heath.styled';
 const HearthAnimation = () => {
   return (
-    <div>
-      <S.WapperHeath $position={80} $time={7} $type={'top'}>
+    <span>
+      <S.WapperHeath $position={15} $time={7} $type={'top'}>
         <S.Hearth
           $opacity={0.4}
           $height={12}
@@ -48,7 +48,7 @@ const HearthAnimation = () => {
         />
       </S.WapperHeath>
 
-      <S.WapperHeath $position={140} $time={8} $type={'top'}>
+      <S.WapperHeath $position={40} $time={8} $type={'top'}>
         <S.Hearth
           $opacity={0.4}
           $height={40}
@@ -57,7 +57,7 @@ const HearthAnimation = () => {
         />
       </S.WapperHeath>
 
-      <S.WapperHeath $position={150} $time={9} $type={'bottom'}>
+      <S.WapperHeath $position={65} $time={9} $type={'bottom'}>
         <S.Hearth
           $opacity={0.7}
           $height={25}
@@ -66,7 +66,7 @@ const HearthAnimation = () => {
         />
       </S.WapperHeath>
 
-      <S.WapperHeath $position={130} $time={10} $type={'bottom'}>
+      <S.WapperHeath $position={45} $time={10} $type={'bottom'}>
         <S.Hearth
           $opacity={1}
           $height={15}
@@ -74,7 +74,7 @@ const HearthAnimation = () => {
           alt="image hearth"
         />
       </S.WapperHeath>
-    </div>
+    </span>
   );
 };
 

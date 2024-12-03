@@ -1,5 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import { container } from '../../styles/Container.styled';
+import { size } from '../../styles/Global.styled';
 
 const rotate = keyframes`
 from {
@@ -23,6 +24,15 @@ export const WrapperSpinner = styled.div`
   justify-content: center;
   align-items: center;
 `;
-export const Spinner = styled.img`
+export const Spinner = styled.span`
+  background: url('../../utils/spinner.png') no-repeat center center;
+  background-size: cover;
+  height: 5rem;
+  width: 5rem;
   animation: ${rotate} 2s infinite linear;
+
+  @media (max-width: ${size.mobileS}) {
+    height: 2.5rem;
+    width: 2.5rem;
+  }
 `;
