@@ -366,7 +366,7 @@ const Form = () => {
           {qualitys.length ? (
             showQualitys
           ) : (
-            <S.TextContent>Adicione no máximo 3 qualidades...</S.TextContent>
+            <S.TextContent>Adicione no máximo 6 qualidades...</S.TextContent>
           )}
         </S.TextContainerQualitys>
       </S.InputBox>

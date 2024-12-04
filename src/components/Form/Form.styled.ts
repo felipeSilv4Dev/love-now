@@ -39,6 +39,7 @@ const baseInput = css<{ $error: boolean }>`
   border: 3px solid ${({ theme }) => theme.colors.dark_2};
   border-radius: 7.1rem;
   transition: all 0.3s;
+  box-sizing: border-box;
 
   &:focus {
     outline: none;
@@ -63,6 +64,10 @@ const baseInput = css<{ $error: boolean }>`
   @media (max-width: ${size.mobileS}) {
     font-size: 1.8rem;
     border-radius: 2.5rem;
+
+    &::placeholder {
+      font-size: 1.5rem;
+    }
   }
 `;
 
@@ -231,15 +236,17 @@ export const Message = styled.textarea<{ $error: boolean }>`
   ${baseInput};
   height: 25rem;
   border-radius: 3.4rem;
+
   resize: none;
 `;
 
 export const BoxQuality = styled.div`
   ${flex}
   flex-direction: row;
+  position: relative;
 
   input {
-    flex: 0 0 calc(100% - 16rem);
+    flex: 1;
   }
 `;
 
@@ -251,8 +258,17 @@ export const ButtonQuality = styled.button`
   text-align: center;
   justify-content: center;
   cursor: pointer;
-  padding: 1.5rem 2rem;
+
   font-size: 1.5rem;
+  position: absolute;
+  box-sizing: border-box;
+  padding: 0;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  border-top: 3px solid ${({ theme: { colors } }) => colors.dark_2};
+  border-right: 3px solid ${({ theme: { colors } }) => colors.dark_2};
+  border-bottom: 3px solid ${({ theme: { colors } }) => colors.dark_2};
 
   &:hover {
     transform: initial;
@@ -272,6 +288,22 @@ export const ButtonQuality = styled.button`
       }
     }
   }
+
+  @media (hover: none) {
+    &:active {
+      opacity: 0.7;
+    }
+
+    &:hover {
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+  @media (max-width: ${size.mobileS}) {
+    border-radius: 2.1rem;
+  }
 `;
 
 export const TextContainerQualitys = styled.div`
@@ -281,6 +313,15 @@ export const TextContainerQualitys = styled.div`
   align-items: center;
   width: 100%;
   overflow-x: scroll;
+
+  &::-webkit-scrollbar {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(47, 46, 65, 0.3);
+    border-radius: 6px;
+  }
 
   p {
     padding: 1rem 1.5rem;

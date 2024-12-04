@@ -54,6 +54,6 @@ export const Hearth = styled.img<{ $height?: number; $opacity?: number }>`
   box-sizing: border-box;
 
   @media (max-width: ${size.mobileS}) {
-    height: 2rem;
+    height: ${(props) => (props.$height ? `${props.$height / 16}rem` : 'auto')};
   }
 `;
