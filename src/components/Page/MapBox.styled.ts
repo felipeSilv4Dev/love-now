@@ -18,7 +18,7 @@ export const MapContainer = styled.section`
   position: relative;
   width: 90vw;
   height: 70rem;
-  border: 3px solid ${({ theme: { colors } }) => colors.dark_2};
+  border: 3px solid ${({ theme: { colors } }) => colors.dark_3};
 
   @media (max-width: ${size.mobileS}) {
     width: 100%;

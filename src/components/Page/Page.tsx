@@ -8,6 +8,7 @@ import { AxiosRequestConfig } from 'axios';
 import MapBox from './MapBox';
 
 import { useParams } from 'react-router';
+import StartFall from './animations/StarFall';
 
 declare global {
   interface User {
@@ -77,6 +78,7 @@ const Page = () => {
   if (ValidateData(data)) {
     return (
       <S.Container>
+        <StartFall />
         <S.PhotosBox>
           <S.ContainerImage>
             {data.photos.map((img, index) => (

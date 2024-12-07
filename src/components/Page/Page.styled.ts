@@ -60,7 +60,7 @@ export const PhotosBox = styled.div`
 export const ContainerImage = styled.div`
   display: grid;
   overflow: hidden;
-  border: 5px solid ${({ theme: { colors } }) => colors.dark_2};
+  border: 5px solid ${({ theme: { colors } }) => colors.dark_3};
   border-radius: 2.3rem;
   height: 118rem;
   width: 82.6rem;
@@ -153,6 +153,8 @@ export const TitleQuality = styled.img`
   display: block;
   margin: 15rem auto 4rem;
   height: 9rem;
+  position: relative;
+  z-index: 1;
 
   @media (max-width: ${size.mobileS}) {
     margin: 10rem auto 5rem;
@@ -232,6 +234,9 @@ export const Message = styled.p`
   font-weight: bold;
   padding: 0 6rem;
   text-align: center;
+  background-color: ${({ theme: { colors } }) => colors.dark};
+  position: relative;
+  z-index: 1;
 
   @media (max-width: ${size.mobileS}) {
     padding: 0;

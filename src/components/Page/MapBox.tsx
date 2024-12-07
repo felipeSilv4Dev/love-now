@@ -30,7 +30,8 @@ const MapBox = ({ name }: { name: string }) => {
     // Criar o mapa
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
-      style: 'mapbox://styles/mapbox/dark-v11',
+      style: 'mapbox://styles/felipe444/cm4aenpp901cc01s3hmdk0mls',
+      // style: 'mapbox://styles/mapbox/dark-v11',
       projection: 'mercator',
       interactive: false,
       touchZoomRotate: false,
