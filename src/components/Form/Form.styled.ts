@@ -66,7 +66,7 @@ const baseInput = css<{ $error: boolean }>`
     border-radius: 2.5rem;
 
     &::placeholder {
-      font-size: 1.5rem;
+      font-size: 1.7rem;
     }
   }
 `;
@@ -114,7 +114,7 @@ export const TextError = styled.span<{ $error: boolean }>`
   }
 
   @media (max-width: ${size.mobileS}) {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
   }
 `;
 
@@ -177,7 +177,7 @@ export const TextContainerPhotos = styled.div`
 
     p {
       padding: 1.5rem 2rem;
-      font-size: 1.5rem;
+      font-size: 1.7rem;
     }
   }
 `;
@@ -188,14 +188,29 @@ export const TextErrorPhoto = styled.span<{ $error: boolean }>`
   color: ${({ $error, theme: { colors } }) =>
     $error ? colors.error : colors.light};
   transition: all 0.3s linear;
+  width: 100%;
   align-self: center;
+  overflow-x: scroll;
+
+  &::-webkit-scrollbar {
+    background-color: transparent;
+    height: 2px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(47, 46, 65, 0.3);
+    border-radius: 6px;
+  }
+  p {
+    width: 100%;
+  }
 
   @media (max-width: ${size.largeS}) {
     font-size: 1.8rem;
   }
 
   @media (max-width: ${size.mobileS}) {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
   }
 `;
 
@@ -303,6 +318,7 @@ export const ButtonQuality = styled.button`
 
   @media (max-width: ${size.mobileS}) {
     border-radius: 2.1rem;
+    width: 14rem;
   }
 `;
 
@@ -332,7 +348,8 @@ export const TextContainerQualitys = styled.div`
 
     p {
       padding: 1.5rem 2rem;
-      font-size: 1.5rem;
+
+      font-size: 1.7rem;
     }
   }
 `;

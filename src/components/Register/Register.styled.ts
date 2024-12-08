@@ -35,6 +35,10 @@ export const Title = styled.img`
   @media (max-width: ${size.largeS}) {
     height: 8rem;
   }
+
+  @media (max-width: ${size.mobileS}) {
+    height: 5rem;
+  }
 `;
 
 export const Home = styled(Link)`
@@ -69,10 +73,19 @@ export const Home = styled(Link)`
     top: initial;
     left: initial;
     position: initial;
-    box-shadow: initial;
 
     img {
       height: 4rem;
+    }
+
+    @media (max-width: ${size.mobileS}) {
+      width: 5rem;
+      height: 5rem;
+      align-self: start;
+
+      img {
+        height: 2.5rem;
+      }
     }
   }
 `;
