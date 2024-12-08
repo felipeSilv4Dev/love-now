@@ -1,17 +1,17 @@
 # Epic Games Store
 
-<!-- <div align="center" >
-<img align="start" src="./src/assets/hd-img/img-1.png" height='120' >
-<img align="start" src="./src/assets/hd-img/img-2.png" height='120' >
-<img align="start" src="./src/assets/hd-img/img-3.png"  height='120'>
-<img align="start" src="./src/assets/hd-img/img-4.png" height='120'  >
-<img align="start" src="./src/assets/hd-img/img-5.png" height='120' >
-</div> -->
+<div align="center" >
+<img align="start" src="./utils/read-imgs/read-img-1.png" height='120' >
+<img align="start" src="./utils/read-imgs/read-img-2.png" height='120' >
+<img align="start" src="./utils/read-imgs/read-img-3.png"  height='120'>
+<img align="start" src="./utils/read-imgs/read-img-4.png" height='120'  >
+<img align="start" src="./utils/read-imgs/read-img-5.png" height='120' >
+</div>
 
 <p>
-  <img src="https://img.shields.io/badge/made%20by-Felipe%20Silva-0074e4?style=flat-square">
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/FelipeSilv4Dev/dog?color=0074e4&style=flat-square">
-  <img alt="GitHub Top Language" src="https://img.shields.io/github/languages/top/FelipeSilv4Dev/dog?color=0074e4&style=flat-square">
+  <img src="https://img.shields.io/badge/made%20by-Felipe%20Silva-FFA7FF?style=flat-square">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/FelipeSilv4Dev/dog?color=FFA7FF&style=flat-square">
+  <img alt="GitHub Top Language" src="https://img.shields.io/github/languages/top/FelipeSilv4Dev/dog?color=FFA7FF&style=flat-square">
 </p>
 
 ## Tópicos
@@ -34,12 +34,9 @@ A epic-games é uma loja de games online muito famosa por seus jogos.O intuito f
 
 ## Funcionalidades
 
-- [x] Página de suporte
-- [x] Wish List.
-- [x] Página de carrinho.
-- [x] Perfil dos games.
+- [x] Criar uma página personalizada
 - [x] Páginas dinâmicas com React js.
-- [x] Todas as rotas iteráveis.
+- [x] rotas iteráveis.
 
 <br>
 
@@ -53,6 +50,8 @@ As seguintes tecnologias foram utilizadas no desenvolvimento do projeto:
 - [React Js](https://devdocs.io/Reactjs/)
 - [styled-components](https://devdocs.io/styled-components/)
 - [Node js](https://devdocs.io/node)
+- [React Hook-Form](https://devdocs.io/react-hook-form)
+- [typescript](https://devdocs.io/react-hook-form)
 
 <br>
 

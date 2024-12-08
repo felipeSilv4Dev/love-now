@@ -5,10 +5,8 @@ import useFetch from '../../Hooks/useFetch';
 import Error from '../Error/Error';
 import Spinner from '../Spinner/Spinner';
 import { AxiosRequestConfig } from 'axios';
-import MapBox from './MapBox';
 
 import { useParams } from 'react-router';
-import StartFall from './animations/StarFall';
 
 declare global {
   interface User {
@@ -101,10 +99,6 @@ const Page = () => {
             ))}
           </S.Control>
         </S.PhotosBox>
-
-        <S.TitleMap src="../../utils/title-map.svg" alt="title map" />
-
-        <MapBox name={data.name} />
 
         <S.TitleQuality src="../../utils/quality.svg" alt="title map" />
         <S.QualityBox $quantity={data.quality.length > 2}>

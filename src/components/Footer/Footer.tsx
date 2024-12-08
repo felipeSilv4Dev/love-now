@@ -1,16 +1,23 @@
 import React from 'react';
 import * as S from './Footer.styled';
+import { Link } from 'react-router-dom';
 const Footer = () => {
   return (
     <S.Container>
       <S.Contacts>
-        <S.Contact className="fa-solid fa-envelope" />
-        <S.Contact className="fa-brands fa-linkedin" />
+        <Link to="https://www.linkedin.com/in/felipe-silva-1019ab271/">
+          <S.Contact className="fa-brands fa-linkedin" />
+        </Link>
+        <Link to="mailto:felipesantana18n@gmail.com">
+          <S.Contact className="fa-solid fa-envelope" />
+        </Link>
       </S.Contacts>
 
       <S.Copyrigth>
         <S.Creator>
-          <S.Photo />
+          <Link to="https://www.linkedin.com/in/felipe-silva-1019ab271/">
+            <S.Photo />
+          </Link>
           <S.Name>Felipe</S.Name>
         </S.Creator>
         <S.Copy>© 2024 - todos os diretos reservados.</S.Copy>
