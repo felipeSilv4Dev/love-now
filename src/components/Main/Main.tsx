@@ -1,4 +1,3 @@
-import React from 'react';
 import * as S from './Main.styled';
 import HearthAnimation from './HearthAnimation';
 import Steps from './Steps';
