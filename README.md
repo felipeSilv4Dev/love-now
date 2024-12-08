@@ -1,11 +1,11 @@
 # Epic Games Store
 
 <div align="center" >
-<img align="start" src="./utils/read-imgs/read-img-1.png" height='120' >
-<img align="start" src="./utils/read-imgs/read-img-2.png" height='120' >
-<img align="start" src="./utils/read-imgs/read-img-3.png"  height='120'>
-<img align="start" src="./utils/read-imgs/read-img-4.png" height='120'  >
-<img align="start" src="./utils/read-imgs/read-img-5.png" height='120' >
+<img align="start" src="./public/utils/read-imgs/read-img-1.png" height='120' >
+<img align="start" src="./public/utils/read-imgs/read-img-2.png" height='120' >
+<img align="start" src="./public/utils/read-imgs/read-img-3.png"  height='120'>
+<img align="start" src="./public/utils/read-imgs/read-img-4.png" height='120'  >
+<img align="start" src="./public/utils/read-imgs/read-img-5.png" height='120' >
 </div>
 
 <p>
@@ -28,7 +28,7 @@
 
 ## Propósito e Objetivo
 
-A epic-games é uma loja de games online muito famosa por seus jogos.O intuito foi recriar ao máximo as funcionalidades e o visual de loja.
+Crair uma página customizada para a pessoa que você ama e entregar de presente.
 
 <br>
 
