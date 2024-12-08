@@ -19,7 +19,6 @@ body {
   font-family: "Poppins", sans-serif;
   background-color:  ${({ theme }) => theme.colors.dark};
 	color: ${({ theme }) => theme.colors.light};
-
 }
 
 

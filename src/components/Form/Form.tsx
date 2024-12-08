@@ -316,7 +316,7 @@ const Form = () => {
       <S.InputBox>
         <S.Input
           type="text"
-          placeholder="Nome de quem vai receber..."
+          placeholder="Para quem é..."
           {...register('name')}
           $error={!!errors.name}
         />
@@ -341,7 +341,7 @@ const Form = () => {
       <S.InputBox>
         <S.BoxQuality>
           <S.Input
-            placeholder="Escreva as qualidades da pessoa"
+            placeholder="linda..."
             {...register('quality')}
             $error={!!errors.quality}
             autoComplete="on"
@@ -366,7 +366,7 @@ const Form = () => {
           {qualitys.length ? (
             showQualitys
           ) : (
-            <S.TextContent>Adicione no máximo 6 qualidades...</S.TextContent>
+            <S.TextContent>Adicione no máximo 6 apelidos...</S.TextContent>
           )}
         </S.TextContainerQualitys>
       </S.InputBox>

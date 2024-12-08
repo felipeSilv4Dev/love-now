@@ -24,10 +24,6 @@ export const Container = styled.section`
   height: 100%;
   overflow: initial;
 
-  @media (max-width: ${size.mobileL}) {
-    height: 100vh;
-  }
-
   @media (max-width: ${size.mobileS}) {
     height: 100%;
     padding: 5rem 3rem;

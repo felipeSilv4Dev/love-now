@@ -10,6 +10,7 @@ import Page from './components/Page/Page';
 import Error from './components/Error/Error';
 import DeletePage from './components/DeletePage/DeletePage';
 import Email from './components/Email/Email';
+import Footer from './components/Footer/Footer';
 
 declare global {
   interface Inputs {
@@ -39,6 +40,7 @@ function App() {
         <Route path="/send-email/:id" element={<Email />} />
         <Route path="*" element={<Error message="página não encontrada!" />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
