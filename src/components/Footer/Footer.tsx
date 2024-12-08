@@ -1,4 +1,3 @@
-import React from 'react';
 import * as S from './Footer.styled';
 import { Link } from 'react-router-dom';
 const Footer = () => {
