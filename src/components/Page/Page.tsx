@@ -1,4 +1,3 @@
-import React from 'react';
 import { useEffect, useState } from 'react';
 import * as S from './Page.styled';
 import useFetch from '../../Hooks/useFetch';
