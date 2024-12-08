@@ -7,6 +7,7 @@ import { size } from '../../styles/Global.styled';
 
 export const Container = styled.section`
   ${container}
+  height: 100vh;
 
   img {
     top: 40%;

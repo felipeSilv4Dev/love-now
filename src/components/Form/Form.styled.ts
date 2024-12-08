@@ -174,7 +174,7 @@ export const TextContainerPhotos = styled.div`
 
   @media (max-width: ${size.mobileS}) {
     text-align: center;
-
+    gap: 0.5rem;
     p {
       padding: 1.5rem 2rem;
       font-size: 1.7rem;
@@ -202,7 +202,7 @@ export const TextErrorPhoto = styled.span<{ $error: boolean }>`
     border-radius: 6px;
   }
   p {
-    width: 100%;
+    margin: 0 auto;
   }
 
   @media (max-width: ${size.largeS}) {
