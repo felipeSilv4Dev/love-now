@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import * as S from './DeletePage.styled';
 
 import HearthAnimation from '../Main/HearthAnimation';
