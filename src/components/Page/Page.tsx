@@ -76,7 +76,6 @@ const Page = () => {
   if (ValidateData(data)) {
     return (
       <S.Container>
-        <StartFall />
         <S.PhotosBox>
           <S.ContainerImage>
             {data.photos.map((img, index) => (
