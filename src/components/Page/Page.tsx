@@ -28,7 +28,7 @@ const Page = () => {
   const params = useParams();
 
   const [count, setCount] = useState<number>(0);
-  const [width, setWidth] = useState(false);
+  const [width, setWidth] = useState(true);
 
   const ValidateData = (obj: unknown): obj is User => {
     if (obj !== null && typeof obj === 'object' && 'photos' in obj) return true;
@@ -43,24 +43,22 @@ const Page = () => {
   }, [request, params]);
 
   useEffect(() => {
-    if (ValidateData(data) && data.photos.length > 1) {
-      const imagesTime = setInterval(() => {
-        setWidth(true);
-        if (count < data.photos.length - 1) {
-          setCount(count + 1);
-        } else {
-          setCount(0);
-        }
-      }, 6000);
+    if (!ValidateData(data)) return;
 
-      return () => {
-        setWidth(false);
-        clearInterval(imagesTime);
-      };
-    } else {
+    const imagesTime = setInterval(() => {
+      setWidth(false);
+      if (data.photos.length - 1 > count) {
+        setCount(count + 1);
+      } else {
+        setCount(0);
+      }
+    }, 5000);
+
+    return () => {
       setWidth(true);
-    }
-  }, [count, setCount, data]);
+      clearInterval(imagesTime);
+    };
+  }, [count, data]);
 
   const handlerChangeIndex = (index: number) => {
     if (count === index) return;
@@ -83,7 +81,7 @@ const Page = () => {
           </S.ContainerImage>
 
           <S.Name>
-            <S.LoadingWidth $width={width} />
+            {width && <S.LoadingWidth />}
             {data.name}
           </S.Name>
 

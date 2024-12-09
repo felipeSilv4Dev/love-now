@@ -114,7 +114,7 @@ export const Name = styled.h3`
   }
 `;
 
-export const LoadingWidth = styled.span<{ $width: boolean }>`
+export const LoadingWidth = styled.span<{ $width?: boolean }>`
   height: 100%;
   background-color: ${({ theme: { colors } }) => colors.dark_2};
   position: absolute;
@@ -122,7 +122,7 @@ export const LoadingWidth = styled.span<{ $width: boolean }>`
   left: 0;
   bottom: 0;
   z-index: -1;
-  animation: ${({ $width }) => ($width ? '' : width)} 6s linear;
+  animation: ${width} 5s linear;
 `;
 
 export const Control = styled.div`
