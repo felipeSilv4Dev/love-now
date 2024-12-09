@@ -64,7 +64,7 @@ const baseInput = css<{ $error: boolean }>`
   @media (max-width: ${size.mobileS}) {
     font-size: 1.8rem;
     border-radius: 2.5rem;
-    border: 1px solid ${({ theme: { colors } }) => colors.dark_2};
+    border: 2px solid ${({ theme: { colors } }) => colors.dark_2};
 
     &::placeholder {
       font-size: 1.7rem;
@@ -72,7 +72,7 @@ const baseInput = css<{ $error: boolean }>`
 
     &:focus {
       outline: none;
-      border-bottom: 0.1rem solid
+      border-bottom: 2px solid
         ${({ $error, theme: { colors } }) =>
           $error ? colors.error : colors.correct};
     }
