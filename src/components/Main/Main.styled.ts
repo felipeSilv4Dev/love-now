@@ -181,6 +181,7 @@ export const IconInfo = styled.i`
 export const ButtonPlan = styled(Link)`
   ${buttonStyle}
   display: block;
-  margin: 4rem 8rem;
+  width: fit-content;
+  margin: 4rem auto;
   text-align: center;
 `;

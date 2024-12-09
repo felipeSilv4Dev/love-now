@@ -8,7 +8,11 @@ const Steps = () => {
 
       <S.Steps>
         {imgs.map((_, i) => (
-          <S.Step src={`../../utils/step-${i + 1}.png`} alt={`step ${i + 1}`} />
+          <S.Step
+            key={i}
+            src={`../../utils/step-${i + 1}.png`}
+            alt={`step ${i + 1}`}
+          />
         ))}
       </S.Steps>
     </S.Container>

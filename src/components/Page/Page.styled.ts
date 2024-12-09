@@ -65,15 +65,19 @@ export const ContainerImage = styled.div`
   height: 118rem;
   width: 82.6rem;
 
+  @media (max-width: ${size.mobileL}) {
+    height: 96rem;
+    width: 66rem;
+  }
   @media (max-width: ${size.mobileS}) {
     height: 60rem;
     width: 44rem;
     border-radius: 1.2rem;
   }
 
-  @media (max-width: 21.5rem) {
-    height: 50rem;
-    width: 35rem;
+  @media (max-width: 23.5rem) {
+    height: 54rem;
+    width: 37.1rem;
   }
 `;
 
@@ -99,9 +103,14 @@ export const Name = styled.h3`
   left: -4rem;
   overflow: hidden;
 
+  @media (max-width: ${size.mobileL}) {
+    left: 0;
+    bottom: 4rem;
+    border-radius: 1.2rem;
+    font-size: 2.2rem;
+  }
   @media (max-width: ${size.mobileS}) {
-    left: -1.5rem;
-    border-radius: 2rem;
+    font-size: 2rem;
   }
 `;
 
@@ -129,24 +138,6 @@ export const Index = styled.span<{ $active: boolean }>`
   background-color: ${({ theme: { colors }, $active }) =>
     $active ? colors.cor_1 : colors.dark_1};
   cursor: pointer;
-`;
-
-export const TitleMap = styled.img`
-  display: block;
-  height: 12rem;
-  margin: 10rem auto;
-  padding-top: 5rem;
-  border-top: 2px solid ${({ theme: { colors } }) => colors.dark_1};
-
-  @media (max-width: ${size.mobileS}) {
-    margin: 5rem auto;
-    height: 14rem;
-  }
-
-  @media (max-width: 21.5rem) {
-    padding-top: 0rem;
-    height: 10rem;
-  }
 `;
 
 export const TitleQuality = styled.img`
