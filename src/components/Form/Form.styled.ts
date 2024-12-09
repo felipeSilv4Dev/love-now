@@ -64,9 +64,17 @@ const baseInput = css<{ $error: boolean }>`
   @media (max-width: ${size.mobileS}) {
     font-size: 1.8rem;
     border-radius: 2.5rem;
+    border: 1px solid ${({ theme: { colors } }) => colors.dark_2};
 
     &::placeholder {
       font-size: 1.7rem;
+    }
+
+    &:focus {
+      outline: none;
+      border-bottom: 0.1rem solid
+        ${({ $error, theme: { colors } }) =>
+          $error ? colors.error : colors.correct};
     }
   }
 `;
@@ -160,6 +168,11 @@ export const InputPhoto = styled.label<{ $fill: number; $error: boolean }>`
   @media (max-width: ${size.mobileS}) {
     width: 15rem;
     height: 15rem;
+
+    &::before {
+      height: 14.6rem;
+      width: 14.6rem;
+    }
   }
 `;
 export const TextContainerPhotos = styled.div`
@@ -319,6 +332,9 @@ export const ButtonQuality = styled.button`
   @media (max-width: ${size.mobileS}) {
     border-radius: 2.1rem;
     width: 14rem;
+    border-top: 1px solid ${({ theme: { colors } }) => colors.dark_2};
+    border-right: 1px solid ${({ theme: { colors } }) => colors.dark_2};
+    border-bottom: 1px solid ${({ theme: { colors } }) => colors.dark_2};
   }
 `;
 
