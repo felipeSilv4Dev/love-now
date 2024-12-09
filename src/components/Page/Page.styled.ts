@@ -76,8 +76,8 @@ export const ContainerImage = styled.div`
   }
 
   @media (max-width: 23.5rem) {
-    height: 54rem;
-    width: 37.1rem;
+    height: 50.4rem;
+    width: 34.6rem;
   }
 `;
 
