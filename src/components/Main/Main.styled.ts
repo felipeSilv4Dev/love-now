@@ -129,6 +129,8 @@ export const Plan = styled.div`
   width: 50rem;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
   margin-bottom: 10rem;
+  position: relative;
+  z-index: 1;
 
   @media (max-width: ${size.mobileS}) {
     width: 100%;

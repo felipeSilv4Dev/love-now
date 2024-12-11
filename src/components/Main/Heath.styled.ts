@@ -41,7 +41,7 @@ export const WapperHeath = styled.span<{
   transform-style: preserve-3d;
   animation: ${(props) => (props.$type === 'top' ? top : bottom)}
     ${(props) => (props.$time ? `${props.$time}s` : '8s')} infinite linear;
-  position: absolute;
+  position: fixed;
   left: ${(props) => (props.$position ? `${props.$position}%` : '50%')};
 `;
 

@@ -5,6 +5,8 @@ export const Container = styled.footer`
   padding: 2.7rem 7.2rem;
   background-color: ${({ theme: { colors } }) => colors.dark_4};
   border-top: 2px solid ${({ theme: { colors } }) => colors.dark_3};
+  position: relative;
+  z-index: 1;
 
   @media (max-width: ${size.mobileS}) {
     padding: 2.7rem 3rem;
