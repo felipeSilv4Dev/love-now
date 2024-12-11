@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { container } from '../../styles/Container.styled';
 import { size } from '../../styles/Global.styled';
 import { title } from '../../styles/Title.styled';
 
