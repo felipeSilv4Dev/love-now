@@ -20,6 +20,7 @@ body {
 	${container}
 	font-family: "Poppins", sans-serif;
 	color: ${({ theme }) => theme.colors.light};
+	background-color: ${({ theme }) => theme.colors.dark_linear2};;
 }
 
 
