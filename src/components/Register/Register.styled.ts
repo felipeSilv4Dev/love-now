@@ -52,7 +52,7 @@ export const Home = styled(Link)`
   width: 6rem;
   height: 6rem;
   border-radius: 50%;
-  background-color: ${({ theme: { colors } }) => colors.dark_1};
+  background-color: ${({ theme: { colors } }) => colors.dark_5};
   box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.5);
 
   img {
