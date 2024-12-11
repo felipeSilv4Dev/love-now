@@ -1,8 +1,19 @@
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { buttonStyle } from '../../styles/Button.styled';
 import { size } from '../../styles/Global.styled';
 import { title } from '../../styles/Title.styled';
+
+const scaleButton = keyframes`
+
+0%{
+transform:initial
+}
+
+100%{
+transform: scale(1.1)
+}
+`;
 
 export const Container = styled.section`
   display: flex;
@@ -10,7 +21,7 @@ export const Container = styled.section`
   align-items: center;
 
   padding: 15rem 0;
-  gap: 20rem;
+  gap: 15rem;
 
   @media (max-width: ${size.mobileL}) {
     height: fit-content;
@@ -19,7 +30,8 @@ export const Container = styled.section`
   }
 
   @media (max-width: ${size.mobileS}) {
-    padding: 20rem 3rem;
+    padding: 10rem 3rem;
+    gap: 5rem;
   }
 `;
 
@@ -59,7 +71,8 @@ export const Phone = styled.img`
 
 export const Title = styled.h1`
   ${title}
-  z-index: 1;
+  text-align: center;
+  max-width: 10ch;
 
   @media (max-width: ${size.mobileL}) {
     font-size: 14rem;
@@ -68,6 +81,12 @@ export const Title = styled.h1`
   @media (max-width: ${size.mobileS}) {
     font-size: 10rem;
   }
+`;
+
+export const Highlight = styled.span`
+  background-image: ${({ theme }) => theme.colors.linearPrimary};
+  background-clip: text;
+  color: transparent;
 `;
 
 export const Description = styled.p`
@@ -103,7 +122,7 @@ export const ContainerPlan = styled.div`
 `;
 
 export const Plan = styled.div`
-  background-image: ${({ theme }) => theme.colors.dark_linear};
+  background-image: ${({ theme }) => theme.colors.dark_linear2};
   padding: 7rem 2rem 3rem;
   border-radius: 1.3rem;
   border: 2px solid ${({ theme }) => theme.colors.dark_3};
@@ -140,17 +159,25 @@ export const ContainerPrice = styled.h3`
   font-size: 3rem;
 `;
 
-export const Price = styled.span`
-  background-image: ${({ theme }) => theme.colors.linearPrimary};
-  background-clip: text;
-  color: transparent;
-`;
-
 export const ContainerInfo = styled.div`
   display: flex;
   align-items: start;
   flex-direction: column;
   gap: 1.5rem;
+`;
+
+export const Subtitle = styled.span`
+  font-size: 1.6rem;
+  color: ${({ theme }) => theme.colors.light};
+  font-style: italic;
+
+  @media (max-width: ${size.mobileL}) {
+    font-size: 1.8rem;
+  }
+
+  @media (max-width: ${size.mobileS}) {
+    font-size: 1.8rem;
+  }
 `;
 
 export const Info = styled.span`
@@ -166,7 +193,7 @@ export const Info = styled.span`
 
 export const IconInfo = styled.i`
   font-size: 1.5rem;
-  color: ${({ theme }) => theme.colors.cor_1};
+  color: transparent;
 `;
 
 export const ButtonPlan = styled(Link)`
@@ -175,4 +202,6 @@ export const ButtonPlan = styled(Link)`
   width: fit-content;
   margin: 4rem auto;
   text-align: center;
+
+  animation: ${scaleButton} 1s infinite linear alternate-reverse;
 `;

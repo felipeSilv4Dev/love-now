@@ -1,18 +1,39 @@
 import * as S from './Steps.styled';
 
+const steps = [
+  {
+    step: 1,
+    title: 'Preencha o formulário',
+  },
+  {
+    step: 2,
+    title: 'faça o pagamento',
+  },
+  {
+    step: 3,
+    title: 'Receba sua página',
+  },
+];
+
 const Steps = () => {
-  const imgs = Array.from({ length: 3 });
   return (
     <S.Container>
-      <S.Title src="../../utils/steps-title.svg" alt="title" />
+      <S.Title> Como fazer :</S.Title>
 
       <S.Steps>
-        {imgs.map((_, i) => (
-          <S.Step
-            key={i}
-            src={`../../utils/step-${i + 1}.png`}
-            alt={`step ${i + 1}`}
-          />
+        {steps.map((step) => (
+          <S.Step key={step.step}>
+            <S.TitleStep>
+              <span>{step.step}°</span>
+
+              {step.title}
+            </S.TitleStep>
+
+            <S.ImageStep
+              src={`../../utils/step-${step.step}.png`}
+              alt="image step"
+            />
+          </S.Step>
         ))}
       </S.Steps>
     </S.Container>

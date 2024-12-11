@@ -6,7 +6,7 @@ export const title = css`
   font-style: normal;
   text-transform: uppercase;
   letter-spacing: 0.3rem;
-  font-size: 14rem;
+  font-size: 11rem;
   position: relative;
   color: ${({ theme }) => theme.colors.light};
   z-index: 1;

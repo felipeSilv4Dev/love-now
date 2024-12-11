@@ -2,12 +2,16 @@ import * as S from './Main.styled';
 import HearthAnimation from './HearthAnimation';
 import Steps from './Steps';
 
+const plans = ['3 fotos', '6 apelidos', 'um ano de acesso'];
 const Main = () => {
   return (
     <S.Container>
       <S.HomeBox>
         <S.TextBox>
-          <S.Title>Love Now</S.Title>
+          <S.Title>
+            Crie <S.Highlight>agora</S.Highlight>, ame para{' '}
+            <S.Highlight>sempre </S.Highlight>!
+          </S.Title>
 
           <S.Description>
             "Surpreenda quem você ama com uma página personalizada: mensagens,
@@ -15,32 +19,31 @@ const Main = () => {
           </S.Description>
 
           <S.Button to={'/register'}>Criar Minha página</S.Button>
-          <HearthAnimation />
         </S.TextBox>
 
         <S.Phone src="../../utils/phone-exemplo.svg" alt="photo iphone" />
       </S.HomeBox>
       <Steps />
       <S.ContainerPlan>
-        <S.Title>Ofertas Disponíveis</S.Title>
+        <S.Title>Ofertas</S.Title>
         <S.Plan>
           <S.Header>
-            <S.NamePlan>Plano Fixo</S.NamePlan>
+            <S.NamePlan>Básico</S.NamePlan>
+            <S.Subtitle>Pagamento Único</S.Subtitle>
             <S.ContainerPrice>
-              R$ <S.Price> 19,99</S.Price>
+              R$ <S.Highlight>19,99</S.Highlight>
             </S.ContainerPrice>
           </S.Header>
 
           <S.ContainerInfo>
-            <S.Info>
-              <S.IconInfo className="fa-solid fa-check" /> 3 fotos
-            </S.Info>
-            <S.Info>
-              <S.IconInfo className="fa-solid fa-check" /> 6 apelidos
-            </S.Info>
-            <S.Info>
-              <S.IconInfo className="fa-solid fa-check" /> 1 ano de acesso
-            </S.Info>
+            {plans.map((plan, i) => (
+              <S.Info key={i}>
+                <S.Highlight>
+                  <S.IconInfo className="fa-solid fa-check" />
+                </S.Highlight>
+                {plan}
+              </S.Info>
+            ))}
           </S.ContainerInfo>
 
           <S.ButtonPlan to="/register">Comprar</S.ButtonPlan>
