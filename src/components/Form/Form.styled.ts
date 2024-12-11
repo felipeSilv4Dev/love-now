@@ -34,9 +34,9 @@ const baseInput = css<{ $error: boolean }>`
   font-family: inherit;
   font-size: 1.5rem;
   padding: 1.5rem 2rem;
-  background: ${({ theme: { colors } }) => colors.dark_1};
+  background: ${({ theme: { colors } }) => colors.dark_5};
   color: ${({ theme: { colors } }) => colors.light};
-  border: 3px solid ${({ theme }) => theme.colors.dark_2};
+  border: 3px solid ${({ theme }) => theme.colors.dark_3};
   border-radius: 7.1rem;
   transition: all 0.3s;
   box-sizing: border-box;
@@ -50,7 +50,7 @@ const baseInput = css<{ $error: boolean }>`
 
   &::placeholder {
     font-weight: bold;
-    color: ${({ theme: { colors } }) => colors.dark_2};
+    color: ${({ theme: { colors } }) => colors.dark_3};
   }
 
   &:focus::placeholder {
@@ -64,7 +64,7 @@ const baseInput = css<{ $error: boolean }>`
   @media (max-width: ${size.mobileS}) {
     font-size: 1.8rem;
     border-radius: 2.5rem;
-    border: 2px solid ${({ theme: { colors } }) => colors.dark_2};
+    border: 2px solid ${({ theme: { colors } }) => colors.dark_3};
 
     &::placeholder {
       font-size: 1.7rem;
@@ -98,7 +98,7 @@ export const Input = styled.input<{ $error: boolean }>`
 
   &:-webkit-autofill {
     font-size: 1.5rem !important;
-    -webkit-box-shadow: 0 0 0 100rem ${({ theme: { colors } }) => colors.dark_1}
+    -webkit-box-shadow: 0 0 0 100rem ${({ theme: { colors } }) => colors.dark_5}
       inset !important;
     -webkit-text-fill-color: ${({ theme: { colors } }) =>
       colors.light} !important;
@@ -135,7 +135,7 @@ export const InputPhoto = styled.label<{ $fill: number; $error: boolean }>`
     ${({ theme: { colors } }) => colors.fill}
       calc(${({ $fill }) => ($fill ? $fill : 0)} * 3.6deg),
     ${({ theme: { colors }, $error }) =>
-        $error ? colors.error : colors.dark_2}
+        $error ? colors.error : colors.dark_3}
       0
   );
   cursor: ${({ $fill }) => ($fill === 100 ? 'initial' : 'pointer')};
@@ -149,7 +149,7 @@ export const InputPhoto = styled.label<{ $fill: number; $error: boolean }>`
     height: 11.4rem;
     width: 11.4rem;
     position: absolute;
-    background-color: ${({ theme: { colors } }) => colors.dark_1};
+    background-color: ${({ theme: { colors } }) => colors.dark_5};
     border-radius: 50%;
     top: 50%;
     left: 50%;
@@ -232,8 +232,6 @@ export const PhotoFill = styled.span<{ $fill: number }>`
 
   align-items: center;
   justify-content: center;
-  color: ${({ theme: { colors }, $fill }) =>
-    $fill < 100 ? colors.light : colors.dark_2};
   position: absolute;
   top: 50%;
   left: 50%;
@@ -294,9 +292,9 @@ export const ButtonQuality = styled.button`
   bottom: 0;
   top: 0;
   right: 0;
-  border-top: 3px solid ${({ theme: { colors } }) => colors.dark_2};
-  border-right: 3px solid ${({ theme: { colors } }) => colors.dark_2};
-  border-bottom: 3px solid ${({ theme: { colors } }) => colors.dark_2};
+  border-top: 3px solid ${({ theme: { colors } }) => colors.dark_3};
+  border-right: 3px solid ${({ theme: { colors } }) => colors.dark_3};
+  border-bottom: 3px solid ${({ theme: { colors } }) => colors.dark_3};
 
   &:hover {
     transform: initial;
@@ -332,9 +330,9 @@ export const ButtonQuality = styled.button`
   @media (max-width: ${size.mobileS}) {
     border-radius: 2.1rem;
     width: 14rem;
-    border-top: 1px solid ${({ theme: { colors } }) => colors.dark_2};
-    border-right: 1px solid ${({ theme: { colors } }) => colors.dark_2};
-    border-bottom: 1px solid ${({ theme: { colors } }) => colors.dark_2};
+    border-top: 1px solid ${({ theme: { colors } }) => colors.dark_3};
+    border-right: 1px solid ${({ theme: { colors } }) => colors.dark_3};
+    border-bottom: 1px solid ${({ theme: { colors } }) => colors.dark_3};
   }
 `;
 
@@ -376,7 +374,7 @@ export const TextContent = styled.p`
   flex-direction: row;
   align-items: end;
   gap: 1rem;
-  background-color: ${({ theme: { colors } }) => colors.dark_1};
+  background: ${({ theme: { colors } }) => colors.dark_3};
   border-radius: 8rem;
   padding: 1rem 1.5rem;
   color: ${({ theme: { colors } }) => colors.light};

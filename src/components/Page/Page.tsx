@@ -96,7 +96,7 @@ const Page = () => {
           </S.Control>
         </S.PhotosBox>
 
-        <S.TitleQuality src="../../utils/title-quality.svg" alt="title map" />
+        <S.TitleQuality src="../../utils/title-error.svg" alt="title map" />
         <S.QualityBox $quantity={data.quality.length > 2}>
           {data.quality.map((el, i) => (
             <S.Quality key={i}>{el}</S.Quality>

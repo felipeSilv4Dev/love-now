@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { container } from '../../styles/Container.styled';
 import { size } from '../../styles/Global.styled';
+import { title } from '../../styles/Title.styled';
 
 export const Header = styled.div`
   display: flex;
@@ -18,7 +19,6 @@ export const Header = styled.div`
 `;
 
 export const Container = styled.section`
-  ${container}
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -29,15 +29,15 @@ export const Container = styled.section`
     padding: 5rem 3rem;
   }
 `;
-export const Title = styled.img`
-  height: 10rem;
-
-  @media (max-width: ${size.largeS}) {
-    height: 8rem;
+export const Title = styled.h1`
+  ${title}
+  text-align: center;
+  @media (max-width: ${size.mobileL}) {
+    font-size: 14rem;
   }
 
   @media (max-width: ${size.mobileS}) {
-    height: 5rem;
+    font-size: 10rem;
   }
 `;
 
@@ -88,4 +88,9 @@ export const Home = styled(Link)`
       }
     }
   }
+`;
+
+export const IconHome = styled.i`
+  font-size: 2rem;
+  color: transparent;
 `;
