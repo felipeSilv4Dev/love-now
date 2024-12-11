@@ -11,7 +11,8 @@ export const defaultTheme = {
     dark_2: '#474053',
     dark_3: '#2F2E41',
     dark_4: '#1F1E2C',
-    dark_linear: 'linear-gradient(to bottom, #1F1E2C, #111111)',
+    dark_linear:
+      'linear-gradient(to bottom,  rgba(17,17,17,.1), rgba(17,17,17,.4))',
 
     cor_1: '#FFA7FF',
     linearPrimary: 'linear-gradient(to right top, #ffa7ff, #f600dd)',

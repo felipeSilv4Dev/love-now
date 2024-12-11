@@ -1,34 +1,33 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { buttonStyle } from '../../styles/Button.styled';
-import { container } from '../../styles/Container.styled';
 import { size } from '../../styles/Global.styled';
+import { title } from '../../styles/Title.styled';
 
 export const Container = styled.section`
-  ${container}
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+
   padding: 15rem 0;
   gap: 20rem;
 
   @media (max-width: ${size.mobileL}) {
     height: fit-content;
-    padding: 5rem 0;
+    padding: 20rem 0;
     gap: 10rem;
   }
 
   @media (max-width: ${size.mobileS}) {
-    padding: 3rem;
+    padding: 20rem 3rem;
   }
 `;
 
-export const CoupleBox = styled.div`
+export const HomeBox = styled.div`
   display: flex;
+  align-items: center;
   gap: 2rem;
   height: 100%;
-  align-items: center;
 
   @media (max-width: ${size.mobileL}) {
     flex-direction: column;
@@ -47,36 +46,27 @@ export const TextBox = styled.div`
   }
 `;
 
-export const Couple = styled.div`
-  background: url('../../utils/couple.svg') no-repeat center center;
-  background-size: cover;
-
-  height: 50rem;
-  width: 52rem;
-
+export const Phone = styled.img`
   position: relative;
   z-index: 1;
 
   @media (max-width: ${size.mobileL}) {
-    height: 40rem;
-    width: 42rem;
-    order: -1;
-    flex: 0 0 40rem;
   }
 
   @media (max-width: ${size.mobileS}) {
-    height: 30rem;
-    width: 30rem;
-    flex: 0 0 30rem;
   }
 `;
 
-export const Title = styled.img`
+export const Title = styled.h1`
+  ${title}
   z-index: 1;
-  height: 16rem;
 
   @media (max-width: ${size.mobileL}) {
-    height: 14rem;
+    font-size: 14rem;
+  }
+
+  @media (max-width: ${size.mobileS}) {
+    font-size: 10rem;
   }
 `;
 
@@ -89,10 +79,11 @@ export const Description = styled.p`
   text-align: center;
   max-width: 45ch;
   line-height: 1.3;
+  font-weight: 400;
   color: ${({ theme }) => theme.colors.light};
 
   @media (max-width: ${size.mobileS}) {
-    font-size: 1.8rem;
+    font-size: 2rem;
   }
 `;
 

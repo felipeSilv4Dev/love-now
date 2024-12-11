@@ -1,8 +1,8 @@
 import { css } from 'styled-components';
 
 export const container = css`
-  background: url('../../utils/texture.jpg') no-repeat center center;
+  background-image: ${({ theme }) => theme.colors.dark_linear},
+    url('../../utils/texture.jpg');
   background-size: cover;
   position: relative;
-  overflow: hidden;
 `;

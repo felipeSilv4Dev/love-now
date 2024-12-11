@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { container } from './Container.styled';
 
 export const size = {
   desktopL: '160em',
@@ -16,8 +17,8 @@ export const GlobalStyles = createGlobalStyle`
 }
 
 body {
-  font-family: "Poppins", sans-serif;
-  background-color:  ${({ theme }) => theme.colors.dark};
+	${container}
+	font-family: "Poppins", sans-serif;
 	color: ${({ theme }) => theme.colors.light};
 }
 

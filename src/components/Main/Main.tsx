@@ -5,9 +5,9 @@ import Steps from './Steps';
 const Main = () => {
   return (
     <S.Container>
-      <S.CoupleBox>
+      <S.HomeBox>
         <S.TextBox>
-          <S.Title src="../../utils/title.svg" alt="title" />
+          <S.Title>Love Now</S.Title>
 
           <S.Description>
             "Surpreenda quem você ama com uma página personalizada: mensagens,
@@ -18,11 +18,11 @@ const Main = () => {
           <HearthAnimation />
         </S.TextBox>
 
-        <S.Couple />
-      </S.CoupleBox>
+        <S.Phone src="../../utils/phone-exemplo.svg" alt="photo iphone" />
+      </S.HomeBox>
       <Steps />
       <S.ContainerPlan>
-        <S.Title src="../../utils/plan-title.svg" alt="plant title" />
+        <S.Title>Ofertas Disponíveis</S.Title>
         <S.Plan>
           <S.Header>
             <S.NamePlan>Plano Fixo</S.NamePlan>
