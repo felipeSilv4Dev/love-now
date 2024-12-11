@@ -45,6 +45,11 @@ const Page = () => {
   useEffect(() => {
     if (!ValidateData(data)) return;
 
+    if (!(data.photos.length > 1)) {
+      setWidth(false);
+      return;
+    }
+
     const imagesTime = setInterval(() => {
       setWidth(false);
       if (data.photos.length - 1 > count) {
@@ -63,7 +68,7 @@ const Page = () => {
   const handlerChangeIndex = (index: number) => {
     if (count === index) return;
     setCount(index);
-    setWidth(true);
+    setWidth(false);
   };
 
   if (isLoading) return <Spinner />;
@@ -85,18 +90,20 @@ const Page = () => {
             {data.name}
           </S.Name>
 
-          <S.Control>
-            {data.photos.map((_, index) => (
-              <S.Index
-                onClick={() => handlerChangeIndex(index)}
-                key={index}
-                $active={count === index}
-              />
-            ))}
-          </S.Control>
+          {data.photos.length > 1 && (
+            <S.Control>
+              {data.photos.map((_, index) => (
+                <S.Index
+                  onClick={() => handlerChangeIndex(index)}
+                  key={index}
+                  $active={count === index}
+                />
+              ))}
+            </S.Control>
+          )}
         </S.PhotosBox>
 
-        <S.TitleQuality src="../../utils/title-error.svg" alt="title map" />
+        <S.TitleQuality>você é</S.TitleQuality>
         <S.QualityBox $quantity={data.quality.length > 2}>
           {data.quality.map((el, i) => (
             <S.Quality key={i}>{el}</S.Quality>

@@ -1,6 +1,7 @@
 import styled, { css, keyframes } from 'styled-components';
 import { container } from '../../styles/Container.styled';
 import { size } from '../../styles/Global.styled';
+import { title } from '../../styles/Title.styled';
 
 const start = keyframes`
 0%{
@@ -140,21 +141,17 @@ export const Index = styled.span<{ $active: boolean }>`
   cursor: pointer;
 `;
 
-export const TitleQuality = styled.img`
-  display: block;
-  margin: 15rem auto 4rem;
-  height: 9rem;
-  position: relative;
-  z-index: 1;
+export const TitleQuality = styled.h1`
+  ${title}
+  text-align: center;
+  margin-top: 10rem;
 
-  @media (max-width: ${size.mobileS}) {
-    margin: 10rem auto 5rem;
-    height: 6rem;
+  @media (max-width: ${size.mobileL}) {
+    font-size: 14rem;
   }
 
-  @media (max-width: 21.5rem) {
-    height: 4.5rem;
-    margin: 5rem auto;
+  @media (max-width: ${size.mobileS}) {
+    font-size: 10rem;
   }
 `;
 
