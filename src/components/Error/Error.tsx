@@ -1,5 +1,4 @@
 import { Image } from '../../styles/Image.styled';
-import HearthAnimation from '../Main/HearthAnimation';
 import * as S from './Error.styled';
 
 const Error = ({
@@ -20,8 +19,6 @@ const Error = ({
         </S.Message>
         <S.Home to="/">voltar</S.Home>
       </S.ContentBox>
-      <HearthAnimation />
-      {/* <Image src="../../utils/spinner.svg" alt="spinner" /> */}
     </S.Container>
   );
 };

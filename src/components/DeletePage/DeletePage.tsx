@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import * as S from './DeletePage.styled';
 
-import HearthAnimation from '../Main/HearthAnimation';
 import Error from '../Error/Error';
 import useFetch from '../../Hooks/useFetch';
 import { useParams } from 'react-router';
@@ -30,7 +29,6 @@ const DeletePage = () => {
         <S.Message>Seus dados foram apagados!</S.Message>
         <S.Home to="/register">voltar</S.Home>
       </S.ContentBox>
-      <HearthAnimation />
     </S.Container>
   );
 };

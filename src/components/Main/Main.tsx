@@ -1,5 +1,4 @@
 import * as S from './Main.styled';
-import HearthAnimation from './HearthAnimation';
 import Steps from './Steps';
 
 const plans = ['3 fotos', '6 apelidos', 'um ano de acesso'];
@@ -19,8 +18,6 @@ const Main = () => {
           </S.Description>
 
           <S.Button to={'/register'}>Criar Minha página</S.Button>
-
-          <HearthAnimation />
         </S.TextBox>
 
         <S.Phone src="../../utils/phone-exemplo.svg" alt="photo iphone" />
