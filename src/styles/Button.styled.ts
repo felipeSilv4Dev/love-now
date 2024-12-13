@@ -14,6 +14,7 @@ export const buttonStyle = css`
   text-decoration: none;
   transition: all 0.2s;
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 
   &::after {
     content: '';

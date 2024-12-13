@@ -20,9 +20,8 @@ body {
 	${container}
 	font-family: "Poppins", sans-serif;
 	color: ${({ theme }) => theme.colors.light};
-	background-color: ${({ theme }) => theme.colors.dark_linear2};;
+	background-color: ${({ theme }) => theme.colors.dark_linear2};
 }
-
 
 html {
   font-size: 62.5%;

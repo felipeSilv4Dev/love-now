@@ -1,6 +1,7 @@
 export const defaultTheme = {
   colors: {
     light: '#efefff',
+    light_1: '#CFCCEB',
 
     error: '#CA1959',
     correct: '#237A12',

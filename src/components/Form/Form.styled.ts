@@ -283,7 +283,6 @@ export const ButtonQuality = styled.button`
 	width: 16rem;
   text-align: center;
   justify-content: center;
-  cursor: pointer;
 
   font-size: 1.5rem;
   position: absolute;
