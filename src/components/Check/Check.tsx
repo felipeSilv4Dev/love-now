@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import * as S from './Check.styled';
 import { Highlight } from '../Main/Main.styled';
-import { Link } from 'react-router-dom';
 
 const Check: React.FC = () => {
   const [copied, setCopied] = useState('');
