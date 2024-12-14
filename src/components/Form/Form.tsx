@@ -48,11 +48,7 @@ const schema = yup.object({
     .test('fileCount', 'Por favor, só aceitamos apenas imagens', (files) => {
       const [contians] = files.map((file) => file.type.startsWith('image'));
       return contians;
-    })
-    .test('fileCount', 'Por favor, selecione no máximo 3 imagens', (files) => {
-      return files.length <= 3;
     }),
-
   quality: yup
     .mixed<string[]>()
     .required('dsasdasd')
@@ -119,6 +115,11 @@ const Form = () => {
 
   const handlerDatas: SubmitHandler<Inputs> = async (data) => {
     try {
+      if (data.photos.length > 3) {
+        setError('photos', { message: 'o limite é apenas 3 fotos!' });
+        setTimeout(() => clearErrors('photos'), 2000);
+        return;
+      }
       setIsLoading(true);
       const user = await createUser(data);
 
@@ -248,17 +249,25 @@ const Form = () => {
     ? errors.photos.message
     : `selecione ${selectedFiles.length}/3`;
 
-  const showPhotos = selectedFiles.map((quality, index) => (
-    <S.TextContent key={index}>
-      <span>{shortNamePhoto(quality.name, index)}</span>
+  const showPhotos = errors.photos ? (
+    <S.TextErrorPhoto $error={!!errors.photos}>
+      <S.TextContainerPhotos>
+        <p>{errors.photos.message}</p>
+      </S.TextContainerPhotos>
+    </S.TextErrorPhoto>
+  ) : (
+    selectedFiles.map((quality, index) => (
+      <S.TextContent key={index}>
+        <span>{shortNamePhoto(quality.name, index)}</span>
 
-      <S.Close
-        onClick={() => handleRemovePhoto(index)}
-        src="../../utils/trash.svg"
-        alt="image trash"
-      />
-    </S.TextContent>
-  ));
+        <S.Close
+          onClick={() => handleRemovePhoto(index)}
+          src="../../utils/trash.svg"
+          alt="image trash"
+        />
+      </S.TextContent>
+    ))
+  );
 
   const handleButtonQualitys = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();

@@ -7,15 +7,6 @@ import { AxiosRequestConfig } from 'axios';
 
 import { useParams } from 'react-router';
 
-declare global {
-  interface User {
-    id: string;
-    name: string;
-    photos: Array<string>;
-    quality: Array<string>;
-    message: string;
-  }
-}
 interface FetchRequest {
   data: User | unknown;
   isLoading: boolean;

@@ -4,15 +4,15 @@ import { Highlight } from '../Main/Main.styled';
 import { QRCodeSVG } from 'qrcode.react';
 
 const Check = () => {
-  const [copied, setCopied] = useState('');
+  const [copied, setCopied] = useState(false);
   const qrCodeRef = useRef<SVGSVGElement>(null);
 
   const copyText = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
-      setCopied(text);
-      console.log(copied);
-      setTimeout(() => setCopied(''), 2000);
+      setCopied(true);
+
+      setTimeout(() => setCopied(false), 2000);
     } catch (error) {
       alert('Falha ao copiar o texto.');
     }
@@ -74,7 +74,7 @@ const Check = () => {
           <S.URLCopy>
             <S.Url>https://alguém/idaleatorio123</S.Url>
             <S.Copy onClick={() => copyText('https://alguém/idaleatorio123')}>
-              Copiar
+              {copied ? 'Copiado!' : 'Copiar'}
             </S.Copy>
           </S.URLCopy>
         </S.ContainerUrl>

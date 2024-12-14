@@ -17,6 +17,14 @@ declare global {
     message: string;
     quality: string[];
   }
+
+  interface User {
+    id: string;
+    name: string;
+    photos: Array<string>;
+    quality: Array<string>;
+    message: string;
+  }
 }
 function App() {
   return (
