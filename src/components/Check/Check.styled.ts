@@ -57,7 +57,7 @@ export const Title = styled.h1`
   }
 
   @media (max-width: 21.5em) {
-    font-size: 8rem;
+    font-size: 7rem;
   }
 `;
 
@@ -69,8 +69,9 @@ export const Content = styled.div`
   width: 100%;
   border-radius: 1.3rem;
   display: flex;
-  align-items: center;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
   gap: 10rem;
   margin-bottom: 5rem;
 
@@ -89,12 +90,6 @@ export const ContainerQRCode = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-`;
-
-export const QRCode = styled.div`
-  height: 25rem;
-  width: 25rem;
-  background-color: #444;
 `;
 
 export const Download = styled.span`

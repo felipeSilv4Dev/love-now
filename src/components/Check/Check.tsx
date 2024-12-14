@@ -1,29 +1,63 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import * as S from './Check.styled';
 import { Highlight } from '../Main/Main.styled';
+import { QRCodeSVG } from 'qrcode.react';
+import { saveAs } from 'file-saver';
 
-const Check: React.FC = () => {
+const Check = () => {
   const [copied, setCopied] = useState('');
+  const qrCodeRef = useRef<SVGSVGElement>(null);
 
   const copyText = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
       setCopied(text);
 
-      setTimeout(() => setCopied(''), 2000); // Reseta o estado após 2 segundos
+      setTimeout(() => setCopied(''), 2000);
     } catch (error) {
       alert('Falha ao copiar o texto.');
     }
   };
 
-  console.log(copied);
+  const qrCodeDownload = () => {
+    if (!qrCodeRef.current) return;
+
+    // Get the SVG element
+    const svgElement = qrCodeRef.current;
+
+    // Serialize the SVG to a string
+    const serializer = new XMLSerializer();
+    const svgString = serializer.serializeToString(svgElement);
+
+    // Create a Blob with the SVG string
+    const blob = new Blob([svgString], { type: 'image/svg+xml' });
+
+    // Create a temporary <a> element for downloading
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'qrcode-page.svg';
+
+    // Trigger the download
+    document.body.appendChild(link);
+    link.click();
+
+    // Cleanup
+    document.body.removeChild(link);
+  };
+
   return (
     <S.Container>
       <S.Title>Instruções</S.Title>
       <S.Content>
         <S.ContainerQRCode>
-          <S.QRCode></S.QRCode>
-          <S.Download>baixar</S.Download>
+          <QRCodeSVG
+            ref={qrCodeRef}
+            value="https://love-now.netlify.app/"
+            height={'25rem'}
+            width={'25rem'}
+          />
+
+          <S.Download onClick={qrCodeDownload}>baixar</S.Download>
         </S.ContainerQRCode>
 
         <S.ContainerUrl>
@@ -40,7 +74,7 @@ const Check: React.FC = () => {
 
           <S.URLCopy>
             <S.Url>https://alguém/idaleatorio123</S.Url>
-            <S.Copy onClick={() => copyText('Texto para copiar')}>
+            <S.Copy onClick={() => copyText('https://alguém/idaleatorio123')}>
               Copiar
             </S.Copy>
           </S.URLCopy>
