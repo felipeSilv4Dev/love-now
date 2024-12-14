@@ -2,7 +2,6 @@ import { useRef, useState } from 'react';
 import * as S from './Check.styled';
 import { Highlight } from '../Main/Main.styled';
 import { QRCodeSVG } from 'qrcode.react';
-import { saveAs } from 'file-saver';
 
 const Check = () => {
   const [copied, setCopied] = useState('');
