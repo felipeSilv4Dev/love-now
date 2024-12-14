@@ -11,7 +11,7 @@ const Check = () => {
     try {
       await navigator.clipboard.writeText(text);
       setCopied(text);
-
+      console.log(copied);
       setTimeout(() => setCopied(''), 2000);
     } catch (error) {
       alert('Falha ao copiar o texto.');
