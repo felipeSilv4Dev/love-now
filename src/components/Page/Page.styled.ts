@@ -56,7 +56,6 @@ const flex = css`
 `;
 
 export const Container = styled.section`
-  ${container}
   height: auto;
   padding: 12rem 3rem;
 `;
@@ -180,7 +179,7 @@ export const TitleQuality = styled.h2`
   }
 
   @media (max-width: ${size.mobileS}) {
-    font-size: 10rem;
+    font-size: 7rem;
   }
 `;
 
@@ -192,7 +191,7 @@ export const QualityBox = styled.div<{ $quantity: boolean }>`
   width: 55%;
   margin: 10rem auto;
   padding-bottom: 5rem;
-  border-bottom: 2px solid ${({ theme: { colors } }) => colors.dark_1};
+  border-bottom: 2px solid ${({ theme: { colors } }) => colors.dark_4};
   overflow-x: scroll;
   width: 100%;
 

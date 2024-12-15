@@ -25,7 +25,7 @@ const DeletePage = () => {
     <S.Container>
       <S.Image src="../../utils/trash-delete.svg" alt="Page Delete" />
       <S.ContentBox>
-        <S.Title src="../../utils/title-delete.svg" alt="Page delete" />
+        <S.Title>deletado</S.Title>
         <S.Message>Seus dados foram apagados!</S.Message>
         <S.Home to="/register">voltar</S.Home>
       </S.ContentBox>

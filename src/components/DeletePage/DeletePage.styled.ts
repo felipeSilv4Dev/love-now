@@ -40,12 +40,15 @@ export const Message = styled.h2`
   }
 `;
 
-export const Title = styled.img`
-  z-index: 1;
-  height: 16rem;
-
+export const Title = styled.h2`
+  ${title}
+  background: ${({ theme: { colors } }) => colors.linearPrimary};
+  background-clip: text;
+  color: transparent;
+  width: 100%;
+  text-align: center;
   @media (max-width: ${size.mobileS}) {
-    height: 12rem;
+    font-size: 10rem;
   }
 `;
 

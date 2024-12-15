@@ -13,7 +13,7 @@ const Error = ({
       <Image src="../../utils/error.svg" alt="Page Error" />
 
       <S.ContentBox>
-        <S.Title src="../../utils/title-error.svg" alt="Page Error" />
+        <S.Title>error</S.Title>
         <S.Message>
           {message} <S.Status>{statusCode} 💥</S.Status>
         </S.Message>
