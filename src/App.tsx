@@ -24,6 +24,7 @@ declare global {
     photos: Array<string>;
     quality: Array<string>;
     message: string;
+    slug: string;
   }
 }
 function App() {
@@ -43,7 +44,7 @@ function App() {
 
         <Route path="/:slug/:id" element={<Page />} />
         <Route path="/delete-page/:id" element={<DeletePage />} />
-        <Route path="/check-copy" element={<Check />} />
+        <Route path="/check-copy/:id" element={<Check />} />
         <Route path="*" element={<Error message="página não encontrada!" />} />
       </Routes>
       <Footer />

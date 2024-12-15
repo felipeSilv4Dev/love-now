@@ -38,6 +38,18 @@ width:100%;
 
 `;
 
+const moveBg = keyframes`
+0%{
+	background-position-y: 100rem ;
+  
+}
+
+100%{
+	background-position-y: 0;
+}
+
+`;
+
 const flex = css`
   display: flex;
   align-items: center;
@@ -48,6 +60,21 @@ export const Container = styled.section`
   height: auto;
   padding: 12rem 3rem;
 `;
+
+export const Title = styled.h2`
+  ${title}
+  text-align: center;
+  margin-bottom: 5rem;
+
+  @media (max-width: ${size.mobileL}) {
+    font-size: 14rem;
+  }
+
+  @media (max-width: ${size.mobileS}) {
+    font-size: 8rem;
+  }
+`;
+
 export const PhotosBox = styled.div`
   ${flex}
   width: max-content;
@@ -94,8 +121,10 @@ export const Image = styled.div<{ $active: boolean; $src: string }>`
 
 export const Name = styled.h3`
   position: absolute;
+  font-family: 'BrushBesh', sans-serif;
+  letter-spacing: 0.2rem;
   z-index: 10;
-  background-color: ${({ theme: { colors } }) => colors.dark_1};
+  background-color: ${({ theme: { colors } }) => colors.dark_5};
   font-size: 1.8rem;
   padding: 1rem 1.5rem;
   border-radius: 6rem;
@@ -117,7 +146,7 @@ export const Name = styled.h3`
 
 export const LoadingWidth = styled.span<{ $width?: boolean }>`
   height: 100%;
-  background-color: ${({ theme: { colors } }) => colors.dark_2};
+  background-color: ${({ theme: { colors } }) => colors.dark_3};
   position: absolute;
   width: 0;
   left: 0;
@@ -137,11 +166,11 @@ export const Index = styled.span<{ $active: boolean }>`
   border-radius: 50%;
   transition: all 0.2s;
   background-color: ${({ theme: { colors }, $active }) =>
-    $active ? colors.cor_1 : colors.dark_1};
+    $active ? colors.cor_1 : colors.dark_3};
   cursor: pointer;
 `;
 
-export const TitleQuality = styled.h1`
+export const TitleQuality = styled.h2`
   ${title}
   text-align: center;
   margin-top: 10rem;
@@ -189,13 +218,15 @@ export const QualityBox = styled.div<{ $quantity: boolean }>`
 export const Quality = styled.p`
   ${flex}
   flex-shrink: 0;
-  background: url('../../utils/coracao.svg') no-repeat center center;
+  font-family: 'BrushBesh', sans-serif;
+  letter-spacing: 0.3rem;
+  background: url('../../utils/coracao.svg') center center;
   background-size: cover;
   height: 22rem;
   width: 22rem;
-  background-color: ${({ theme: { colors } }) => colors.dark_3};
-  border: 2px solid ${({ theme: { colors } }) => colors.dark_2};
-  font-size: 2rem;
+  background-color: ${({ theme: { colors } }) => colors.dark_5};
+  border: 2px solid ${({ theme: { colors } }) => colors.dark_3};
+  font-size: 2.2rem;
   padding: 4rem;
   justify-content: center;
   text-align: center;
@@ -204,6 +235,8 @@ export const Quality = styled.p`
 
   position: relative;
   aspect-ratio: 1;
+  /* background-position-x: 200%; */
+  animation: ${moveBg} 30s infinite linear;
 
   @media (max-width: ${size.mobileS}) {
     height: 18rem;
@@ -222,7 +255,6 @@ export const Message = styled.p`
   font-weight: bold;
   padding: 0 6rem;
   text-align: center;
-  background-color: ${({ theme: { colors } }) => colors.dark};
   position: relative;
   z-index: 1;
 

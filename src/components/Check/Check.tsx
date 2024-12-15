@@ -1,18 +1,43 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as S from './Check.styled';
 import { Highlight } from '../Main/Main.styled';
 import { QRCodeSVG } from 'qrcode.react';
+import { useParams } from 'react-router';
+import useFetch from '../../Hooks/useFetch';
+import { AxiosRequestConfig } from 'axios';
+import Error from '../Error/Error';
+import Spinner from '../Spinner/Spinner';
+
+interface FetchRequest {
+  data: User | unknown;
+  isLoading: boolean;
+  request: (config: AxiosRequestConfig) => Promise<void>;
+  error: string;
+}
 
 const Check = () => {
   const [copied, setCopied] = useState(false);
   const qrCodeRef = useRef<SVGSVGElement>(null);
+  const params = useParams();
+
+  const { request, data, error, isLoading }: FetchRequest = useFetch();
+
+  const ValidateData = (obj: unknown): obj is User => {
+    if (obj !== null && typeof obj === 'object' && 'photos' in obj) return true;
+    return false;
+  };
+
+  useEffect(() => {
+    request({
+      method: 'GET',
+      url: `${import.meta.env.VITE_URL_API}register/${params.id}`,
+    });
+  }, [request, params]);
 
   const copyText = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
       setCopied(true);
-
-      setTimeout(() => setCopied(false), 2000);
     } catch (error) {
       alert('Falha ao copiar o texto.');
     }
@@ -44,6 +69,12 @@ const Check = () => {
     document.body.removeChild(link);
   };
 
+  if (isLoading) return <Spinner />;
+
+  if (error) return <Error message={error} />;
+
+  if (!ValidateData(data)) return;
+  const url = `https://love-now.netlify.app/${data.slug}/${data.id}`;
   return (
     <S.Container>
       <S.Title>Instruções</S.Title>
@@ -51,7 +82,7 @@ const Check = () => {
         <S.ContainerQRCode>
           <QRCodeSVG
             ref={qrCodeRef}
-            value="https://love-now.netlify.app/"
+            value={url}
             height={'25rem'}
             width={'25rem'}
           />
@@ -72,17 +103,19 @@ const Check = () => {
           </S.InfoUrlContainer>
 
           <S.URLCopy>
-            <S.Url>https://alguém/idaleatorio123</S.Url>
-            <S.Copy onClick={() => copyText('https://alguém/idaleatorio123')}>
+            <S.Url>{url}</S.Url>
+            <S.Copy onClick={() => copyText(url)}>
               {copied ? 'Copiado!' : 'Copiar'}
             </S.Copy>
           </S.URLCopy>
         </S.ContainerUrl>
       </S.Content>
 
-      <S.NexButton to="/">
-        <S.Next>Acessar sua páginar</S.Next>
-      </S.NexButton>
+      {copied && (
+        <S.NexButton to={url}>
+          <S.Next>Acessar sua páginar</S.Next>
+        </S.NexButton>
+      )}
     </S.Container>
   );
 };

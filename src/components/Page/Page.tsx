@@ -69,6 +69,7 @@ const Page = () => {
   if (ValidateData(data)) {
     return (
       <S.Container>
+        <S.Title>{data.name}</S.Title>
         <S.PhotosBox>
           <S.ContainerImage>
             {data.photos.map((img, index) => (
