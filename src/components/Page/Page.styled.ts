@@ -1,5 +1,4 @@
 import styled, { css, keyframes } from 'styled-components';
-import { container } from '../../styles/Container.styled';
 import { size } from '../../styles/Global.styled';
 import { title } from '../../styles/Title.styled';
 
@@ -234,7 +233,6 @@ export const Quality = styled.p`
 
   position: relative;
   aspect-ratio: 1;
-  /* background-position-x: 200%; */
   animation: ${moveBg} 30s infinite linear;
 
   @media (max-width: ${size.mobileS}) {
