@@ -43,7 +43,7 @@ const Preview = ({ data }: { data: User | null }) => {
 
   if (ValidateData(data)) {
     return (
-      <S.Container>
+      <S.Container style={{ padding: 0, marginTop: '3rem' }}>
         <S.Title>{data.name}</S.Title>
         <S.PhotosBox>
           <S.ContainerImage>

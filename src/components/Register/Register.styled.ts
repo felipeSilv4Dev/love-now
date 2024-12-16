@@ -22,6 +22,7 @@ export const Container = styled.section`
   flex-direction: column;
   height: 100%;
   overflow: initial;
+  padding: 12rem 0;
 
   @media (max-width: ${size.mobileS}) {
     height: 100%;

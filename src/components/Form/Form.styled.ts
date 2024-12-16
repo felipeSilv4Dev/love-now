@@ -9,13 +9,13 @@ const flex = css`
 `;
 
 export const Form = styled.form`
-  position: relative;
   ${flex}
   gap: 2rem;
   width: 55%;
   margin: auto;
   padding: 8rem 0;
   z-index: 1;
+  border-bottom: 2px solid ${({ theme: { colors } }) => colors.dark_5};
 
   @media (max-width: ${size.largeS}) {
     width: 70%;
