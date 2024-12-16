@@ -73,7 +73,7 @@ const Preview = ({ data }: { data: User | null }) => {
         </S.PhotosBox>
 
         <S.TitleQuality>você é</S.TitleQuality>
-        <S.QualityBox $quantity={data.quality.length > (match ? 2 : 4)}>
+        <S.QualityBox $quantity={data.quality.length > (match ? 4 : 2)}>
           {data.quality.map((el, i) => (
             <S.Quality key={i}>{el}</S.Quality>
           ))}
