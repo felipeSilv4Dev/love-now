@@ -61,6 +61,7 @@ export const Container = styled.section`
 
 export const Title = styled.h2`
   ${title}
+  text-transform: capitalize;
   text-align: center;
   margin-bottom: 5rem;
 
@@ -130,6 +131,7 @@ export const Name = styled.h3`
   bottom: 10rem;
   left: -4rem;
   overflow: hidden;
+  text-transform: capitalize;
 
   @media (max-width: ${size.mobileL}) {
     left: 0;
@@ -234,6 +236,7 @@ export const Quality = styled.p`
   position: relative;
   aspect-ratio: 1;
   animation: ${moveBg} 30s infinite linear;
+  font-style: italic;
 
   @media (max-width: ${size.mobileS}) {
     height: 18rem;
@@ -254,6 +257,7 @@ export const Message = styled.p`
   text-align: center;
   position: relative;
   z-index: 1;
+  font-style: italic;
 
   @media (max-width: ${size.mobileS}) {
     padding: 0;
