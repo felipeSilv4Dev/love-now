@@ -61,7 +61,11 @@ const schema = yup.object({
     ),
 });
 
-const Form = () => {
+const Form = ({
+  setData,
+}: {
+  setData: React.Dispatch<React.SetStateAction<User>>;
+}) => {
   const [isloading, setIsLoading] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [qualitys, setQualitys] = useState<string[]>([]);
@@ -204,6 +208,7 @@ const Form = () => {
 
   const handleSelectedQuality = (value: string) => {
     clearErrors('quality');
+
     if (handleValidateValue(value)) {
       setQualitys((prevQualitys) => {
         if (prevQualitys.length <= 5) {
@@ -293,6 +298,31 @@ const Form = () => {
     </S.TextContent>
   ));
 
+  useEffect(() => {
+    if (!qualitys.length) {
+      const qualitys = ['meiga', 'linda', 'gata'];
+      setData((data) => ({ ...data, quality: qualitys }));
+
+      return;
+    }
+    setData((data) => ({ ...data, quality: qualitys }));
+  }, [qualitys]);
+
+  useEffect(() => {
+    if (!selectedFiles.length) {
+      const imgs = [
+        '../../utils/photo-preview.png',
+        '../../utils/photo-preview.png',
+        '../../utils/photo-preview.png',
+      ];
+      setData((data) => ({ ...data, photos: imgs }));
+      return;
+    }
+
+    const imgs = selectedFiles.map((file) => URL.createObjectURL(file));
+    setData((data) => ({ ...data, photos: imgs }));
+  }, [selectedFiles]);
+
   return (
     <S.Form onSubmit={handleSubmit(handlerDatas)}>
       <S.InputBox>
@@ -328,6 +358,9 @@ const Form = () => {
           placeholder="Para quem é..."
           {...register('name')}
           $error={!!errors.name}
+          onChange={({ target }) =>
+            setData((data) => ({ ...data, name: target.value }))
+          }
         />
 
         <S.TextError $error={!!errors.name}>
@@ -340,6 +373,9 @@ const Form = () => {
           placeholder="Escreva aqui sua linda mensagem..."
           {...register('message')}
           $error={!!errors.message}
+          onChange={({ target }) =>
+            setData((data) => ({ ...data, message: target.value }))
+          }
         />
 
         <S.TextError $error={!!errors.message}>
