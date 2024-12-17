@@ -122,7 +122,6 @@ export const Plan = styled.div`
   border: 2px solid ${({ theme }) => theme.colors.dark_3};
   width: 50rem;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
-  margin-bottom: 10rem;
 
   @media (max-width: ${size.mobileS}) {
     width: 100%;
@@ -198,4 +197,34 @@ export const ButtonPlan = styled(Link)`
   text-align: center;
 
   animation: ${scaleButton} 1s infinite linear alternate-reverse;
+`;
+
+export const QrcodeBox = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  background-color: ${({ theme }) => theme.colors.dark_5};
+  border: 2px solid ${({ theme }) => theme.colors.dark_3};
+  padding: 2rem 3rem;
+  border-radius: 1.3rem;
+
+  @media (max-width: ${size.mobileL}) {
+    width: 100%;
+  }
+`;
+
+export const QrCodeText = styled.h2`
+  ${title}
+  font-size: 2.5rem;
+  text-align: center;
+  font-family: 'poppins', sans-serif;
+  letter-spacing: initial;
+  text-transform: lowercase;
+  font-style: italic;
+
+  @media (max-width: ${size.mobileL}) {
+    font-size: 2rem;
+  }
 `;

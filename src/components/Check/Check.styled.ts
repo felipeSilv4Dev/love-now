@@ -201,3 +201,15 @@ export const Next = styled.button`
     font-size: 2rem;
   }
 `;
+
+export const ButtonContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 3rem;
+
+  @media (max-width: ${size.mobileS}) {
+    justify-content: center;
+  }
+`;

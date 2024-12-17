@@ -1,8 +1,21 @@
+import { useEffect, useState } from 'react';
 import * as S from './Main.styled';
+import Qrcode from './Qrcode';
 import Steps from './Steps';
 
 const plans = ['3 fotos', '6 apelidos', 'um ano de acesso'];
+
 const Main = () => {
+  const [payment, setPayment] = useState(false);
+
+  useEffect(() => {
+    const id = localStorage.getItem('id');
+
+    if (id) {
+      setPayment(true);
+    }
+  }, []);
+
   return (
     <S.Container>
       <S.HomeBox>
@@ -48,6 +61,8 @@ const Main = () => {
           <S.ButtonPlan to="/register">Comprar</S.ButtonPlan>
         </S.Plan>
       </S.ContainerPlan>
+
+      {payment && <Qrcode />}
     </S.Container>
   );
 };

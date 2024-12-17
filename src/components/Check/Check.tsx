@@ -28,6 +28,12 @@ const Check = () => {
   };
 
   useEffect(() => {
+    if (ValidateData(data)) {
+      localStorage.setItem('id', JSON.stringify(data.id));
+    }
+  }, [data]);
+
+  useEffect(() => {
     request({
       method: 'GET',
       url: `${import.meta.env.VITE_URL_API}register/${params.id}`,
@@ -111,11 +117,17 @@ const Check = () => {
         </S.ContainerUrl>
       </S.Content>
 
-      {copied && (
-        <S.NexButton to={url}>
-          <S.Next>Acessar sua páginar</S.Next>
+      <S.ButtonContainer>
+        <S.NexButton to="/">
+          <S.Next>voltar para home</S.Next>
         </S.NexButton>
-      )}
+
+        {copied && (
+          <S.NexButton to={url}>
+            <S.Next>Acessar sua páginar</S.Next>
+          </S.NexButton>
+        )}
+      </S.ButtonContainer>
     </S.Container>
   );
 };
