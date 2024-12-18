@@ -93,12 +93,13 @@ export const ContainerImage = styled.div`
   width: 82.6rem;
 
   @media (max-width: ${size.mobileL}) {
-    height: 96rem;
-    width: 66rem;
+    height: 88.5rem;
+    width: 61.9rem;
   }
+
   @media (max-width: ${size.mobileS}) {
-    height: 60rem;
-    width: 44rem;
+    height: 56.6rem;
+    width: 39.6rem;
     border-radius: 1.2rem;
   }
 
