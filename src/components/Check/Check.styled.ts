@@ -53,7 +53,7 @@ export const Title = styled.h1`
   }
 
   @media (max-width: ${size.mobileS}) {
-    font-size: 10rem;
+    font-size: 8rem;
   }
 
   @media (max-width: 21.5em) {
@@ -161,6 +161,7 @@ export const Url = styled.h2`
   @media (max-width: ${size.mobileS}) {
     font-size: 1.8rem;
     width: 100%;
+    word-wrap: break-word;
   }
 `;
 
