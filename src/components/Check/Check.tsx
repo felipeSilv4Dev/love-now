@@ -81,6 +81,7 @@ const Check = () => {
 
   if (!ValidateData(data)) return;
   const url = `https://love-now.netlify.app/${data.slug}/${data.id}`;
+
   return (
     <S.Container>
       <S.Title>Instruções</S.Title>
@@ -99,11 +100,15 @@ const Check = () => {
         <S.ContainerUrl>
           <S.InfoUrlContainer>
             <S.InfoUrl>
-              1 - <Highlight>Salve </Highlight>
+              1 - Obrigado pela sua compra para{' '}
+              <Highlight>{data.name} </Highlight>
+            </S.InfoUrl>
+            <S.InfoUrl>
+              2 - <Highlight>Salve </Highlight>
               esta URL nas suas notas ou em um local de sua preferência.
             </S.InfoUrl>
             <S.InfoUrl>
-              2 - Guarde esta URL ou QR Code para não perder o{' '}
+              3 - Guarde esta URL ou QR Code para não perder o{' '}
               <Highlight>acesso à página</Highlight>.
             </S.InfoUrl>
           </S.InfoUrlContainer>
@@ -122,11 +127,9 @@ const Check = () => {
           <S.Next>voltar para home</S.Next>
         </S.NexButton>
 
-        {copied && (
-          <S.NexButton to={url}>
-            <S.Next>Acessar sua páginar</S.Next>
-          </S.NexButton>
-        )}
+        <S.NexButton to={url}>
+          <S.Next>Acessar sua páginar</S.Next>
+        </S.NexButton>
       </S.ButtonContainer>
     </S.Container>
   );

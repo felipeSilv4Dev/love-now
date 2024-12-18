@@ -269,3 +269,69 @@ export const Message = styled.p`
     font-size: 1.8rem;
   }
 `;
+
+const title1 = keyframes`
+0%{
+opacity: 0;
+overflow: hidden;
+}
+
+100%{
+overflow: visible;
+opacity: 1;
+}
+`;
+
+const title2 = keyframes`
+0%{
+opacity: 0;
+overflow: hidden;
+}
+
+100%{
+overflow: visible;
+opacity: 1;
+}
+`;
+
+export const Introduction = styled.div`
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${({ theme: { colors } }) => colors.dark_linear2};
+  padding: 0 3rem;
+
+  * {
+    font-size: 5rem;
+  }
+
+  h2 {
+    opacity: 0;
+    width: 100%;
+    overflow: hidden;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -45%);
+  }
+
+  h2:first-child {
+    animation: ${title1} 3s backwards;
+  }
+
+  h2:last-child {
+    animation: ${title2} 3s 3s backwards;
+  }
+
+  @media (max-width: ${size.mobileS}) {
+    h2 {
+      font-size: 3rem;
+    }
+  }
+`;

@@ -1,20 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import * as S from './Main.styled';
 import Qrcode from './Qrcode';
 import Steps from './Steps';
+import CheckUser from './CheckUser';
 
 const plans = ['3 fotos', '6 apelidos', 'um ano de acesso'];
 
 const Main = () => {
-  const [payment, setPayment] = useState(false);
+  const [payment, _] = useState(() => {
+    const item = localStorage.getItem('id');
+    if (!item) return '';
+    const id = JSON.parse(item);
+    return id;
+  });
 
-  useEffect(() => {
-    const id = localStorage.getItem('id');
-
-    if (id) {
-      setPayment(true);
-    }
-  }, []);
+  const check = CheckUser(payment);
 
   return (
     <S.Container>
@@ -62,7 +62,7 @@ const Main = () => {
         </S.Plan>
       </S.ContainerPlan>
 
-      {payment && <Qrcode />}
+      {check && <Qrcode id={payment} />}
     </S.Container>
   );
 };

@@ -21,6 +21,7 @@ const Page = () => {
 
   const [count, setCount] = useState<number>(0);
   const [width, setWidth] = useState(true);
+  const [hidden, setHidden] = useState(false);
 
   const ValidateData = (obj: unknown): obj is User => {
     if (obj !== null && typeof obj === 'object' && 'photos' in obj) return true;
@@ -33,6 +34,10 @@ const Page = () => {
       url: `${import.meta.env.VITE_URL_API}register/${params.id}`,
     });
   }, [request, params]);
+
+  useEffect(() => {
+    setTimeout(() => setHidden(true), 6000);
+  }, []);
 
   useEffect(() => {
     if (!ValidateData(data)) return;
@@ -71,7 +76,15 @@ const Page = () => {
   if (ValidateData(data)) {
     return (
       <S.Container>
-        <S.Title>{data.name}</S.Title>
+        {!hidden && (
+          <S.Introduction>
+            {' '}
+            <S.Title>Para você ❤️</S.Title>
+            <S.Title>{data.name} ❤️</S.Title>
+          </S.Introduction>
+        )}
+
+        <S.Title> {data.name}</S.Title>
         <S.PhotosBox>
           <S.ContainerImage>
             {data.photos.map((img, index) => (
