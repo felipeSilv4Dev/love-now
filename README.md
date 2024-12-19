@@ -61,26 +61,6 @@ O design foi feito do zero.
 
 <br>
 
-## Instalação e Uso
-
-Para rodar a aplicação, você precisa instalar o [Node](https://nodejs.org/en/)
-
-Siga os passos abaixo:
-
-```bash
-# Abra um terminal e copie este repositório com o comando
-$ git clone https://github.com/felipeSilv4Dev/love-now.git
-# ou use a opção de download.
-
-# Instale as dependências
-$ npm install
-
-# Rode a aplicação
-$ npm run dev
-```
-
-<br>
-
 <strong>Site : ...</strong>
 
 ---
