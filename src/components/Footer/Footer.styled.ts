@@ -51,7 +51,7 @@ export const Creator = styled.div`
 `;
 
 export const Photo = styled.div`
-  background: url('../../utils/man.jpg') no-repeat center center;
+  background: url('../../utils/logo.png') no-repeat center center;
   background-size: cover;
   height: 5rem;
   width: 5rem;
