@@ -72,9 +72,7 @@ const Form = ({
   const [qualityValue, setQualityValue] = useState<string>('');
   const porcentage = 100 / 3;
 
-  const stripePromise = loadStripe(
-    'pk_test_51QChFIK7uAjTqLfBVYyBBb57pNu2BHxgtRBWkH0QlaqRXH1oZeuvUsfttrz72D0TlX4rxH6EHY0mSEfz9tnBO6KB00KJb9LNWQ'
-  );
+  const stripePromise = loadStripe(`${import.meta.env.VITE_STRIPE_SECRET_KEY}`);
 
   const {
     register,
