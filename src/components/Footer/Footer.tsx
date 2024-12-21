@@ -14,10 +14,8 @@ const Footer = () => {
 
       <S.Copyrigth>
         <S.Creator>
-          <Link to="https://www.linkedin.com/in/felipe-silva-1019ab271/">
-            <S.Photo />
-          </Link>
-          <S.Name>Felipe</S.Name>
+          <S.Photo />
+          <S.Name>love now</S.Name>
         </S.Creator>
         <S.Copy>© 2024 - todos os diretos reservados.</S.Copy>
       </S.Copyrigth>
