@@ -18,7 +18,7 @@ const steps = [
 const Steps = () => {
   return (
     <S.Container>
-      <S.Title> Como fazer :</S.Title>
+      <S.Title>Como fazer</S.Title>
 
       <S.Steps>
         {steps.map((step) => (

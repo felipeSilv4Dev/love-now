@@ -11,7 +11,7 @@ const Register = ({ children }: { children: ReactNode }) => {
             <S.IconHome className="fa-solid fa-house"></S.IconHome>
           </Highlight>
         </S.Home>
-        <S.Title>preencha os campos</S.Title>
+        <S.Title>crie sua página</S.Title>
       </S.Header>
 
       {children}
