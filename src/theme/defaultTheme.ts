@@ -2,6 +2,7 @@ export const defaultTheme = {
   colors: {
     light: '#efefff',
     light_1: '#CFCCEB',
+    light_2: '#9B99AF',
 
     error: '#CA1959',
     correct: '#237A12',

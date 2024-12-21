@@ -37,6 +37,10 @@ const baseInput = css<{ $error: boolean }>`
   background: ${({ theme: { colors } }) => colors.dark_5};
   color: ${({ theme: { colors } }) => colors.light};
   border: 3px solid ${({ theme }) => theme.colors.dark_3};
+  border-bottom: 0.3rem solid
+    ${({ $error, theme: { colors } }) =>
+      $error ? colors.error : colors.dark_3};
+
   border-radius: 7.1rem;
   transition: all 0.3s;
   box-sizing: border-box;
@@ -50,7 +54,7 @@ const baseInput = css<{ $error: boolean }>`
 
   &::placeholder {
     font-weight: bold;
-    color: ${({ theme: { colors } }) => colors.dark_3};
+    color: ${({ theme: { colors } }) => colors.light_2};
   }
 
   &:focus::placeholder {
@@ -111,11 +115,7 @@ export const TextError = styled.span<{ $error: boolean }>`
   display: Block;
   color: ${({ $error, theme: { colors } }) =>
     $error ? colors.error : colors.light};
-
-  opacity: ${({ $error }) => ($error ? 1 : 0)};
-  visibility: ${({ $error }) => ($error ? 'visible' : 'hidden')};
   transition: all 0.3s;
-  transform: translateY(${({ $error }) => ($error ? 0 : '-5rem')});
 
   @media (max-width: ${size.largeS}) {
     font-size: 1.8rem;
@@ -127,8 +127,8 @@ export const TextError = styled.span<{ $error: boolean }>`
 `;
 
 export const InputPhoto = styled.label<{ $fill: number; $error: boolean }>`
-  width: 12rem;
-  height: 12rem;
+  width: 16rem;
+  height: 16rem;
   border-radius: 50%;
   align-self: center;
   background: conic-gradient(
@@ -146,8 +146,8 @@ export const InputPhoto = styled.label<{ $fill: number; $error: boolean }>`
   &::before {
     content: '';
     display: block;
-    height: 11.4rem;
-    width: 11.4rem;
+    height: 15.4rem;
+    width: 15.4rem;
     position: absolute;
     background-color: ${({ theme: { colors } }) => colors.dark_5};
     border-radius: 50%;

@@ -40,8 +40,7 @@ const schema = yup.object({
     .string()
     .trim()
     .required('Por favor, preencha o campo de mensagem antes de enviar.')
-    .min(3, 'A mensagem deve ter pelo menos 3 letras')
-    .max(1000, 'O texto deve ter no máximo 1000 palavras'),
+    .min(3, 'A mensagem deve ter pelo menos 3 letras'),
   photos: yup
     .mixed<File[]>()
     .required('Por favor, selecione de 1 a 3 fotos!')
@@ -54,7 +53,7 @@ const schema = yup.object({
     .required('dsasdasd')
     .test(
       'typeError',
-      'Por favor, escreva uma qualidade antes de enviar!',
+      'Por favor, escreva uma palavra antes de enviar!',
       (doc) => {
         return !!doc.length;
       }
@@ -185,7 +184,25 @@ const Form = ({
     return setError('quality', { message });
   };
 
-  const handleValidateValue = (value: string) => {
+  const handleValidateTextValue = (value: string, type: 'message' | 'name') => {
+    if (value.length < 3) {
+      return setError(type, {
+        message: `Por favor,${
+          type === 'name' ? 'o nome' : 'a mensagem'
+        } deve ter ao menos 3 letras!`,
+      });
+    }
+
+    if (!value) {
+      return setError(type, {
+        message: 'Preenchas este campo!',
+      });
+    }
+
+    return true;
+  };
+
+  const handleValidateQualitys = (value: string) => {
     if (value.length > 15) {
       return setErrorQuality(
         'Por favor,a palavra deve ter no máximo 15 caracteres!'
@@ -207,7 +224,7 @@ const Form = ({
   const handleSelectedQuality = (value: string) => {
     clearErrors('quality');
 
-    if (handleValidateValue(value)) {
+    if (handleValidateQualitys(value)) {
       setQualitys((prevQualitys) => {
         if (prevQualitys.length <= 5) {
           return handleAddItems({
@@ -250,7 +267,7 @@ const Form = ({
 
   const showErroPhotos = errors.photos
     ? errors.photos.message
-    : `selecione ${selectedFiles.length}/3`;
+    : `selecione as fotos ${selectedFiles.length}/3`;
 
   const showPhotos = errors.photos ? (
     <S.TextErrorPhoto $error={!!errors.photos}>
@@ -351,45 +368,65 @@ const Form = ({
       </S.InputBox>
 
       <S.InputBox>
+        <S.TextError $error={!!errors.name}>
+          {errors.name ? errors.name.message : 'Nome de quem vai receber'}
+        </S.TextError>
+
         <S.Input
           type="text"
-          placeholder="Para quem é..."
+          placeholder="roberta(o)"
           {...register('name')}
           $error={!!errors.name}
-          onChange={({ target }) =>
-            setData((data) => ({ ...data, name: target.value }))
-          }
+          onChange={({ target }) => {
+            if (errors.name) {
+              if (handleValidateTextValue(target.value, 'name')) {
+                clearErrors('name');
+              }
+            }
+            setData((data) => ({ ...data, name: target.value }));
+          }}
         />
-
-        <S.TextError $error={!!errors.name}>
-          {errors.name ? errors.name.message : 'Nome'}
-        </S.TextError>
       </S.InputBox>
 
       <S.InputBox>
+        <S.TextError $error={!!errors.message}>
+          {errors.message ? errors.message.message : 'Mensagem'}
+        </S.TextError>
+
         <S.Message
           placeholder="Escreva aqui sua linda mensagem..."
           {...register('message')}
           $error={!!errors.message}
-          onChange={({ target }) =>
-            setData((data) => ({ ...data, message: target.value }))
-          }
+          onChange={({ target }) => {
+            if (errors.message) {
+              if (handleValidateTextValue(target.value, 'message')) {
+                clearErrors('message');
+              }
+            }
+            setData((data) => ({ ...data, message: target.value }));
+          }}
         />
-
-        <S.TextError $error={!!errors.message}>
-          {errors.message ? errors.message.message : 'Mensagem'}
-        </S.TextError>
       </S.InputBox>
 
       <S.InputBox>
+        <S.TextError $error={!!errors.quality}>
+          {errors.quality ? errors.quality.message : 'Apelido'}
+        </S.TextError>
         <S.BoxQuality>
           <S.Input
-            placeholder="linda..."
+            placeholder="linda(o)"
             {...register('quality')}
             $error={!!errors.quality}
             autoComplete="on"
             value={qualityValue}
-            onChange={({ target }) => setQualityValue(target.value)}
+            onChange={({ target }) => {
+              if (errors.quality) {
+                if (handleValidateQualitys(target.value)) {
+                  clearErrors('quality');
+                }
+              }
+              setQualityValue(target.value);
+            }}
             onBlur={({ target }) => target.blur()}
           />
 
@@ -400,10 +437,6 @@ const Form = ({
             Adicionar
           </S.ButtonQuality>
         </S.BoxQuality>
-
-        <S.TextError $error={!!errors.quality}>
-          {errors.quality ? errors.quality.message : 'Qualidade'}
-        </S.TextError>
 
         <S.TextContainerQualitys>
           {qualitys.length ? (
